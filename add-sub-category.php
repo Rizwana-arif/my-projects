@@ -44,7 +44,13 @@ include ("./include/sidebar.php");
                       <h4>Add Category</h4>
                       <button class="btn btn-primary" onclick="location.href='./view-sub-category.php'">View</button>
                     </div>
-                    <select name="catname" >
+                    
+             
+                    <div class="card-body">
+                      <div class="form-group">
+                    <label>Select Category Name</label>
+                    <select name="catname" class="form-control ml-0">
+                    
              <option value="">Select Category type</option>
              <?php 
                   $subsql="SELECT * FROM `category-rec`";
@@ -55,9 +61,7 @@ include ("./include/sidebar.php");
                     <?php
                   }
               ?>
-        </select>
-                    <div class="card-body">
-          
+        </select></div>
                       <div class="form-group">
                         <label>SubCategory Name</label>
                         <input type="text" class="form-control" name="subname" required="">

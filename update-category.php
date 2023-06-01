@@ -25,7 +25,11 @@ include ("./include/sidebar.php");
 
 
 ?>
-
+<style>
+  .btn{
+    margin-left : auto;
+  }
+  </style>
 <div class="main-content">
         <section class="section">
           <div class="section-body">

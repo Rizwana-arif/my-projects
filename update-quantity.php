@@ -12,7 +12,7 @@ if(isset($_POST['sub'])){
     $urun=mysqli_query($conn,$usql);
     if ($urun){
         echo "<script>alert ('quantity has been updated')</script>";
-        header("Refresh:2, url=./view-quantity.php");
+        header("Refresh:0, url=./view-quantity.php");
       }
       else{
         echo "<script>alert ('quantity has not been updated')</script>";
@@ -24,7 +24,11 @@ include ("./include/sidebar.php");
 
 
 ?>
-
+<style>
+  .btn{
+    margin-left : auto;
+  }
+  </style>
 <div class="main-content">
         <section class="section">
           <div class="section-body">

@@ -1,64 +1,77 @@
 <?php
-include ("./include/header.php");
-include ("./include/sidebar.php");
+
 include ("./include/connection.php");
 if(isset($_POST['sub'])){
-    $catname=mysqli_real_escape_string($conn,$_POST['catname']);
-  $subname=strtolower(mysqli_real_escape_string($conn,$_POST['subname']));
-$subdescrip=mysqli_real_escape_string($conn,$_POST['subdescrip']);
-$subdate=date ("m-d-y");
-$s="SELECT * FROM `sub-category-rec` WHERE `catname`='$catname' and `subname`='$subname'";
-$r=mysqli_query($conn,$s);
-if(mysqli_num_rows($r)>0){
-  echo "<script>alert ('SubCategory already exist')</script>";
-}
-else{
-  $sql="INSERT INTO `sub-category-rec` (`catname`,`subname`,`subdescrip`,`subdate`) VALUES ('$catname','$subname','$subdescrip','$subdate')";
+    $pctg=mysqli_real_escape_string($conn,$_POST['pctg']);
+    $psubctg=strtolower(mysqli_real_escape_string($conn,$_POST['psubctg']));
+    $psupname=mysqli_real_escape_string($conn,$_POST['psupname']);
+    $pcode=mysqli_real_escape_string($conn,$_POST['pcode']);
+    $pname=mysqli_real_escape_string($conn,$_POST['pname']);
+    $pdescrip=mysqli_real_escape_string($conn,$_POST['pdescrip']);
+    $punit=mysqli_real_escape_string($conn,$_POST['punit']);
+    $sprice=mysqli_real_escape_string($conn,$_POST['sprice']);
+    $pqua=mysqli_real_escape_string($conn,$_POST['pqua']);
+    $pstock=mysqli_real_escape_string($conn,$_POST['pstock']);
+    $pfile=$_Files['pfile']['name'];
+    $status=mysqli_real_escape_string($conn,$_POST['status']);
+    $pdate=date ("m-d-y");
+
+  $sql="INSERT INTO `product-rec` (`pctg`,`psubctg`,`psupname`,`pcode`,`pname`,`pdescrip`,`punit`,`sprice`,`pqua`,`pstock`,`pfile`,`status`,`pdate`) VALUES ('$pctg','$psubctg','$psupname','$pcode','$pname','$pdescrip','$punit','$sprice','$pqua','$pstock','$pfile','$status','$pdate')";
   $run=mysqli_query($conn,$sql);
   if ($run){
-    echo "<script>alert ('SubCategory has been inserted')</script>";
+    echo "<script>alert ('Product has been inserted')</script>";
   }
   else{
-    echo "<script>alert ('SubCategory has not been inserted')</script>";
+    echo "<script>alert ('product has not been inserted')</script>";
   }
 }
-}
+
+include ("./include/header.php");
+include ("./include/sidebar.php");
 ?>
 <style>
   .btn{
     margin-left: auto;
     }
-    select{
-        margin-left : 30px;
-    }
+   #pfile{
+    display : none;
+    visibility: none;
+    
+   }
+
   </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <div class="main-content">
         <section class="section">
           <div class="section-body">
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form method="post" enctype="multipart/form-data">
                     <div class="card-header">
                       <h4>Add Category</h4>
-                      <button class="btn btn-primary" onclick="location.href='./view-sub-category.php'">View</button>
+                      <button class="btn btn-primary" onclick="location.href='./view-product.php'">View Product</button>
                     </div>
+                    <div class="card-body">
                     <div class="form-group">
-                    <select name="catname" >
+                    <label>Select Category</label>
+                    <select name="pctg" class="form-control ml-0"  >
              <option value="">Select Category type</option>
              <?php 
                   $csql="SELECT * FROM `category-rec`";
                   $crun=mysqli_query($conn,$csql);
                   while($cfet=mysqli_fetch_assoc($crun)){
                     ?>
-                 <option value="<?php echo $scfet['ctgid'] ?>"><?php echo $cfet['ctgname']; ?></option>
+                 <option value="<?php echo $cfet['ctgid'] ?>"><?php echo $cfet['ctgname']; ?></option>
                     <?php
                   }
               ?>
         </select>
         </div>
         <div class="form-group">
-        <select name="subcatname" >
+        <label>Select SubCategory</label>
+        <select name="psubctg" class="form-control ml-0" >
              <option value="">Select SubCategory type</option>
              <?php 
                   $ssql="SELECT * FROM `sub-category-rec`";
@@ -72,7 +85,8 @@ else{
         </select>
         </div>
         <div class="form-group">
-        <select name="supcatname" >
+        <label>Select Supplier</label>
+        <select name="psupname" class="form-control ml-0" >
              <option value="">Select Supplier</option>
              <?php 
                   $supsql="SELECT * FROM `supplier-rec`";
@@ -84,9 +98,7 @@ else{
                   }
               ?>
         </select>
-        </div>
-                    <div class="card-body">
-          
+                </div>
                       <div class="form-group">
                         <label>Product Code</label>
                         <input type="text" class="form-control" name="pcode" required="">
@@ -105,10 +117,11 @@ else{
                       </div>
                       <div class="form-group">
                         <label>product Sale Price</label>
-                        <input type="text" class="form-control" name="psale" required="">
+                        <input type="text" class="form-control" name="sprice" required="">
                       </div>
                       <div class="form-group">
-                      <select name="catname" >
+                      <label>Choose Quantity</label>
+                      <select name="pqua" class="form-control ml-0" >
              <option value="">Select Quantity</option>
              <?php 
                   $qsql="SELECT * FROM `quantity-rec`";
@@ -126,9 +139,16 @@ else{
                         <input type="text" class="form-control" name="pstock" required="">
                       </div>
                       <div class="form-group">
-                        <label>product Pictures</label>
-                        <input type="file" class="form-control" name="pfile" required="">
+                        <label>Select Picture</label><br>
+                        <label for="pfile"><i class="fa-solid fa-cloud-arrow-up" style="font-size: 55px; border: 1px solid black; padding: 5px; cursor: pointer;"></i></label>
+                        <input type="file" multiple name="pfile[]" required="" id="pfile">
+                        
                       </div>
+                      <!-- <div class="form-group"> -->
+                      <label>Online</label>
+                         <input type="checkbox" name="status" required="">
+                         
+                      <!-- </div> -->
                     </div>
                     <div class="card-footer text-right">
                       <button class="btn btn-primary" name="sub">Submit</button>
