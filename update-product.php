@@ -1,6 +1,9 @@
-<?php
-
+<?php 
 include ("./include/connection.php");
+$pid=$_GET['pid'];
+$sql="SELECT * FROM `product-rec` p INNER JOIN `category-rec` c ON p.pctg=c.ctgid INNER JOIN `sub-category-rec` sub ON p.psubctg=sub.subid INNER JOIN `supplier-rec` sup ON p.psupname=sup.supid INNER JOIN `quantity-rec` q ON p.pqua=q.quaid";
+$run=mysqli_query($conn,$sql);
+$fet=mysqli_fetch_assoc($run);
 if(isset($_POST['sub'])){
     $pctg=mysqli_real_escape_string($conn,$_POST['pctg']);
     $psubctg=strtolower(mysqli_real_escape_string($conn,$_POST['psubctg']));
@@ -12,73 +15,57 @@ if(isset($_POST['sub'])){
     $sprice=mysqli_real_escape_string($conn,$_POST['sprice']);
     $pqua=mysqli_real_escape_string($conn,$_POST['pqua']);
     $pstock=mysqli_real_escape_string($conn,$_POST['pstock']);
-    $pfile=$_FILES['pfile']['name'];
+    @$pfile=$_FILES['pfile']['name'];
     $status=mysqli_real_escape_string($conn,$_POST['status']);
     $pdate=date ("m-d-y");
-$ctgsql="SELECT * FROM `product-rec` WHERE `pctg`='$pctg' and `pname`='$pname'";
-$ctgrun=mysqli_query($conn,$ctgsql);
-if(mysqli_num_rows($ctgrun)>0){
-  echo "<script>alert ('Category already exist')</script>";
-}
-else {
-  $subsql="SELECT * FROM `product-rec` WHERE `psubctg`='$psubctg' and `pname`='$pname'";
-  $subrun=mysqli_query($conn,$subsql);
-  if(mysqli_num_rows($subrun)>0){
-    echo "<script>alert ('Subcategory alredy exist')</script>";
-  }
-  else{
-    $supsql="SELECT * FROM `product-rec` WHERE `psupname`='$psupname' and `pname`='$pname'";
-    $suprun=mysqli_query($conn,$supsql);
-    if(mysqli_num_rows($suprun)>0){
-      echo "<script>alert ('Supplier  already exist')</script>";
-    }
-      else{
-      $psql="SELECT * FROM `product-rec` WHERE `pcode`='$pcode'";
-      $prun=mysqli_query($conn,$psql);
-      if(mysqli_num_rows($prun)>0){
-        echo "<script>alert ('product of this code  already exist')</script>";
-      }
-     
-      
-      else{
+    if(!empty($pfile[0])){
         foreach($pfile as $p){
-          $a=strtolower(pathinfo($p,PATHINFO_EXTENSION));
-          $arr=array("png","jpg","jpeg");
-          if(in_array($a,$arr)){
-            $newname=rand(10000,100000);
-            $newp=$newname . "." . $a;
-            $parr[]=$newp;
-            $msg="right";
-            
-          }
-          else{
-            $msg="invalid";
-           
-          }
+            $a=strtolower(pathinfo($p,PATHINFO_EXTENSION));
+            $arr=array("png","jpg","jpeg");
+            if(in_array($a,$arr)){
+                $mymsg="right";
+            }else{
+                $mymsg="invalid";
+               }
         }
-        if($msg=="right"){
-          $pi=serialize($parr);
-          $sql="INSERT INTO `product-rec` (`pctg`,`psubctg`,`psupname`,`pcode`,`pname`,`pdescrip`,`punit`,`sprice`,`pqua`,`pstock`,`pfile`,`status`,`pdate`) VALUES ('$pctg','$psubctg','$psupname','$pcode','$pname','$pdescrip','$punit','$sprice','$pqua','$pstock','$pi','$status','$pdate')";
-          $run=mysqli_query($conn,$sql);
-          if($run){
-            foreach($parr as $key=>$p){
-              move_uploaded_file($_FILES['pfile']['tmp_name'][$key],"./product-imgs/" . $p);
-          echo "<script>alert ('inserted')</script>";}
-           }
-           else{
-           echo "<script>alert (' noooooot inserted')</script>";
-           }
+        if($mymsg=="right"){
+            $dpic=unserialize($fet['pfile']);
+            foreach($dpic as $key=>$p){
+                unlink("./product-imgs/".$p);
+             }
         }
+        if($mymsg=="right"){
     
+            $pi=serialize($pfile);
+         $sql="UPDATE `product-rec` SET `pctg`='$pctg',`psubctg`='$psubctg',`psupname`='$psupname',`pcode`='$pcode',`pname`='$pname',`pdescrip`='$pdescrip',`punit`='$punit',`sprice`='$sprice',`pqua`='$pqua',`pstock`='$pstock',`pfile`='$pi',`status`='$status' WHERE `pid`='$pid'";
     
-  }
-      }
-    }
-  }
-  
+             $run=mysqli_query($conn,$sql);
+             if($run){
+              foreach($pfile as $key=>$p){
+                 move_uploaded_file($_FILES['pfile']['tmp_name'][$key],"./product-imgs/".$p);
+              }
+              echo "<script>alert ('Data has been updated')</script>";
+                 header("Refresh:0, url=./view-product.php");
+             }else{
+                echo "<script>alert ('Data has not been updated')</script>";
+             }
+    
+         }else{
+             $msg="Your imgs is not right";
+         }
+     }
+     else{
+        $pi=$fet['pfile'];
+        $sql="UPDATE `product-rec` SET `pctg`='$pctg',`psubctg`='$psubctg',`psupname`='$psupname',`pcode`='$pcode',`pname`='$pname',`pdescrip`='$pdescrip',`punit`='$punit',`sprice`='$sprice',`pqua`='$pqua',`pstock`='$pstock',`pfile`='$pi',`status`='$status' WHERE `pid`='$pid'";
+        $run=mysqli_query($conn,$sql);
+        if($run){
+            echo "<script>alert ('Data has been updated but You don't updated your images')</script>";
+                 header("Refresh:0, url=./view-product.php");
+        }else{
+            echo "<script>alert ('Data has not been updated')</script>";
+          }
+     }
 }
-
-
 include ("./include/header.php");
 include ("./include/sidebar.php");
 ?>
@@ -110,7 +97,7 @@ include ("./include/sidebar.php");
                     <div class="form-group">
                     <label>Select Category</label>
                     <select name="pctg" class="form-control ml-0"  >
-             <option value="">Select Category type</option>
+             <option value="<?php echo $fet['ctgid'] ?>"><?php echo $fet['ctgname']; ?></option>
              <?php 
                   $csql="SELECT * FROM `category-rec`";
                   $crun=mysqli_query($conn,$csql);
@@ -125,7 +112,7 @@ include ("./include/sidebar.php");
         <div class="form-group">
         <label>Select SubCategory</label>
         <select name="psubctg" class="form-control ml-0" >
-             <option value="">Select SubCategory type</option>
+        <option value="<?php echo $fet['subid'] ?>"><?php echo $fet['subname']; ?></option>
              <?php 
                   $ssql="SELECT * FROM `sub-category-rec`";
                   $srun=mysqli_query($conn,$ssql);
@@ -140,7 +127,7 @@ include ("./include/sidebar.php");
         <div class="form-group">
         <label>Select Supplier</label>
         <select name="psupname" class="form-control ml-0" >
-             <option value="">Select Supplier</option>
+        <option value="<?php echo $fet['supid'] ?>"><?php echo $fet['supname']; ?></option>
              <?php 
                   $supsql="SELECT * FROM `supplier-rec`";
                   $suprun=mysqli_query($conn,$supsql);
@@ -154,28 +141,33 @@ include ("./include/sidebar.php");
                 </div>
                       <div class="form-group">
                         <label>Product Code</label>
-                        <input type="number" class="form-control" name="pcode" required="">
+                        <input type="number" class="form-control" name="pcode" required="" value="<?php echo $fet['pcode'] ?>">
                       </div>
                       <div class="form-group">
                         <label>product Name</label>
-                        <input type="text" class="form-control" name="pname" required="">
+                        <input type="text" class="form-control" name="pname" required=""
+                        value="<?php echo $fet['pname'] ?>">
                       </div>
                       <div class="form-group mb-0">
                         <label>Product Description</label>
-                        <textarea class="form-control" required="" name="pdescrip"></textarea>
+                        <textarea class="form-control" required="" name="pdescrip">
+                        <?php echo $fet['pdescrip'] ?>
+                        </textarea>
                       </div>
                       <div class="form-group">
                         <label>product unit price</label>
-                        <input type="text" class="form-control" name="punit" required="">
+                        <input type="text" class="form-control" name="punit" required=""
+                        value="<?php echo $fet['punit'] ?>">
                       </div>
                       <div class="form-group">
                         <label>product Sale Price</label>
-                        <input type="text" class="form-control" name="sprice" required="">
+                        <input type="text" class="form-control" name="sprice" required=""
+                        value="<?php echo $fet['sprice'] ?>">
                       </div>
                       <div class="form-group">
                       <label>Choose Quantity</label>
                       <select name="pqua" class="form-control ml-0" >
-             <option value="">Select Quantity</option>
+                      <option value="<?php echo $fet['quaid'] ?>"><?php echo $fet['quaname']; ?></option>
              <?php 
                   $qsql="SELECT * FROM `quantity-rec`";
                   $qrun=mysqli_query($conn,$qsql);
@@ -189,7 +181,8 @@ include ("./include/sidebar.php");
                       </div>
                       <div class="form-group">
                         <label>product Stock</label>
-                        <input type="text" class="form-control" name="pstock" required="">
+                        <input type="text" class="form-control" name="pstock" required=""
+                        value="<?php echo $fet['pstock'] ?>">
                       </div>
                       <div class="form-group">
                         <label>Select Picture</label><br>
@@ -197,13 +190,20 @@ include ("./include/sidebar.php");
                         <input type="file" multiple name="pfile[]" required="" id="pfile">
                         
                       </div>
+                      <?php
+  if($fet['status']=="online"){
+    $m="Online";
+  }else{
+   $m="Offline";
+  }
+                      ?>
                       <!-- <div class="form-group"> -->
-                      <input type="checkbox" name="status" required="">
+                      <input type="checkbox" name="status" required=""value="<?php echo @$m; ?>" >
                       <label>Online</label>
                       <!-- </div> -->
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">Submit</button>
+                      <button class="btn btn-primary" name="sub">update</button>
                     </div>
                   </form>
                 </div>
