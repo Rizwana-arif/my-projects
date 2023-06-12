@@ -1,7 +1,8 @@
 <?php 
+include ("./include/connection.php");
 include ("./include/header.php");
 include ("./include/sidebar.php");
-include ("./include/connection.php");
+
  ?>
    
       <!-- Main Content -->

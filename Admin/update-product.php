@@ -12,7 +12,7 @@ if(isset($_POST['sub'])){
     $pname=mysqli_real_escape_string($conn,$_POST['pname']);
     $pdescrip=mysqli_real_escape_string($conn,$_POST['pdescrip']);
     $punit=mysqli_real_escape_string($conn,$_POST['punit']);
-    $sprice=mysqli_real_escape_string($conn,$_POST['sprice']);while
+    $sprice=mysqli_real_escape_string($conn,$_POST['sprice']);
     $pqua=mysqli_real_escape_string($conn,$_POST['pqua']);
     $pstock=mysqli_real_escape_string($conn,$_POST['pstock']);
     $status=mysqli_real_escape_string($conn,$_POST['status']);

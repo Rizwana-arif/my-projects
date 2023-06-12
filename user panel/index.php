@@ -1,5 +1,5 @@
 <?php 
-include ('../inventury-project/include/connection.php');
+include ('../admin/include/connection.php');
 include ('./include/header.php');
 ?>
 	
