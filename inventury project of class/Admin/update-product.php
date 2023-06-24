@@ -30,8 +30,9 @@ if(isset($_POST['sub'])){
                 $mymsg="right";
             }else{
                 $mymsg="invalid";
+                break;
                }
-               break;
+               
         }
         if($mymsg=="right"){
             $dpic=unserialize($fet['pfile']);
@@ -56,16 +57,18 @@ if(isset($_POST['sub'])){
              }
     
          }else{
-          echo "<script>alert ('Product has been updated but U dont updated images')</script>";;
+          echo "<script>alert ('Product has been updated also updated images')</script>";
+          header("Refresh:0, url=./view-product.php");
          }
      }
      else{
+    
         $pi=$fet['pfile'];
         $sql="UPDATE `product-rec` SET `pctg`='$pctg',`psubctg`='$psubctg',`psupname`='$psupname',`pcode`='$pcode',`pname`='$pname',`pdescrip`='$pdescrip',`punit`='$punit',`sprice`='$sprice',`pqua`='$pqua',`pstock`='$pstock',`pfile`='$pi',`status`='$status' WHERE `pid`='$pid'";
         $run=mysqli_query($conn,$sql);
         if($run){
           
-            echo "<script>alert ('Product has been updated also updated images')</script>";
+          echo "<script>alert ('Product has been updated but U dont updated images')</script>";
             header("Refresh:0, url=./view-product.php"); 
         }else{
             echo "<script>alert ('Product has not been updated')</script>";
@@ -193,7 +196,7 @@ include ("./include/sidebar.php");
                       <div class="form-group">
                         <label>Select Picture</label><br>
                         <label for="pfile"><i class="fa-solid fa-cloud-arrow-up" style="font-size: 55px; border: 1px solid black; padding: 5px; cursor: pointer;"></i></label>
-                        <input type="file" multiple name="pfile[]" required="" id="pfile">
+                        <input type="file" multiple name="pfile[]"  id="pfile">
                         
                       </div>
                       <?php
@@ -208,7 +211,7 @@ include ("./include/sidebar.php");
                       <!-- </div> -->
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">update</button>
+                    <button class="btn btn-primary" name="sub">Update</button>
                     </div>
                   </form>
                 </div>
