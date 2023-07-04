@@ -6,7 +6,7 @@ include ('./include/header.php');
                  <div class="row g-4">
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Disapproved Lawyers</h6>
+                            <h6 class="mb-4">View Lawyers</h6>
                             <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -28,12 +28,13 @@ include ('./include/header.php');
                                         <th >Resume</th>
                                         <th >Intro</th>
                                         <th >Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                
                                 <tbody>
                                 <?php 
-                                $sql="SELECT * FROM `registered-lawyers`";
+                                $sql="SELECT * FROM `lawyers-rec` where `status`='DisApproved'";
                                 $run=mysqli_query($conn,$sql);
                                 while($fet=mysqli_fetch_assoc($run)){
                                 ?>
@@ -55,6 +56,19 @@ include ('./include/header.php');
                                         <td><img width=50px height=50px src="<?php echo "./data/resume/" . $fet['rfile']; ?> "/></td>
                                         <td><?php echo $fet['intro'] ;?></td>
                                         <td><?php echo $fet['status'] ;?></td>
+                                        <td>
+                                        <div class="dropdown">
+  <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+  <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="./update-status.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Disapproved</a></li>
+    <li><a class="dropdown-item" href="./remove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Remove</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+
+                                        </td>
                                     </tr>
                                     <?php } ?>
                                 </tbody>

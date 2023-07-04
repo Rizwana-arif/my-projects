@@ -34,7 +34,7 @@ include ('./include/header.php');
                                
                                 <tbody>
                                 <?php 
-                                $sql="SELECT * FROM `lawyers-rec`";
+                                $sql="SELECT * FROM `lawyers-rec` where `status`='approved'";
                                 $run=mysqli_query($conn,$sql);
                                 while($fet=mysqli_fetch_assoc($run)){
                                 ?>
