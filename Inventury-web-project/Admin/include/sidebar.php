@@ -64,7 +64,7 @@
            
 
             
-            <li><a class="nav-link" href="blank.html"><i data-feather="file"></i><span>Blank Page</span></a></li>
+            <li><a class="nav-link" href="./admin-logout.php"><i data-feather="file"></i><span>Logout</span></a></li>
     
           </ul>
         </aside>

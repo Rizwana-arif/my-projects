@@ -1,3 +1,23 @@
+<?php
+include ('./include/connection.php');
+SESSION_START();
+if(isset($_POST['login'])){
+  $email=mysqli_real_escape_string($conn,$_POST['email']);
+  $password=mysqli_real_escape_string($conn,$_POST['password']);
+  $sql="SELECT * FROM `admin-reg` WHERE `email`='$email' and `password`='$password'";
+  $run=mysqli_query($conn,$sql);
+  $fet=mysqli_fetch_assoc($run);
+  if(mysqli_num_rows($run)==1){
+    if($fet['status']=="admin"){
+      $_SESSION['email']=$email;
+      header("location:./index-main.php");
+    }
+    }else{
+      echo "<script> alert ('Invalid Details')</script>";
+  }
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,33 +72,17 @@
                       please fill in your password
                     </div>
                   </div>
+                 
                   <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" name="login">
                       Login
                     </button>
                   </div>
                 </form>
-                <div class="text-center mt-4 mb-3">
-                  <div class="text-job text-muted">Login With Social</div>
-                </div>
-                <div class="row sm-gutters">
-                  <div class="col-6">
-                    <a class="btn btn-block btn-social btn-facebook">
-                      <span class="fab fa-facebook"></span> Facebook
-                    </a>
-                  </div>
-                  <div class="col-6">
-                    <a class="btn btn-block btn-social btn-twitter">
-                      <span class="fab fa-twitter"></span> Twitter
-                    </a>
-                  </div>
-                </div>
+
+
+
+                
               </div>
             </div>
             <div class="mt-5 text-muted text-center">

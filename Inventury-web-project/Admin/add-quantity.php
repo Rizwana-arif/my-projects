@@ -1,5 +1,9 @@
 <?php
 include ("./include/connection.php");
+session_start();
+if(empty($_SESSION['email'])){
+  header("location:./login.php");
+}
 if(isset($_POST['sub'])){
   $quaname=strtolower(mysqli_real_escape_string($conn,$_POST['quaname']));
 $quadescrip=mysqli_real_escape_string($conn,$_POST['quadescrip']);

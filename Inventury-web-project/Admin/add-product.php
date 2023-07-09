@@ -1,6 +1,10 @@
 <?php
 
 include ("./include/connection.php");
+session_start();
+if(empty($_SESSION['email'])){
+  header("location:./login.php");
+}
 if(isset($_POST['sub'])){
     $pctg=mysqli_real_escape_string($conn,$_POST['pctg']);
     $psubctg=strtolower(mysqli_real_escape_string($conn,$_POST['psubctg']));

@@ -1,3 +1,36 @@
+<?php
+include ('./include/connection.php');
+session_start();
+if(isset($_POST['login'])){
+    $email=mysqli_real_escape_string($conn,$_POST['email']);
+  $password=mysqli_real_escape_string($conn,$_POST['password']);
+  $sql="SELECT * FROM `admin` WHERE `email`='$email' AND `password`='$password'";
+$run=mysqli_query($conn,$sql);
+$fet=mysqli_fetch_assoc($run);
+if(mysqli_num_rows($run)==1){
+    if($fet['status']=="admin" ){
+      $_SESSION['email']=$email;
+      header("location:./index.php");
+    }
+    } else{
+     $lsql="SELECT * FROM `lawyer` WHERE `email`='$email' AND `password`='$password'";
+    $lrun=mysqli_query($conn,$lsql);
+    $lfet=mysqli_fetch_assoc($lrun);
+    if(mysqli_num_rows($lrun)==1){
+        if($lfet['status']=="lawyer" ){
+          $_SESSION['email']=$email;
+          header("location:./index.php");
+        }
+}else {
+    echo "<script> alert ('Invalid Details')</script>";
+}
+}
+
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,31 +79,28 @@
         <div class="container-fluid">
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <form method="post">
                     <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
-                            <a href="index.html" class="">
-                                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
-                            </a>
-                            <h3>Sign In</h3>
+                            
+                            <h3>Login</h3>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">Email address</label>
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                            <label for="email">Email address</label>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                            <label for="floatingPassword">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                            <label for="password">Password</label>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
+                            
                             <a href="">Forgot Password</a>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="login">Login</button>
                         <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
                     </div>
+</form>
                 </div>
             </div>
         </div>

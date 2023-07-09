@@ -1,4 +1,12 @@
-<?php include ('./include/header.php'); ?>
+<?php 
+include ('./include/connection.php');
+session_start();
+if(empty($_SESSION['email'])){
+    header("location:./login.php");
+}
+include ('./include/header.php');
+include ('./include/sidebar.php');
+?>
 
 
             <!-- Sale & Revenue Start -->

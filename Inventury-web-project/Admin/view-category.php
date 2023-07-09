@@ -1,7 +1,12 @@
 <?php 
+include ("./include/connection.php");
+session_start();
+if(empty($_SESSION['email'])){
+  header("location:./login.php");
+}
 include ("./include/header.php");
 include ("./include/sidebar.php");
-include ("./include/connection.php");
+
 
 ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
