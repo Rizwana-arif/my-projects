@@ -1,5 +1,9 @@
 <?php 
 include ('./include/connection.php'); 
+session_start();
+if(empty($_SESSION['email'])){
+    header("location:./login.php");
+}
 include ('./include/header.php');
 ?>
   <div class="container-fluid pt-4 px-4">

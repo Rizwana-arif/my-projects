@@ -1,8 +1,13 @@
 
-  <?php
-  include ('./include/connection.php'); 
-  include('./include/header.php'); 
-  ?>          
+<?php 
+include ('./include/connection.php');
+session_start();
+if(empty($_SESSION['email'])){
+    header("location:./login.php");
+}
+include ('./include/header.php');
+
+?>
             
             <!-- Carousel Start -->
             <div id="carousel" class="carousel slide" data-ride="carousel">

@@ -1,5 +1,9 @@
 <?php 
 include ('./include/connection.php');
+session_start();
+if(empty($_SESSION['email'])){
+    header("location:./login.php");
+}
 if(isset($_POST['sub'])){
     $name=mysqli_real_escape_string($conn,$_POST['name']);
     $email=mysqli_real_escape_string($conn,$_POST['email']);

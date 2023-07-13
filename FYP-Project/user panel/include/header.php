@@ -71,26 +71,44 @@
 
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto">
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
-                                <a href="about.html" class="nav-item nav-link">About</a>
-                                <a href="service.html" class="nav-item nav-link">Practice</a>
-                                <a href="team.html" class="nav-item nav-link">Attorneys</a>
-                                <a href="portfolio.html" class="nav-item nav-link">Case Studies</a>
-                                <div class="nav-item dropdown">
+                                <a href="./index.php" class="nav-item nav-link active">Home</a>
+                                <a href="#" class="nav-item nav-link">About</a>
+                                <!-- <a href="service.html" class="nav-item nav-link">Practice</a> -->
+                                <a href="./lawyers.php" class="nav-item nav-link">Lawyers</a>
+                                <a href="#" class="nav-item nav-link">Case Studies</a>
+                                <?php
+                                if($_SESSION['status']=="client"){
+                                ?>
+                                <a href="clients-profile.php" class="nav-item nav-link">Profile</a>
+                                <a href="./logout.php" class="nav-item nav-link">Logout</a>
+                                <?php } ?>
+                                <?php
+                                if($_SESSION['status']=="lawyer"){
+                                ?>
+                                <!-- <a href="./lawyers-profile.php" class="nav-item nav-link">Profile</a> -->
+                                <a href="./logout.php" class="nav-item nav-link">Logout</a>
+                                <?php } ?>
+                                <!-- <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                     <div class="dropdown-menu">
                                         <a href="blog.html" class="dropdown-item">Blog Page</a>
                                         <a href="single.html" class="dropdown-item">Single Page</a>
                                     </div>
+                                </div> -->
+                                <a href="#" class="nav-item nav-link">Contact</a>
+                                <div class="nav-item dropdown">
+                                    <a href="#" class=" nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
+                                    <div class="dropdown-menu">
+                                        <a href="./register-lawyers.php" class="dropdown-item">As Lawyer</a>
+                                        <a href="./register-clients.php" class="dropdown-item">As Client</a>
+                                    </div>
                                 </div>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                <a href="./register-lawyers.php" class="nav-item nav-link">Register</a>
                             </div>
                             <div class="nav-item dropdown">
                                     <a href="#" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
                                     <div class="dropdown-menu">
-                                        <a href="register-lawyers.php" class="dropdown-item">As Lawyer</a>
-                                        <a href="single.html" class="dropdown-item">As Client</a>
+                                        <a href="./login.php" class="dropdown-item">As Lawyer</a>
+                                        <a href="./login.php" class="dropdown-item">As Client</a>
                                     </div>
                                 </div>
                             <div class="ml-auto">
