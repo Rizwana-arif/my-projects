@@ -5,6 +5,8 @@ if(empty($_SESSION['email'])){
     header("location:./login.php");
 }
 include ('./include/header.php');
+include ('./include/sidebar.php');
+
 ?>
   <div class="container-fluid pt-4 px-4">
                  <div class="row g-4">
@@ -66,7 +68,7 @@ include ('./include/header.php');
   <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="./update-status.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Disapproved</a></li>
+    <li><a class="dropdown-item" href="./update-approve-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Approved</a></li>
     <li><a class="dropdown-item" href="./remove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Remove</a></li>
     <li><a class="dropdown-item" href="#">Something else here</a></li>
   </ul>

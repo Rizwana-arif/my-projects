@@ -8,19 +8,19 @@ if(isset($_POST['login'])){
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
 if(mysqli_num_rows($run)==1){
-    if($fet['status']=="admin" ){
+    if($fet['estatus']=="admin" ){
       $_SESSION['email']=$email;
-      $_SESSION['status']="admin";
+      $_SESSION['estatus']="admin";
       header("location:./index.php");
     }
     } else{
-     $lsql="SELECT * FROM `lawyer` WHERE `email`='$email' AND `password`='$password'";
+     $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password'";
     $lrun=mysqli_query($conn,$lsql);
     $lfet=mysqli_fetch_assoc($lrun);
     if(mysqli_num_rows($lrun)==1){
-        if($lfet['status']=="lawyer" ){
+        if($lfet['estatus']=="lawyer" ){
           $_SESSION['email']=$email;
-      $_SESSION['status']="lawyer";
+      $_SESSION['estatus']="lawyer";
           header("location:./index.php");
         }
 }else {

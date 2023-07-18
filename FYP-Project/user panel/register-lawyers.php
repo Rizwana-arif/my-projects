@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
     header("location:./login.php");
 }
 if(isset($_POST['sub'])){
@@ -22,6 +22,7 @@ if(isset($_POST['sub'])){
     $rfile=$_FILES['rfile']['name'];
     $intro=mysqli_real_escape_string($conn,$_POST['intro']);
     $status=mysqli_real_escape_string($conn,$_POST['status']);
+    $estatus="lawyer";
     $a=strtolower(pathinfo($pfile,PATHINFO_EXTENSION));
     $a1=strtolower(pathinfo($idffile,PATHINFO_EXTENSION));
     $a2=strtolower(pathinfo($idbfile,PATHINFO_EXTENSION));
@@ -35,7 +36,7 @@ if(isset($_POST['sub'])){
         $idb=$idbfile."." .$rand. ".".$a2;
         $li=$lifile."." .$rand. ".".$a3;
         $rf=$rfile."." .$rand. ".".$a4;
-        $sql="INSERT INTO `lawyers-rec`(`name`,`email`,`cnic`, `phoneno`,`state`,`password`,`exp`,`expyear`,`quali`,`exparea`,`pfile`,`idffile`,`idbfile`,`lifile`,`rfile`,`intro`,`status`) VALUES ('$name','$email','$cnic','$phoneno','$state','$password','$exp','$expyear','$quali','$exparea','$pic','$idf','$idb','$li','$rf','$intro','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`name`,`email`,`cnic`, `phoneno`,`state`,`password`,`exp`,`expyear`,`quali`,`exparea`,`pfile`,`idffile`,`idbfile`,`lifile`,`rfile`,`intro`,`status`,`estatus`) VALUES ('$name','$email','$cnic','$phoneno','$state','$password','$exp','$expyear','$quali','$exparea','$pic','$idf','$idb','$li','$rf','$intro','$status','$estatus')";
         $run=mysqli_query($conn,$sql);
         if($run){
 

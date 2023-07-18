@@ -22,6 +22,8 @@ if(isset($_POST['sub'])){
     $rfile=$_FILES['rfile']['name'];
     $intro=mysqli_real_escape_string($conn,$_POST['intro']);
     $status=mysqli_real_escape_string($conn,$_POST['status']);
+$estatus="lawyer";
+
     $a=strtolower(pathinfo($pfile,PATHINFO_EXTENSION));
     $a1=strtolower(pathinfo($idffile,PATHINFO_EXTENSION));
     $a2=strtolower(pathinfo($idbfile,PATHINFO_EXTENSION));
@@ -35,7 +37,7 @@ if(isset($_POST['sub'])){
         $idb=$idbfile."." .$rand. ".".$a2;
         $li=$lifile."." .$rand. ".".$a3;
         $rf=$rfile."." .$rand. ".".$a4;
-        $sql="INSERT INTO `lawyers-rec`(`name`,`email`,`cnic`, `phoneno`,`state`,`password`,`exp`,`expyear`,`quali`,`exparea`,`pfile`,`idffile`,`idbfile`,`lifile`,`rfile`,`intro`,`status`) VALUES ('$name','$email','$cnic','$phoneno','$state','$password','$exp','$expyear','$quali','$exparea','$pic','$idf','$idb','$li','$rf','$intro','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`name`,`email`,`cnic`, `phoneno`,`state`,`password`,`exp`,`expyear`,`quali`,`exparea`,`pfile`,`idffile`,`idbfile`,`lifile`,`rfile`,`intro`,`status`,`estatus`) VALUES ('$name','$email','$cnic','$phoneno','$state','$password','$exp','$expyear','$quali','$exparea','$pic','$idf','$idb','$li','$rf','$intro','$status','$estatus')";
         $run=mysqli_query($conn,$sql);
         if($run){
 
@@ -55,6 +57,7 @@ if(isset($_POST['sub'])){
     }
 }
 include ('./include/header.php');
+include ('./include/sidebar.php');
 ?>
 <body>
     <div class="container-fluid pt-4 px-4 ">
@@ -87,9 +90,9 @@ include ('./include/header.php');
                             <label  class="form-label">State</label>
                             <select class="form-select mb-3" aria-label="Default select example" name="state">
                                 <option selected>Choose state</option>
-                                <option value="1">Jaranwala</option>
-                                <option value="2">nshataabad</option>
-                                <option value="3">shah kout</option>
+                                <option >Jaranwala</option>
+                                <option >nshataabad</option>
+                                <option >shah kout</option>
                             </select>
                            
                         </div>
@@ -109,28 +112,28 @@ include ('./include/header.php');
                         <label class="form-label">Qualification</label>
                         <select class="form-select mb-3" aria-label="Default select example" name="quali">
                         <option selected></option>
-                        <option value="1">L.L.B (3years)</option>
-                        <option value="2">L.L.B (5years)</option>
-                        <option value="3">Barrister</option>
-                        <option value="3">L.L.M</option>
-                        <option value="3">Barrister</option>
+                        <option >L.L.B (3years)</option>
+                        <option>L.L.B (5years)</option>
+                        <option>Barrister</option>
+                        <option>L.L.M</option>
+                        <option>Barrister</option>
                         </select>
                     </div>
                     <div class="mb-3 col-lg-4">
                         <label class="form-label">Area of Expertise</label>
                         <select class="form-select mb-3" aria-label="Default select example" name="exparea">
                                 <option selected></option>
-                                <option value="1">General Law</option>
-                                <option value="2">Family Law</option>
-                                <option value="3">Criminal Law</option>
-                                <option value="1">Business Law</option>
-                                <option value="1">Consumer Law</option>
-                                <option value="1">Real State Law</option>
-                                <option value="1">Immigration Law</option>
-                                <option value="1">Banking Law</option>
-                                <option value="1">Traffic Law</option>
-                                <option value="1">Tax Law</option>
-                                <option value="1">Tax Return Filling</option>
+                                <option >General Law</option>
+                                <option>Family Law</option>
+                                <option>Criminal Law</option>
+                                <option>Business Law</option>
+                                <option>Consumer Law</option>
+                                <option>Real State Law</option>
+                                <option>Immigration Law</option>
+                                <option>Banking Law</option>
+                                <option>Traffic Law</option>
+                                <option>Tax Law</option>
+                                <option>Tax Return Filling</option>
                             </select>
                     </div>
                        

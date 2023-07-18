@@ -1,16 +1,16 @@
 <?php
+include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
     header("location:./login.php");
 }
+$pro=$_SESSION['cemail'];
+    $sql="SELECT * FROM `clients-rec` where `cemail`='$pro' ";
+    $run=mysqli_query($conn,$sql);
+    $fet=mysqli_fetch_assoc($run);
+include ('./include/header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
         body{
@@ -72,14 +72,16 @@ if(empty($_SESSION['email'])){
     <div class="container">
         <div class="main-body">
         
-              <!-- Breadcrumb -->
-              <nav aria-label="breadcrumb" class="main-breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">User Profile</li>
-                </ol>
-              </nav>
+            
+              <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2><?php echo $fet['cname']; ?></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
               <!-- /Breadcrumb -->
         
               <div class="row gutters-sm">
@@ -87,13 +89,13 @@ if(empty($_SESSION['email'])){
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                        <img src="<?php echo './data/client-img/' . $fet['img']; ?>" alt="Admin" class="rounded-circle" width="150">
                         <div class="mt-3">
-                          <h4>John Doe</h4>
-                          <p class="text-secondary mb-1">Full Stack Developer</p>
-                          <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                          <button class="btn btn-primary">Follow</button>
-                          <button class="btn btn-outline-primary">Message</button>
+                          <h4><?php echo $fet['cname']; ?></h4>
+                          <p class="text-secondary mb-1"><?php echo $fet['des']; ?></p>
+                          <p class="text-muted font-size-sm"><?php echo $fet['cemail'] ?></p>
+                          <!-- <a href="./appointment.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-outline-primary" name="sub">Profile </button></a>
+                          <button class="btn btn-outline-primary">Message</button> -->
                         </div>
                       </div>
                     </div>
@@ -131,7 +133,7 @@ if(empty($_SESSION['email'])){
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          Kenneth Valdez
+                        <?php echo $fet['cname']; ?>
                         </div>
                       </div>
                       <hr>
@@ -140,25 +142,43 @@ if(empty($_SESSION['email'])){
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          fip@jukmuh.al
+                        <?php echo $fet['cemail']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Phone</h6>
+                          <h6 class="mb-0">Phone No</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          (239) 816-9029
+                        <?php echo $fet['mobno']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Mobile</h6>
+                          <h6 class="mb-0">CNIC</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          (320) 380-4539
+                        <?php echo $fet['ccnic']; ?>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">State</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        <?php echo $fet['state']; ?>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">District</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        <?php echo $fet['dis']; ?>
                         </div>
                       </div>
                       <hr>
@@ -167,19 +187,37 @@ if(empty($_SESSION['email'])){
                           <h6 class="mb-0">Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                          Bay Area, San Francisco, CA
+                        <?php echo $fet['cadd']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
-                        <div class="col-sm-12">
-                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Refrence Name</h6>
                         </div>
+                        <div class="col-sm-9 text-secondary">
+                        <?php echo $fet['refname']; ?>
+                        </div>
+                      </div>
+
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Refrence No.</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                        <?php echo $fet['refno']; ?>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <!-- <div class="col-sm-12">
+                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                        </div> -->
                       </div>
                     </div>
                   </div>
     
-                  <div class="row gutters-sm">
+                  <!-- <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
                       <div class="card h-100">
                         <div class="card-body">
@@ -234,8 +272,11 @@ if(empty($_SESSION['email'])){
                         </div>
                       </div>
                     </div>
-                  </div>
-              </div>
+                  </div> -->
+    
+    
+    
+                </div>
               </div>
     
             </div>

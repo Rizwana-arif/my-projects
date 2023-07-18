@@ -63,16 +63,16 @@ include ('./include/sidebar.php');
                                         <td><?php echo $fet['intro'] ;?></td>
                                         <td><?php echo $fet['status'] ;?></td>
                                         <td>
-                                        <div class="dropdown">
-  <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- <div class="dropdown">
+  <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> -->
   <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
-  </button>
+  <!-- </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="./update-disapprove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Disapproved</a></li>
-    <li><a class="dropdown-item" href="./remove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>">Remove</a></li>
+    <li><a class="dropdown-item" href="./update-disapprove-lawyer.php?lawyerid=>">Disapproved</a></li>
+    <li><a class="dropdown-item" href="./remove-lawyer.php?lawyerid">Remove</a></li>
     <li><a class="dropdown-item" href="#">Something else here</a></li>
   </ul>
-</div>
+</div> -->
 
                                         </td>
                                     </tr>

@@ -77,15 +77,15 @@
                                 <a href="./lawyers.php" class="nav-item nav-link">Lawyers</a>
                                 <a href="#" class="nav-item nav-link">Case Studies</a>
                                 <?php
-                                if($_SESSION['status']=="client"){
+                                if($_SESSION['estatus']=="client"){
                                 ?>
-                                <a href="clients-profile.php" class="nav-item nav-link">Profile</a>
+                                <a href="clients-profile.php" class="nav-item nav-link">MyProfile</a>
                                 <a href="./logout.php" class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <?php
-                                if($_SESSION['status']=="lawyer"){
+                                if($_SESSION['estatus']=="lawyer"){
                                 ?>
-                                <!-- <a href="./lawyers-profile.php" class="nav-item nav-link">Profile</a> -->
+                                <a href="./lawyers-profile.php" class="nav-item nav-link">Profile</a>
                                 <a href="./logout.php" class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <!-- <div class="nav-item dropdown">
@@ -112,7 +112,7 @@
                                     </div>
                                 </div>
                             <div class="ml-auto">
-                                <a class="btn" href="https://htmlcodex.com/law-firm-website-template">Get Appointment</a>
+                                <a class="btn" href="./appointment.php">Get Appointment</a>
                             </div>
                             
                         </div>

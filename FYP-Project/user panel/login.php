@@ -4,23 +4,23 @@ session_start();
 if(isset($_POST['login'])){
     $email=mysqli_real_escape_string($conn,$_POST['email']);
   $password=mysqli_real_escape_string($conn,$_POST['password']);
-  $sql="SELECT * FROM `client` WHERE `email`='$email' AND `password`='$password'";
+  $sql="SELECT * FROM `clients-rec` WHERE `cemail`='$email' AND `cpass`='$password'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
 if(mysqli_num_rows($run)==1){
-    if($fet['status']=="client" ){
-      $_SESSION['email']=$email;
-      $_SESSION['status']="client";
+    if($fet['estatus']=="client" ){
+      $_SESSION['cemail']=$email;
+      $_SESSION['estatus']="client";
       header("location:./index.php");
     }
     } else{
-     $lsql="SELECT * FROM `lawyer` WHERE `email`='$email' AND `password`='$password'";
+     $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password'";
     $lrun=mysqli_query($conn,$lsql);
     $lfet=mysqli_fetch_assoc($lrun);
     if(mysqli_num_rows($lrun)==1){
-        if($lfet['status']=="lawyer" ){
+        if($lfet['estatus']=="lawyer" ){
           $_SESSION['email']=$email;
-      $_SESSION['status']="lawyer";
+      $_SESSION['estatus']="lawyer";
           header("location:./index.php");
         }
 }else {
