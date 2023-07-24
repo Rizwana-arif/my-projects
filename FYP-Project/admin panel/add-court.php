@@ -27,8 +27,9 @@ include ('./include/sidebar.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Cases Type</title>
- 
+    <title>Add Court</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
 <!-- Button trigger modal -->
@@ -103,7 +104,8 @@ include ('./include/sidebar.php');
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="court"
-                                   name="court" >
+                                   name="court" oninput="checkcourt()">
+                                   <span id="error" style="color:red;font-size:10px"></span>
                                 <label for="floatingPassword">Court</label>
                             </div>
                             <!-- <div class="form-floating mb-3">
@@ -130,7 +132,21 @@ include ('./include/sidebar.php');
   </div>
 </div>
 
-
+<script>
+  function checkcourt(){
+         var court=document.querySelector("#court").value;
+         var courtRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!courtRegex.test(court)) {
+           document.querySelector("#error").innerHTML="Write Alphabets Only";
+           document.querySelector("#court").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#court").style.border="gray solid 2px";
+      }
+    }
+    
+</script>
 
 <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
@@ -168,7 +184,8 @@ include ('./include/sidebar.php');
                                             <td>
                                         <div class="dropdown">
                                         <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
+                                        <i class="fa-solid fa-ellipsis"></i>
+
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item" href="./update-court.php?courtid=<?php echo $fet['courtid']; ?>">Edit</a></li>

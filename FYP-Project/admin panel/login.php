@@ -14,13 +14,15 @@ if(mysqli_num_rows($run)==1){
       header("location:./index.php");
     }
     } else{
-     $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password'";
+     $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password' ";
     $lrun=mysqli_query($conn,$lsql);
     $lfet=mysqli_fetch_assoc($lrun);
+    $lawyerid=$lfet['lawyerid'];
     if(mysqli_num_rows($lrun)==1){
         if($lfet['estatus']=="lawyer" ){
           $_SESSION['email']=$email;
-      $_SESSION['estatus']="lawyer";
+        $_SESSION['estatus']="lawyer";
+        $_SESSION['lawyerid']=$lawyerid;
           header("location:./index.php");
         }
 }else {
@@ -64,6 +66,21 @@ if(mysqli_num_rows($run)==1){
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    #error{
+        color : red;
+        font-size: 10px;
+    }
+    #togglePassword {
+  position: absolute;
+  top: 47%;
+  right: 40px; /* Adjust the distance from the right as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+</style>
 </head>
 
 <body>
@@ -88,12 +105,16 @@ if(mysqli_num_rows($run)==1){
                             <h3>Login</h3>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email">
+                            <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" oninput="checkemail()">
                             <label for="email">Email address</label>
+                            <span id="error"></span>
                         </div>
                         <div class="form-floating mb-4">
-                            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                            <label for="password">Password</label>
+                        
+                        <input type="password" class="form-control" id="password" placeholder="Password" name="password" oninput="checkpassword()">
+                        <label for="password">Password</label>
+                        <i class="fa-regular fa-eye" id="togglePassword"></i>
+                        <span id="perror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             
@@ -122,6 +143,45 @@ if(mysqli_num_rows($run)==1){
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+     function checkemail(){
+         var email=document.querySelector("#email").value;
+         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailRegex.test(email)) {
+           document.querySelector("#error").innerHTML="Must Add @ and .com";
+           document.querySelector("#email").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#email").style.border="gray solid 2px";
+      }
+    }
+    function checkpassword(){
+         var password=document.querySelector("#password").value;
+         var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+         if (!passwordRegex.test(password)) {
+           document.querySelector("#perror").innerHTML="Only 8 characters with no. and alphabets";
+           document.querySelector("#password").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#perror").innerHTML="";
+        document.querySelector("#password").style.border="gray solid 2px";
+      }
+    }
+    document.getElementById("togglePassword").addEventListener("click", function() {
+  var passwordField = document.getElementById("password");
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    this.classList.remove("fa-eye");
+    this.classList.add("fa-eye-slash");
+  } else {
+    passwordField.type = "password";
+    this.classList.remove("fa-eye-slash");
+    this.classList.add("fa-eye");
+  }
+});
+
+</script>
 </body>
 
 </html>

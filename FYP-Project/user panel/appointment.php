@@ -5,6 +5,8 @@ if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
     header("location:./login.php");
 }
 $appoin=$_SESSION['cemail'];
+$lawyer=$_SESSION['lawyerid'];
+
 $sql="SELECT * FROM `clients-rec` where `cemail`='$appoin'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
@@ -22,8 +24,12 @@ if(isset($_POST['sub'])){
     $cldes=mysqli_real_escape_string($conn,$_POST['cldes']);
     $casecat=mysqli_real_escape_string($conn,$_POST['casecat']);
     $clawyer=mysqli_real_escape_string($conn,$_POST['clawyer']);
-    $sta="request";
-    $asql="INSERT INTO `appointment-rec` (`clname` , `clcnic`,`clgen` ,`clmob`,`clrefn`,`clrefno`,`clemail`,`clstate`,`cldis`,`cladd`,`cldes`,`casecat`,`clawyer`,`sta`) VALUES ('$clname','$clcnic','$clgen','$clmob','$clrefn','$clrefno','$clemail','$clstate','$cldis','$cladd','$cldes','$casecat','$clawyer','$sta') ";
+    $datetime=mysqli_real_escape_string($conn,$_POST['datetime']);
+    $sta="unaccepted";
+   $query="SELECT * FROM `client-rec` WHERE `cemail`='$clemail' AND `clawyer`='$lawyer' ";
+   $run=mysqli_query($query);
+   if($run){
+    $asql="INSERT INTO `appointment-rec` (`clname` , `clcnic`,`clgen` ,`clmob`,`clrefn`,`clrefno`,`clemail`,`clstate`,`cldis`,`cladd`,`cldes`,`casecat`,`clawyer`,`datetime`,`sta`) VALUES ('$clname','$clcnic','$clgen','$clmob','$clrefn','$clrefno','$clemail','$clstate','$cldis','$cladd','$cldes','$casecat','$clawyer','$datetime','$sta') ";
     $arun=mysqli_query($conn,$asql);
     if($arun){
         echo "<script>alert('Appointment Request has been sent')</script>";
@@ -31,6 +37,7 @@ if(isset($_POST['sub'])){
     }else{
         echo "<script>alert('Appointment Request has not been sent')</script>";
     }
+}
 }
 include ('./include/header.php');
 ?>
@@ -148,6 +155,11 @@ include ('./include/header.php');
                             ?>
                             </select>
                     </div>
+                    <div class="mb-3 col-lg-4">
+                            <label for="datetime" class="form-label">Time for appointment</label>
+                            <input type="datetime-local" class="form-control" id="datetime" name="datetime"
+                                aria-describedby="emailHelp"/>
+                        </div>
                         <button type="submit" class="btn btn-primary bg-success form-control" name="sub">Sends Request</button>
                         </div>
                     </form>

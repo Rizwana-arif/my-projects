@@ -42,15 +42,22 @@ include ("./include/sidebar.php");
                     <div class="card-body">
                       <div class="form-group">
                         <label>Supplier Name</label>
-                        <input type="text" class="form-control" name="supname" required="">
+                        <input type="text" class="form-control" name="supname" required="" id="supname" oninput="checkname()">
+                        <span id="nerror" style="color:red;font-size:10px"></span>
+
                       </div>
                       <div class="form-group">
                         <label>Supplier Email</label>
-                        <input type="email" class="form-control" name="supemail" required="">
+                        <input type="email" class="form-control" name="supemail" id="supemail" required="" oninput="checkemail()">
+                        <span id="eerror" style="color:red;font-size:10px"></span>
+
                       </div>
                       <div class="form-group">
                         <label>Supplier Number</label>
-                        <input type="text" class="form-control" name="supnum" required="">
+                        <input type="text" class="form-control" name="supnum" id="supnum" required="" oninput=
+                        "checknum()">
+                        <span id="perror" style="color:red;font-size:10px"></span>
+
                       </div>
                       
                       
@@ -66,7 +73,44 @@ include ("./include/sidebar.php");
 </section>
 </div>
                 
-
+<script>
+   function checkname(){
+         var supname=document.querySelector("#supname").value;
+         var supnameRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!supnameRegex.test(supname)) {
+           document.querySelector("#nerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#supname").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#nerror").innerHTML="";
+        document.querySelector("#supname").style.border="gray solid 2px";
+      }
+    }
+    function checkemail(){
+         var supemail=document.querySelector("#supemail").value;
+         var supemailRegex =/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;;
+         if (!supemailRegex.test(supemail)) {
+           document.querySelector("#eerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#supemail").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#eerror").innerHTML="";
+        document.querySelector("#supemail").style.border="gray solid 2px";
+      }
+    }
+    function checknum(){
+         var supnum=document.querySelector("#supnum").value;
+         var supnumRegex =/^\+92\d{10}$|^(03\d{9})$|^(9\d{8})$/;
+         if (!supnumRegex.test(supnum)) {
+           document.querySelector("#perror").innerHTML="Write Alphabets Only";
+           document.querySelector("#supnum").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#perror").innerHTML="";
+        document.querySelector("#supnum").style.border="gray solid 2px";
+      }
+    }
+</script>
 
 
 

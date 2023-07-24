@@ -26,6 +26,7 @@ include ('./include/sidebar.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Cases Type</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
  
 </head>
 <body>
@@ -67,9 +68,10 @@ include ('./include/sidebar.php');
                                 <label for="floatingSelect">Works with selects</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingPassword"
-                                   name="casectg" >
-                                <label for="floatingPassword">Case Category</label>
+                                <input type="text" class="form-control" id="casectg"
+                                   name="casectg" oninput="checkcase()">
+                                   <span id="error" style="color:red;font-size:10px"></span>
+                                <label for="casectg">Case Category</label>
                             </div>
                             <!-- <div class="form-floating mb-3">
                                 <select class="form-select" id="floatingSelect"
@@ -94,7 +96,21 @@ include ('./include/sidebar.php');
 </form>
   </div>
 </div>
-
+<script>
+  function checkcase(){
+         var casectg=document.querySelector("#casectg").value;
+         var casectgRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!casectgRegex.test(casectg)) {
+           document.querySelector("#error").innerHTML="Write Alphabets Only";
+           document.querySelector("#casectg").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#casectg").style.border="gray solid 2px";
+      }
+    }
+    
+</script>
 <!-- End Modal -->
 <!-- start table of case categories -->
 <div class="col-12">
@@ -129,7 +145,7 @@ include ('./include/sidebar.php');
                                             <td>
                                         <div class="dropdown">
                                         <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
+                                      <i class="fa-solid fa-ellipsis"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item" href="./update-case-category.php?cctgid=<?php echo $fet['cctgid']; ?>">Edit</a></li>

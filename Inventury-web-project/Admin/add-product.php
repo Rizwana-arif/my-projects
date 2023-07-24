@@ -168,11 +168,13 @@ include ("./include/sidebar.php");
                 </div>
                       <div class="form-group">
                         <label>Product Code</label>
-                        <input type="number" class="form-control" name="pcode" required="">
+                        <input type="number" class="form-control" name="pcode" id="pcode" required="" oninput="checkpcode()">
+                        <span id="perror" style="color:red;font-size:10px"></span>
                       </div>
                       <div class="form-group">
                         <label>product Name</label>
-                        <input type="text" class="form-control" name="pname" required="">
+                        <input type="text" class="form-control" name="pname" id="pname" required="" oninput="checkpname()">
+                        <span id="pnerror" style="color:red;font-size:10px"></span>
                       </div>
                       <div class="form-group mb-0">
                         <label>Product Description</label>
@@ -181,11 +183,13 @@ include ("./include/sidebar.php");
                       </div>
                       <div class="form-group">
                         <label>product Cost price</label>
-                        <input type="number" class="form-control" name="punit" required="">
+                        <input type="number" class="form-control" name="punit" required="" id="punit" oninput="checkpcprice()">
+                        <span id="cperror" style="color:red;font-size:10px"></span>
                       </div>
                       <div class="form-group">
                         <label>product Sale Price</label>
-                        <input type="number" class="form-control" name="sprice" required="">
+                        <input type="number" class="form-control" name="sprice" required="" id="sprice" oninput="checkpsprice()">
+                        <span id="sperror" style="color:red;font-size:10px"></span>
                       </div>
                       <div class="form-group">
                       <label>Choose Quantity</label>
@@ -204,7 +208,8 @@ include ("./include/sidebar.php");
                       </div>
                       <div class="form-group">
                         <label>product Stock</label>
-                        <input type="number" class="form-control" name="pstock" required="">
+                        <input type="number" class="form-control" name="pstock" id="pstock" required="" oninput="checkpstock()">
+                        <span id="pserror" style="color:red;font-size:10px"></span>
                       </div>
                       <div class="form-group">
                         <label>Select Picture</label><br>
@@ -226,8 +231,68 @@ include ("./include/sidebar.php");
 </div>
 </section>
 </div>
-                
-
+ <script>               
+  function checkpcode(){
+         var pcode=document.querySelector("#pcode").value;
+         var pcodeRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!pcodeRegex.test(pcode)) {
+           document.querySelector("#perror").innerHTML="Write Alphabets Only";
+           document.querySelector("#pcode").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#perror").innerHTML="";
+        document.querySelector("#pcode").style.border="gray solid 2px";
+      }
+    }
+    function checkpname(){
+         var pname=document.querySelector("#pname").value;
+         var pnameRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!pnameRegex.test(pname)) {
+           document.querySelector("#pnerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#pname").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#pnerror").innerHTML="";
+        document.querySelector("#pname").style.border="gray solid 2px";
+      }
+    }
+    function checkpcprice(){
+         var pcprice=document.querySelector("#punit").value;
+         var pcpriceRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!pcpriceRegex.test(pcprice)) {
+           document.querySelector("#cperror").innerHTML="Write Alphabets Only";
+           document.querySelector("#punit").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#cperror").innerHTML="";
+        document.querySelector("#punit").style.border="gray solid 2px";
+      }
+    }
+    function checkpsprice(){
+         var psprice=document.querySelector("#sprice").value;
+         var pspriceRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!pspriceRegex.test(psprice)) {
+           document.querySelector("#sperror").innerHTML="Write Alphabets Only";
+           document.querySelector("#sprice").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#sperror").innerHTML="";
+        document.querySelector("#sprice").style.border="gray solid 2px";
+      }
+    }
+    function checkpstock(){
+         var pstock=document.querySelector("#pstock").value;
+         var pstockRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!pstockRegex.test(pstock)) {
+           document.querySelector("#pserror").innerHTML="Write Alphabets Only";
+           document.querySelector("#pstock").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#pserror").innerHTML="";
+        document.querySelector("#pstock").style.border="gray solid 2px";
+      }
+    }
+</script>
 
 
 

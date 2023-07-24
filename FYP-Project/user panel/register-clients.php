@@ -19,12 +19,13 @@ if(isset($_POST['sub'])){
     $des=mysqli_real_escape_string($conn,$_POST['des']);
     $img=$_FILES['img']['name'];
 $estatus="client";
+$assign_lawyer="";
     $a=strtolower(pathinfo($img,PATHINFO_EXTENSION));
     $arr=array("jpg" , "jpeg" ,"png");
     if(in_array($a,$arr)){
         $rand=rand(10000,999999);
         $pic=$img."." .$rand. ".".$a;
-        $sql="INSERT INTO `clients-rec` (`cname`,`ccnic`,`gender`,`mobno`,`refname`,`refno`,`cemail`,`cpass`,`state`,`dis`,`cadd`,`des`,`img`,`estatus`) VALUES ('$cname','$ccnic','$gender','$mobno','$refname','$refno','$cemail','$cpass','$state','$dis','$cadd','$des','$pic','$estatus')";
+        $sql="INSERT INTO `clients-rec` (`cname`,`ccnic`,`gender`,`mobno`,`refname`,`refno`,`cemail`,`cpass`,`state`,`dis`,`cadd`,`des`,`img`,`estatus`,`assign_lawyer`) VALUES ('$cname','$ccnic','$gender','$mobno','$refname','$refno','$cemail','$cpass','$state','$dis','$cadd','$des','$pic','$estatus','$assign_lawyer')";
         $run=mysqli_query($conn,$sql);
         if($run){
             move_uploaded_file($_FILES['img']['tmp_name'],"./data/client-img/".$pic);

@@ -18,6 +18,17 @@ if(isset($_POST['login'])){
 
 }
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    #togglePassword {
+  position: absolute;
+  top: 60%;
+  right: 40px; /* Adjust the distance from the right as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+</style>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +64,8 @@ if(isset($_POST['login'])){
                 <form method="POST" action="#" class="needs-validation" novalidate="">
                   <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
+                    <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus oninput="checkemail()">
+                    <span id="error" style="color:red;font-size:10px"></span>
                     <div class="invalid-feedback">
                       Please fill in your email
                     </div>
@@ -67,7 +79,10 @@ if(isset($_POST['login'])){
                         </a>
                       </div>
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required oninput="checkpassword()">
+                    <i class="fa-regular fa-eye" id="togglePassword"></i>
+                    <span id="perror" style="color:red;font-size:10px"></span>
+
                     <div class="invalid-feedback">
                       please fill in your password
                     </div>
@@ -101,6 +116,44 @@ if(isset($_POST['login'])){
   <script src="./js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="./js/custom.js"></script>
+  <script>
+  function checkemail(){
+         var email=document.querySelector("#email").value;
+         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if (!emailRegex.test(email)) {
+           document.querySelector("#error").innerHTML="Must Add @ and .com";
+           document.querySelector("#email").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#email").style.border="gray solid 2px";
+      }
+    }
+    function checkpassword(){
+         var password=document.querySelector("#password").value;
+         var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+         if (!passwordRegex.test(password)) {
+           document.querySelector("#perror").innerHTML="Only 8 characters with no. and alphabets";
+           document.querySelector("#password").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#perror").innerHTML="";
+        document.querySelector("#password").style.border="gray solid 2px";
+      }
+    }
+    document.getElementById("togglePassword").addEventListener("click", function() {
+  var passwordField = document.getElementById("password");
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    this.classList.remove("fa-eye");
+    this.classList.add("fa-eye-slash");
+  } else {
+    passwordField.type = "password";
+    this.classList.remove("fa-eye-slash");
+    this.classList.add("fa-eye");
+  }
+});
+  </script>
 </body>
 
 

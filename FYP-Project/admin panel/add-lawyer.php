@@ -21,7 +21,7 @@ if(isset($_POST['sub'])){
     $lifile=$_FILES['lifile']['name'];
     $rfile=$_FILES['rfile']['name'];
     $intro=mysqli_real_escape_string($conn,$_POST['intro']);
-    $status=mysqli_real_escape_string($conn,$_POST['status']);
+    $status="approved";
 $estatus="lawyer";
 
     $a=strtolower(pathinfo($pfile,PATHINFO_EXTENSION));
@@ -59,6 +59,17 @@ $estatus="lawyer";
 include ('./include/header.php');
 include ('./include/sidebar.php');
 ?>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    #togglePassword {
+  position: absolute;
+  top: 31%;
+  right: 60px; /* Adjust the distance from the right as needed */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+</style>
 <body>
     <div class="container-fluid pt-4 px-4 ">
         
@@ -69,21 +80,26 @@ include ('./include/sidebar.php');
             <div class="row g-4 ">
                         <div class="mb-3 col-lg-4">
                             <label class="form-label" for="name">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" />
+                            <input type="text" class="form-control" id="name" name="name" oninput="checkname()"/>
+                            <span id="nerror" style="color:red;font-size:10px"></span>
+
                         </div>
                         <div class="mb-3 col-lg-4">
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                aria-describedby="emailHelp">
+                                aria-describedby="emailHelp" oninput="checkemail()">
+                                <span id="eerror" style="color:red;font-size:10px"></span>
                             </div>
                     
                         <div class="mb-3 col-lg-4">
                             <label for="cnic" class="form-label">CNIC</label>
-                            <input type="number" class="form-control" id="cnic" name="cnic">
+                            <input type="text" class="form-control" id="cnic" name="cnic" oninput="checkcnic()">
+                            <span id="cerror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="mb-3 col-lg-4">
                             <label for="phoneno" class="form-label">Phone No.</label>
-                            <input type="number" class="form-control" id="phoneno" name="phoneno">
+                            <input type="text" class="form-control" id="phoneno" name="phoneno" oninput="checkmob()">
+                            <span id="merror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="mb-3 col-lg-4">
                       
@@ -98,15 +114,19 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="mb-3 col-lg-4">
                             <label class="form-label" for="password">Password</label>
-                            <input type="number" class="form-control" id="password" name="password" />
+                            <input type="password" class="form-control" id="password" name="password" oninput="checkpassword()"/>
+                            <i class="fa-regular fa-eye" id="togglePassword"></i>
+                        <span id="perror" style="color:red;font-size:10px"></span>
                        </div>
                     <div class="mb-3 col-lg-4">
                         <label class="form-label" for="exp">Experience</label>
-                        <input type="text" class="form-control" id="exp" name="exp" />
+                        <input type="text" class="form-control" id="exp" name="exp" oninput="checkexp()"/>
+                        <span id="exerror" style="color:red;font-size:10px"></span>
                     </div>
                     <div class="mb-3 col-lg-4">
                         <label class="form-label" for="expyear">Experience in year </label>
-                        <input type="number" class="form-control" id="expyear" name="expyear" />
+                        <input type="text" class="form-control" id="expyear" name="expyear" oninput="checkexpyear()"/>
+                        <span id="yerror" style="color:red;font-size:10px"></span>
                     </div>
                     <div class="mb-3 col-lg-4">
                         <label class="form-label">Qualification</label>
@@ -162,10 +182,10 @@ include ('./include/sidebar.php');
                             <label class="form-label">About ypurself</label>
                             <textarea class="form-control" aria-label="With textarea" name="intro"></textarea>
                         </div>
-                        <div class="mb-3 col-lg-4">
+                        <!-- <div class="mb-3 col-lg-4">
                         <label class="form-label" for="status">Status </label>
                         <input type="text" class="form-control" id="status" name="status" value="Approved" readonly/>
-                        </div>
+                        </div> -->
                         <button type="submit" class="btn btn-primary bg-success" name="sub">Register </button>
                         </div>
                     </form>
@@ -178,6 +198,106 @@ include ('./include/sidebar.php');
            
 
     </div>
+    <script>
+  function checkname(){
+         var name=document.querySelector("#name").value;
+         var nameRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!nameRegex.test(name)) {
+           document.querySelector("#nerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#name").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#nerror").innerHTML="";
+        document.querySelector("#name").style.border="gray solid 2px";
+      }
+    }
+    function checkemail(){
+         var email=document.querySelector("#email").value;
+         var emailRegex =/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+         if (!emailRegex.test(email)) {
+           document.querySelector("#eerror").innerHTML="Must include @ .com";
+           document.querySelector("#email").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#eerror").innerHTML="";
+        document.querySelector("#email").style.border="gray solid 2px";
+      }
+    }
+    function checkcnic(){
+         var cnic=document.querySelector("#cnic").value;
+         var cnicRegex =/^\d{5}-\d{7}-\d$/;
+         if (!cnicRegex.test(cnic)) {
+           document.querySelector("#cerror").innerHTML="Only numbers and - includes";
+           document.querySelector("#cnic").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#cerror").innerHTML="";
+        document.querySelector("#cnic").style.border="gray solid 2px";
+      }
+    }
+    function checkmob(){
+         var phoneno=document.querySelector("#phoneno").value;
+         var phonenoRegex =/^\+92\d{10}$|^(03\d{9})$|^(9\d{8})$/;
+         if (!phonenoRegex.test(phoneno)) {
+           document.querySelector("#merror").innerHTML="Write Numbers Only";
+           document.querySelector("#phoneno").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#merror").innerHTML="";
+        document.querySelector("#phoneno").style.border="gray solid 2px";
+      }
+    }
+    function checkpassword(){
+         var password=document.querySelector("#password").value;
+         var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+         if (!passwordRegex.test(password)) {
+           document.querySelector("#perror").innerHTML="Only 8 characters with no. and alphabets";
+           document.querySelector("#password").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#perror").innerHTML="";
+        document.querySelector("#password").style.border="gray solid 2px";
+      }
+    }
+    document.getElementById("togglePassword").addEventListener("click", function() {
+  var passwordField = document.getElementById("password");
+  if (passwordField.type === "password") {
+    passwordField.type = "text";
+    this.classList.remove("fa-eye");
+    this.classList.add("fa-eye-slash");
+  } else {
+    passwordField.type = "password";
+    this.classList.remove("fa-eye-slash");
+    this.classList.add("fa-eye");
+  }
+});
+function checkexp(){
+         var exp=document.querySelector("#exp").value;
+         var expRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!expRegex.test(exp)) {
+           document.querySelector("#exerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#exp").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#exerror").innerHTML="";
+        document.querySelector("#exp").style.border="gray solid 2px";
+      }
+    }
+    function checkexpyear(){
+         var expyear=document.querySelector("#expyear").value;
+         var expyearRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!expyearRegex.test(exp)) {
+           document.querySelector("#yerror").innerHTML="Write Alphabets Only";
+           document.querySelector("#expyear").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#yerror").innerHTML="";
+        document.querySelector("#expyear").style.border="gray solid 2px";
+      }
+    } 
+    
+</script>
+
     
     <!-- Form End -->
 

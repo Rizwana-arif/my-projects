@@ -47,7 +47,8 @@ include ("./include/sidebar.php");
                     <div class="card-body">
                       <div class="form-group">
                         <label>Category Name</label>
-                        <input type="text" class="form-control" name="ctgname" required="">
+                        <input type="text" class="form-control" name="ctgname" id="ctgname" required="" oninput="checkname()">
+                        <span id="error" style="color:red;font-size:10px"></span>
                       </div>
                      
                       <div class="form-group mb-0">
@@ -66,7 +67,20 @@ include ("./include/sidebar.php");
 </section>
 </div>
                 
-
+<script>
+    function checkname(){
+         var ctgname=document.querySelector("#ctgname").value;
+         var ctgnameRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!ctgnameRegex.test(ctgname)) {
+           document.querySelector("#error").innerHTML="Write Alphabets Only";
+           document.querySelector("#ctgname").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#ctgname").style.border="gray solid 2px";
+      }
+    }
+</script>
 
 
 

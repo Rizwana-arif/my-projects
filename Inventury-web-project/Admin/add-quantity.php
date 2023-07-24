@@ -41,7 +41,8 @@ include ("./include/sidebar.php");
                     <div class="card-body">
                       <div class="form-group">
                         <label>Quantity</label>
-                        <input type="text" class="form-control" name="quaname" required="">
+                        <input type="text" class="form-control" name="quaname" id="quaname" required="" oninput="checkquaname()">
+                        <span id="error" style="color:red;font-size:10px"></span>
                       </div>
                      
                       <div class="form-group mb-0">
@@ -60,7 +61,20 @@ include ("./include/sidebar.php");
 </section>
 </div>
                 
-
+<script>
+   function checkquaname(){
+         var quaname=document.querySelector("#quaname").value;
+         var quanameRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!quanameRegex.test(quaname)) {
+           document.querySelector("#error").innerHTML="Write Alphabets Only";
+           document.querySelector("#quaname").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#quaname").style.border="gray solid 2px";
+      }
+    }
+  </script>
 
 
 

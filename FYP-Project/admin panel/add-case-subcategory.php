@@ -26,7 +26,8 @@ include ('./include/sidebar.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Cases Type</title>
+    <title>Add Cases SubCategory</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
  
 </head>
 <body>
@@ -39,7 +40,7 @@ include ('./include/sidebar.php');
   <form method="post">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Case Type</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Case SubCateory</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
      
@@ -85,9 +86,11 @@ include ('./include/sidebar.php');
                                 <label for="cctg">Case Category</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingPassword"
-                                   name="csubctg" >
-                                <label for="floatingPassword">Case Category</label>
+                                <input type="text" class="form-control" id="csubctg"
+                                   name="csubctg" oninput="checkcase()">
+                                   <span id="error" style="color:red;font-size:10px"></span>
+
+                                <label for="csubctg">Case SubCategory</label>
                             </div>
                             <!-- <div class="form-floating mb-3">
                                 <select class="form-select" id="floatingSelect"
@@ -113,14 +116,28 @@ include ('./include/sidebar.php');
   </div>
 </div>
 
-
+<script>
+  function checkcase(){
+         var csubctg=document.querySelector("#csubctg").value;
+         var csubctgRegex =/^[A-Za-z\s'-]{1,50}$/;
+         if (!csubctgRegex.test(csubctg)) {
+           document.querySelector("#error").innerHTML="Write Alphabets Only";
+           document.querySelector("#csubctg").style.border="red solid 1px";
+        
+      }else{
+        document.querySelector("#error").innerHTML="";
+        document.querySelector("#csubctg").style.border="gray solid 2px";
+      }
+    }
+    
+</script>
 
 <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
                             <div class="card-header">
-                            <h6>View Cases Type</h6>
+                            <h6>View Cases SubCategory</h6>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Cases Type
+  Add Cases SubCategory
 </button>
                             </div>
                             <div class="table-responsive">
@@ -149,7 +166,7 @@ include ('./include/sidebar.php');
                                             <td>
                                         <div class="dropdown">
                                         <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
+                                        <i class="fa-solid fa-ellipsis"></i>
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item" href="./update-case-subcategory.php?csubid=<?php echo $fet['csubid']; ?>">Edit</a></li>

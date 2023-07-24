@@ -31,6 +31,7 @@ include ('./include/sidebar.php');
                                         <th >Address</th>
                                         <th >Description</th>
                                         <th >Case Category</th>
+                                        <th >Date & Time</th>
                                         <th >Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -57,6 +58,7 @@ include ('./include/sidebar.php');
                                         <td><?php echo $fet['cladd'] ;?></td>
                                         <td><?php echo $fet['cldes'] ;?></td>
                                         <td><?php echo $fet['casetype'] ;?></td>
+                                        <td><?php echo $fet['datetime'] ;?></td>
                                        <td><?php echo $fet['sta'] ;?></td>
                                         <td>
                                         <div class="dropdown">
@@ -64,7 +66,7 @@ include ('./include/sidebar.php');
                                         <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="./update-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>">Accept</a></li>
+                                            <li><a class="dropdown-item" href="./update-appoin-accept.php?appoinid=<?php echo $fet['appoinid']; ?>">Accept</a></li>
                                             <li><a class="dropdown-item" href="./reject-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>">Reject</a></li>
                                         </ul>
                                         </div>

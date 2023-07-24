@@ -14,7 +14,7 @@ include ('./include/sidebar.php');
                  <div class="row g-4">
                     <div class="col-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">View Appointment Accepted Request</h6>
+                            <h6 class="mb-4">View Rejected Appointment</h6>
                             <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -33,6 +33,7 @@ include ('./include/sidebar.php');
                                         <th >Address</th>
                                         <th >Description</th>
                                         <th >Case Category</th>
+                                        <th >Date & Time</th>
                                         <th >Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -40,7 +41,7 @@ include ('./include/sidebar.php');
                                
                                 <tbody>
                                 <?php 
-                                $sql="SELECT * FROM `appointment-rec` a INNER JOIN `lawyers-rec` l ON  a.clawyer=l.lawyerid INNER JOIN `case-type` c ON a.casecat=c.caseid where `sta`='accept'";
+                                $sql="SELECT * FROM `appointment-rec` a INNER JOIN `lawyers-rec` l ON  a.clawyer=l.lawyerid INNER JOIN `case-type` c ON a.casecat=c.caseid where `sta`='reject'";
                                 $run=mysqli_query($conn,$sql);
                                 while($fet=mysqli_fetch_assoc($run)){
                                 ?>
@@ -59,6 +60,7 @@ include ('./include/sidebar.php');
                                         <td><?php echo $fet['cladd'] ;?></td>
                                         <td><?php echo $fet['cldes'] ;?></td>
                                         <td><?php echo $fet['casetype'] ;?></td>
+                                       <td><?php echo $fet['datetime'] ;?></td>
                                        <td><?php echo $fet['sta'] ;?></td>
                                         <td>
                                         <div class="dropdown">
@@ -66,7 +68,7 @@ include ('./include/sidebar.php');
                                         <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="./update-appoin-request.php?appoinid=<?php echo $fet['appoinid']; ?>">Pending</a></li>
+                                            <li><a class="dropdown-item" href="./update-appoin-unaccept.php?appoinid=<?php echo $fet['appoinid']; ?>">Unaccepted</a></li>
                                             <li><a class="dropdown-item" href="./reject-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>">Reject</a></li>
                                         </ul>
                                         </div>
