@@ -2,9 +2,9 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
-    header("location:./login.php");
-}
+// if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
+//     header("location:./login.php");
+// }
 include ('./include/header.php');
 
 ?>
@@ -22,7 +22,7 @@ include ('./include/header.php');
                         <div class="carousel-caption">
                             <h1 class="animated fadeInLeft">We fight for your justice</h1>
                             <p class="animated fadeInRight">Lorem ipsum dolor sit amet elit. Mauris odio mauris...</p>
-                            <a class="btn animated fadeInUp" href="#">Get free consultation</a>
+                            <a class="btn animated fadeInUp" href="./query-consultation.php">Get free consultation</a>
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@ include ('./include/header.php');
                         <div class="carousel-caption">
                             <h1 class="animated fadeInLeft">We fight for your privilege</h1>
                             <p class="animated fadeInRight">Lorem ipsum dolor sit amet elit. Mauris odio mauris...</p>
-                            <a class="btn animated fadeInUp" href="#">Get free consultation</a>
+                            <a class="btn animated fadeInUp" href="./query-consultation.php">Get free consultation</a>
                         </div>
                     </div>
                 </div>
@@ -268,6 +268,7 @@ include ('./include/header.php');
             <!-- Feature End -->
             
             
+          
             <!-- Team Start -->
             <div class="team">
                 <div class="container">
@@ -275,14 +276,20 @@ include ('./include/header.php');
                         <h2>Meet Our Expert Attorneys</h2>
                     </div>
                     <div class="row">
+                    <?php 
+							$sql="SELECT * FROM `lawyers-rec` WHERE `status`='approved'";
+							$run=mysqli_query($conn,$sql);
+							while ($fet=mysqli_fetch_assoc($run)){
+							?>
                         <div class="col-lg-3 col-md-6">
                             <div class="team-item">
                                 <div class="team-img">
-                                    <img src="img/team-1.jpg" alt="Team Image">
+                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/profile/' . $fet['pfile']; ?>" alt="Team Image">
                                 </div>
                                 <div class="team-text">
                                     <h2>Adam Phillips</h2>
                                     <p>Business Consultant</p>
+                                    <a href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-white bg-white form-control" name="sub">Profile </button></a>
                                     <div class="team-social">
                                         <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
                                         <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
@@ -292,57 +299,9 @@ include ('./include/header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team-item">
-                                <div class="team-img">
-                                    <img src="img/team-2.jpg" alt="Team Image">
-                                </div>
-                                <div class="team-text">
-                                    <h2>Dylan Adams</h2>
-                                    <p>Criminal Consultant</p>
-                                    <div class="team-social">
-                                        <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team-item">
-                                <div class="team-img">
-                                    <img src="img/team-3.jpg" alt="Team Image">
-                                </div>
-                                <div class="team-text">
-                                    <h2>Gloria Edwards</h2>
-                                    <p>Divorce Consultant</p>
-                                    <div class="team-social">
-                                        <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team-item">
-                                <div class="team-img">
-                                    <img src="img/team-4.jpg" alt="Team Image">
-                                </div>
-                                <div class="team-text">
-                                    <h2>Josh Dunn</h2>
-                                    <p>Immigration Consultant</p>
-                                    <div class="team-social">
-                                        <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                            <?php } ?>
+                        
                     </div>
                 </div>
             </div>
@@ -362,69 +321,33 @@ include ('./include/header.php');
                             <div class="section-header">
                                 <h2>Have A Questions?</h2>
                             </div>
+                            <?php 
+                                    $c=1;
+                                $fsql="SELECT * FROM `FAQs-rec`";
+                                $frun=mysqli_query($conn,$fsql);
+                                while($ffet=mysqli_fetch_assoc($frun)){
+                                    if($c<=5){
+                            ?>
                             <div id="accordion">
                                 <div class="card">
                                     <div class="card-header">
-                                        <a class="card-link collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="true">
-                                            <span>1</span> Lorem ipsum dolor sit amet?
+                                        <a class="card-link collapsed" data-toggle="collapse" href="<?php echo "#data".$c ?>" aria-expanded="true">
+                                            <span><?php echo $c ; ?></span> <?php echo $ffet['que']; ?>
                                         </a>
                                     </div>
-                                    <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                                    <div id="<?php echo "data".$c ?>" class="collapse" data-parent="#accordion">
                                         <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
+                                            <?php echo $ffet['ans']; ?>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#collapseTwo">
-                                            <span>2</span> Lorem ipsum dolor sit amet?
-                                        </a>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#collapseThree">
-                                            <span>3</span> Lorem ipsum dolor sit amet?
-                                        </a>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#collapseFour">
-                                            <span>4</span> Lorem ipsum dolor sit amet?
-                                        </a>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header">
-                                        <a class="card-link" data-toggle="collapse" href="#collapseFive">
-                                            <span>5</span> Lorem ipsum dolor sit amet?
-                                        </a>
-                                    </div>
-                                    <div id="collapseFive" class="collapse" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non.
-                                        </div>
-                                    </div>
-                                </div> 
+                    
                             </div>
-                            <a class="btn" href="">Ask more</a>
+                            <?php 
+                            $c++;
+                        } 
+                    }?>
+                            <a class="btn" href="./view-FAQ's.php">See more</a>
                         </div>
                     </div>
                 </div>

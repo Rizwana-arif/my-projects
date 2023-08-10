@@ -1,11 +1,11 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
-    header("location:./login.php");
+if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
+    header("location:../admin panel/login.php");
 }
 $appoin=$_SESSION['cemail'];
-$lawyer=$_SESSION['lawyerid'];
+// $lawyer=$_SESSION['lawyerid'];
 
 $sql="SELECT * FROM `clients-rec` where `cemail`='$appoin'";
 $run=mysqli_query($conn,$sql);

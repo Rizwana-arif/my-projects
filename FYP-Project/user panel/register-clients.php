@@ -1,8 +1,8 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
-    header("location:./login.php");
+if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
+    header("location:../admin panel/login.php");
 }
 if(isset($_POST['sub'])){
     $cname=mysqli_real_escape_string($conn,$_POST['cname']);

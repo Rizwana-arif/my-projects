@@ -76,17 +76,19 @@
                                 <!-- <a href="service.html" class="nav-item nav-link">Practice</a> -->
                                 <a href="./lawyers.php" class="nav-item nav-link">Lawyers</a>
                                 <a href="#" class="nav-item nav-link">Case Studies</a>
+                                <a href="./view-FAQ's.php" class="nav-item nav-link">FAQ's</a>
+
                                 <?php
-                                if($_SESSION['estatus']=="client"){
+                                if(@$_SESSION['estatus']=="client"){
                                 ?>
                                 <a href="clients-profile.php" class="nav-item nav-link">MyProfile</a>
-                                <a href="./logout.php" class="nav-item nav-link">Logout</a>
+                                <a href="../admin panel/logout.php" class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <?php
-                                if($_SESSION['estatus']=="lawyer"){
+                                if(@$_SESSION['estatus']=="lawyer"){
                                 ?>
                                 <a href="./lawyers-profile.php" class="nav-item nav-link">Profile</a>
-                                <a href="./logout.php" class="nav-item nav-link">Logout</a>
+                                <a href="../admin panel/logout.php"class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <!-- <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
@@ -107,8 +109,9 @@
                             <div class="nav-item dropdown">
                                     <a href="#" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
                                     <div class="dropdown-menu">
-                                        <a href="./login.php" class="dropdown-item">As Lawyer</a>
-                                        <a href="./login.php" class="dropdown-item">As Client</a>
+                                        <a href="../admin panel/login.php" class="dropdown-item">As Lawyer</a>
+                                        <a href="../admin panel/login.php"class="dropdown-item">As Client</a>
+                                        <a href="../admin panel/login.php" class="dropdown-item">As Team</a>
                                     </div>
                                 </div>
                             <div class="ml-auto">

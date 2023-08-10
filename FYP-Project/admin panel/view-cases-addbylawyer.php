@@ -58,48 +58,56 @@ include ('./include/sidebar.php');
                                
                                 <tbody>
                                 <?php 
-                                $sql="SELECT * FROM `add-case-bylawyers` ac INNER JOIN `appointment-rec` ap ON  ac.clientn=ap.appoinid and ac.ccnic=ap.appoinid and ac.cmobno=ap.appoinid INNER JOIN `province-rec` pr ON ac.pro=pr.pid INNER JOIN `district-rec` dr ON ac.dis=dr.did INNER JOIN `tehsil-rec` tr ON ac.teh=tr.tid INNER JOIN `court-rec` cr ON ac.court=cr.courtid INNER JOIN `case-type` ct ON ac.caset=ct.caseid INNER JOIN `case-category` cc ON ac.ccat=cc.cctgid INNER JOIN `case-subcategory` cs ON ac.csub=cs.csubid WHERE `lawyerid`='$lawyer' ";
+                                $sql="SELECT * FROM `add-case-bylawyers` ac INNER JOIN `clients-rec` cr ON  ac.clientn=cr.clientid  INNER JOIN `province-rec` pr ON ac.pro=pr.pid INNER JOIN `district-rec` dr ON ac.dis=dr.did INNER JOIN `tehsil-rec` tr ON ac.teh=tr.tid INNER JOIN `court-rec` cor ON ac.court=cor.courtid INNER JOIN `case-type` ct ON ac.caset=ct.caseid INNER JOIN `case-category` cc ON ac.ccat=cc.cctgid INNER JOIN `case-subcategory` cs ON ac.csub=cs.csubid  ";
                                 $run=mysqli_query($conn,$sql);
-                                while($fet=mysqli_fetch_assoc($run)){
+                               while($fet=mysqli_fetch_assoc($run)){
                                 ?>
-                                    <tr>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
+                                  <tr>
+                                        <td><?php echo $lawyer;?></td>
+                                        <td><?php echo $_SESSION['email'] ;?></td>
+                                        <td><?php echo $fet['cname'] ;?></td>
+                                        <td><?php echo $fet['ccnic'] ;?></td>
+                                        <td><?php echo $fet['mobno'] ;?></td>
                                         <td><?php echo $fet['pname'] ;?></td>
-
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-                                        <td><?php echo $fet['lawyerid'] ;?></td>
-
-                                       
-                                       
+                                        <td><?php echo $fet['aname'] ;?></td>
+                                        <td><?php echo $fet['rname'] ;?></td>
+                                        <td><?php echo $fet['arname'] ;?></td>
+                                        <td><?php echo $fet['province'] ;?></td>
+                                        <td><?php echo $fet['district'] ;?></td>
+                                        <td><?php echo $fet['tehsil'] ;?></td>
+                                        <td><?php echo $fet['court'] ;?></td>
+                                        <td><?php echo $fet['jname'] ;?></td>
+                                        <td><?php echo $fet['casetype'] ;?></td>
+                                        <td><?php echo $fet['casectg'] ;?></td>
+                                        <td><?php echo $fet['csubctg'] ;?></td>
+                                        <td><?php echo $fet['cno'] ;?></td>
+                                        <td><?php echo $fet['cdate'] ;?></td>
+                                        <td><?php echo $fet['refno'] ;?></td>
+                                        <td><?php echo $fet['rdate'] ;?></td>
+                                        <td><?php echo $fet['pstation'] ;?></td>
+                                        <td><?php echo $fet['fno'] ;?></td>
+                                        <td><?php echo $fet['fdate'] ;?></td>
+                                        <td><?php echo $fet['fnum'] ;?></td>
+                                        <td><?php echo $fet['fidate'] ;?></td>
+                                        <td><?php echo $fet['atype'] ;?></td>
+                                        <td><?php echo $fet['us'] ;?></td>
+                                        <td><?php echo $fet['ldate'] ;?></td>
+                                        <td><?php echo $fet['ndate'] ;?></td>
+                                        <td><?php echo $fet['ph'] ;?></td>
                                         <td>
                                         <div class="dropdown">
                                         <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <li><a class="dropdown-item" href="./.php?appoinid=<?php echo $fet['appoinid']; ?>">Accept</a></li>
-                                            <li><a class="dropdown-item" href="./update-appoin-reject.php?appoinid=<?php echo $fet['appoinid']; ?>">Reject</a></li>
+                                            <li><a class="dropdown-item" href="./update-cases-addbylawyers.php?caid=<?php echo $fet['caid']; ?>">Edit</a></li>
+                                            <li><a class="dropdown-item" href="./delete-cases-addbylawyers.php?caid=<?php echo $fet['caid']; ?>">Delete</a></li>
                                         </ul>
                                         </div>
 
                                         </td>
                                     </tr>
-                                    <?php } ?>
+                                <?php } ?>
                                 </tbody>
                                 
                             </table>

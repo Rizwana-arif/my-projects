@@ -1,9 +1,9 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
-    header("location:./login.php");
-} 
+// if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
+//     header("location:./login.php");
+// } 
 include ('./include/header.php');
 ?>
             

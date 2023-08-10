@@ -226,9 +226,9 @@ include ("./include/sidebar.php");
                     </div>
                   </form>
                 </div>
-</div>
-</div>
-</div>
+              </div>
+            </div>
+         </div>
 </section>
 </div>
  <script>               

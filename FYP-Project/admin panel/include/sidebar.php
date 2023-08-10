@@ -1,6 +1,7 @@
  <?php
 
 
+
  ?>
  
  <!-- Sidebar Start -->
@@ -50,7 +51,13 @@
                     </div>
 
                     <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Feedback</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Queries</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./not-replyed-query-admin.php" class="dropdown-item">Not replyed</a>
+                            <a href="./replyed-query.php" class="dropdown-item">Replyed</a>
+                        </div>
+                    </div>
                     <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
                     <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
                     <!-- <div class="nav-item dropdown">
@@ -74,7 +81,30 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./view-cases-addbylawyer.php" class="dropdown-item">View Cases</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Team Members</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-role.php" class="dropdown-item">Role</a>
+                            <a href="./add-members.php" class="dropdown-item">Members</a>
+                        </div>
+                    </div>
                     <a href="./appointment-records.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointments</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-role-bylawyer.php" class="dropdown-item">Add Role</a>
+                            <a href="./view-role-bylawyer.php" class="dropdown-item">View Role</a>
+                            <a href="./add-user-role.php" class="dropdown-item">User Role</a>
+                            <a href="./view-user-role.php" class="dropdown-item">View User Role</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./not-replyed-query.php" class="dropdown-item">Not replyed</a>
+                            <a href="./replyed-query.php" class="dropdown-item">Replyed</a>
+                        </div>
+                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Setting</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -87,12 +117,86 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./add-court.php" class="dropdown-item">Court</a>
                             <a href="typography.html" class="dropdown-item">Court Type</a>
                             <a href="typography.html" class="dropdown-item">Court Name</a>
-                            <a href="typography.html" class="dropdown-item">Police Station</a>
-                            <a href="typography.html" class="dropdown-item">Act</a>
+                            <a href="./add-pstation.php" class="dropdown-item">Police Station</a>
+                            <a href="./add-act.php" class="dropdown-item">Act</a>
                         </div>
                         <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
                     </div>
+                    <?php }
+                   
+                    if($_SESSION['estatus']=="team"){
+                        $teamid=$_SESSION['uroleid'];
+                        $sql="SELECT * FROM `user-role-rec` WHERE `uroleid`='$teamid'";
+                        $run=mysqli_query($conn,$sql);
+                        $fet=mysqli_fetch_assoc($run);
+                         $role=$fet['urole'];
+
+                        $rsql="SELECT * FROM `role-add-bylawyer` WHERE `lroleid`='$role'";
+                        $rrun=mysqli_query($conn,$rsql);
+                        $rfet=mysqli_fetch_assoc($rrun);
+                        // $rolearr=$rfet['roleacc'];
+                        $arr=unserialize($rfet['roleacc']);
+                        
+                       
+                    ?>
+                   <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Team</a>
+                   <?php  if(in_array("cases",$arr)){ ?>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Cases</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-new-cases-bylawyer.php" class="dropdown-item">Add Cases</a>
+                            <a href="./view-cases-addbylawyer.php" class="dropdown-item">View Cases</a>
+                        </div>
+                    </div>
+                    <?php }
+                    if(in_array("teammember",$arr)){
+                     ?>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Team Members</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-role.php" class="dropdown-item">Role</a>
+                            <a href="./add-members.php" class="dropdown-item">Members</a>
+                        </div>
+                    </div>
+                    <?php }
+                    if(in_array("appointments",$arr)){
+                    ?>
+                    <a href="./appointment-records.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointments</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-role-bylawyer.php" class="dropdown-item">Add Role</a>
+                            <a href="./view-role-bylawyer.php" class="dropdown-item">View Role</a>
+                            <a href="./add-user-role.php" class="dropdown-item">User Role</a>
+                            <a href="./view-user-role.php" class="dropdown-item">View User Role</a>
+                        </div>
+                    </div>
+                    <?php } 
+                    if(in_array("settings",$arr)){
+                    ?>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Setting</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-cases.php" class="dropdown-item">Case Type</a>
+                            <a href="./add-case-category.php" class="dropdown-item">Case Categories</a>
+                            <a href="./add-case-subcategory.php" class="dropdown-item">Case SubCategories</a>
+                            <a href="./province.php" class="dropdown-item">Province</a>
+                            <a href="./district.php" class="dropdown-item">District</a>
+                            <a href="./tehsil.php" class="dropdown-item">Tehsil</a>
+                            <a href="./add-court.php" class="dropdown-item">Court</a>
+                            <a href="typography.html" class="dropdown-item">Court Type</a>
+                            <a href="typography.html" class="dropdown-item">Court Name</a>
+                            <a href="./add-pstation.php" class="dropdown-item">Police Station</a>
+                            <a href="./add-act.php" class="dropdown-item">Act</a>
+                        </div>
+                        <?php } ?>
+                        <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
+                    </div>
+
+
                     <?php } ?>
+
+                    
                     <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Lawyers</a>
                         <div class="dropdown-menu bg-transparent border-0">

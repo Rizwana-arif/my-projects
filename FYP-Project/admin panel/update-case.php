@@ -1,5 +1,10 @@
 <?php 
 include ('./include/connection.php');
+include ('./include/connection.php');
+session_start();
+if(empty($_SESSION['email'])){
+    header("location:./login.php");
+}
  $caseid=$_GET['caseid'];
 $usql="SELECT * FROM `case-type` WHERE `caseid`='$caseid'";
 $urun=mysqli_query($conn,$usql);

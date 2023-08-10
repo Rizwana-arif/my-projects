@@ -7,30 +7,57 @@ if(isset($_POST['login'])){
   $sql="SELECT * FROM `admin` WHERE `email`='$email' AND `password`='$password'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
-if(mysqli_num_rows($run)==1){
-    if($fet['estatus']=="admin" ){
+if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
       $_SESSION['email']=$email;
       $_SESSION['estatus']="admin";
       header("location:./index.php");
     }
-    } else{
-     $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password' ";
-    $lrun=mysqli_query($conn,$lsql);
-    $lfet=mysqli_fetch_assoc($lrun);
-    $lawyerid=$lfet['lawyerid'];
-    if(mysqli_num_rows($lrun)==1){
-        if($lfet['estatus']=="lawyer" ){
-          $_SESSION['email']=$email;
-        $_SESSION['estatus']="lawyer";
-        $_SESSION['lawyerid']=$lawyerid;
-          header("location:./index.php");
-        }
-}else {
-    echo "<script> alert ('Invalid Details')</script>";
-}
+  else{
+      $lsql="SELECT * FROM `lawyers-rec` WHERE `email`='$email' AND `password`='$password' ";
+     $lrun=mysqli_query($conn,$lsql);
+     $lfet=mysqli_fetch_assoc($lrun);
+    
+     if(mysqli_num_rows($lrun)==1 && $lfet['estatus']=="lawyer" ){
+          $lawyerid=$lfet['lawyerid'];
+           $_SESSION['email']=$email;
+         $_SESSION['estatus']="lawyer";
+         $_SESSION['lawyerid']=$lawyerid;
+           header("location:./index.php");
+         }
+        else{
+                $sql="SELECT * FROM `clients-rec` WHERE `cemail`='$email' AND `cpass`='$password'";
+                $run=mysqli_query($conn,$sql);
+                $fet=mysqli_fetch_assoc($run);
+                
+                if(mysqli_num_rows($run)==1 && $fet['estatus']=="client" ){
+                      $_SESSION['cemail']=$email;
+                      $lclientid=$fet['clientid'];
+                    //   $id=$_SESSION['cemail'];
+                      $_SESSION['clientid']=$clientid;
+                      $_SESSION['estatus']="client";
+                      header("location:../user panel/index.php");
+                    }else{
+                      $usql="SELECT * FROM `user-role-rec` WHERE `uemail`='$email' AND `password`='$password'";
+                      $urun=mysqli_query($conn,$usql);
+                      $ufet=mysqli_fetch_assoc($urun);
+                      $teamid=$ufet['uroleid'];
+                      if(mysqli_num_rows($urun)==1 && $ufet['estatus']=="team" ){
+                        $teamid=$ufet['uroleid'];
+                        $_SESSION['uroleid']=$teamid;
+                        $_SESSION['estatus']="team";
+                      $_SESSION['uemail']=$email; 
+                      $_SESSION['uroleid']=$teamid;
+                      header("location:./index.php");
+                    }
+         else {
+          echo "<script> alert ('Invalid Details')</script>";
+      }
 }
 
 }
+}
+  }
+
 
 
 ?>
@@ -79,6 +106,25 @@ if(mysqli_num_rows($run)==1){
   transform: translateY(-50%);
   cursor: pointer;
 }
+form{
+  background-color : #aa9166;
+}
+a{
+  color : black;
+}
+a:hover{
+  color : #aa9166;
+  background-color: black;
+}
+button{
+  color: white;
+  background-color: black;
+}
+button:hover{
+  background-color: white;
+
+}
+
 
 </style>
 </head>
@@ -99,7 +145,7 @@ if(mysqli_num_rows($run)==1){
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
                     <form method="post">
-                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                    <div class=" rounded p-4 p-sm-5 my-4 mx-3">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             
                             <h3>Login</h3>
@@ -120,7 +166,7 @@ if(mysqli_num_rows($run)==1){
                             
                             <a href="">Forgot Password</a>
                         </div>
-                        <button type="submit" class="btn btn-primary py-3 w-100 mb-4" name="login">Login</button>
+                        <button type="submit" class="btn btn-dark py-3 w-100 mb-4" name="login">Login</button>
                         <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p>
                     </div>
 </form>

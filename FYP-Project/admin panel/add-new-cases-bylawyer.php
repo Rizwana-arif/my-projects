@@ -63,11 +63,11 @@ include ('./include/sidebar.php');
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="clientn">
                                 <option ></option>
                                 <?php 
-                                $nsql="SELECT * FROM `appointment-rec` where `clawyer`='$lawyer'";
+                                $nsql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
                                 $nrun=mysqli_query($conn,$nsql);
                                 while($nfet=mysqli_fetch_assoc($nrun)){
                                     ?>
-                                 <option selected value="<?php echo $nfet['appoinid'] ?>"><?php echo $nfet['clname']; ?></option>
+                                 <option selected value="<?php echo $nfet['clientid'] ?>"><?php echo $nfet['cname']; ?></option>
 
                                
                             <?php
@@ -80,11 +80,11 @@ include ('./include/sidebar.php');
                       <label  class="form-label">Client cnic</label>
                       <select class="form-select mb-3 form-control" aria-label="Default select example" name="ccnic">
                         <?php 
-                        $csql="SELECT * FROM `appointment-rec` where `clawyer`='$lawyer'";
+                         $csql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
                         $crun=mysqli_query($conn,$csql);
                         while($cfet=mysqli_fetch_assoc($crun)){
                         ?>
-                        <option selected value="<?php echo $cfet['appoinid'] ?>"><?php echo $cfet['clcnic']; ?></option>
+                        <option selected value="<?php echo $cfet['clientid'] ?>"><?php echo $cfet['ccnic']; ?></option>
 
                           <?php } ?>
                       </select>
@@ -95,11 +95,11 @@ include ('./include/sidebar.php');
                       <label  class="form-label">Client Mobile No.</label>
                       <select class="form-select mb-3 form-control" aria-label="Default select example" name="cmobno">
                       <?php 
-                        $csql="SELECT * FROM `appointment-rec` where `clawyer`='$lawyer'";
+                        $csql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
                         $crun=mysqli_query($conn,$csql);
                         while($cfet=mysqli_fetch_assoc($crun)){
                         ?>
-                         <option selected value="<?php echo $cfet['appoinid'] ?>"><?php echo $cfet['clmob']; ?></option>
+                         <option selected value="<?php echo $cfet['clientid'] ?>"><?php echo $cfet['mobno']; ?></option>
 
                           <?php } ?>
                       </select>

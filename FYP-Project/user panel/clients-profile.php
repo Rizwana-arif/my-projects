@@ -1,8 +1,8 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail'])){
-    header("location:./login.php");
+if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
+  header("location:../admin panel/login.php");
 }
 $pro=$_SESSION['cemail'];
     $sql="SELECT * FROM `clients-rec` where `cemail`='$pro' ";
