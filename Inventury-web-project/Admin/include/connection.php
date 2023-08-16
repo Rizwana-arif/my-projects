@@ -1,5 +1,5 @@
 <?php 
-$conn=mysqli_connect("localhost","root","","classproject");
+$conn=mysqli_connect("localhost","root","","class-project");
 if($conn){
     // echo "connected";
 }else{

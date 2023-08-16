@@ -1,35 +1,37 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
+if( empty($_SESSION['user_email']) ){
     header("location:../admin panel/login.php");
 }
-$appoin=$_SESSION['cemail'];
+$appoin=$_SESSION['user_email'];
 // $lawyer=$_SESSION['lawyerid'];
 
-$sql="SELECT * FROM `clients-rec` where `cemail`='$appoin'";
+$sql="SELECT * FROM `users-rec` where `user_email`='$appoin'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
 if(isset($_POST['sub'])){
-    $clname=mysqli_real_escape_string($conn,$_POST['clname']);
-    $clcnic=mysqli_real_escape_string($conn,$_POST['clcnic']);
-    $clgen=mysqli_real_escape_string($conn,$_POST['clgen']);
-    $clmob=mysqli_real_escape_string($conn,$_POST['clmob']);
-    $clrefn=mysqli_real_escape_string($conn,$_POST['clrefn']);
-    $clrefno=mysqli_real_escape_string($conn,$_POST['clrefno']);
-    $clemail=mysqli_real_escape_string($conn,$_POST['clemail']);
-    $clstate=mysqli_real_escape_string($conn,$_POST['clstate']);
-    $cldis=mysqli_real_escape_string($conn,$_POST['cldis']);
-    $cladd=mysqli_real_escape_string($conn,$_POST['cladd']);
-    $cldes=mysqli_real_escape_string($conn,$_POST['cldes']);
-    $casecat=mysqli_real_escape_string($conn,$_POST['casecat']);
-    $clawyer=mysqli_real_escape_string($conn,$_POST['clawyer']);
+    $client_name=mysqli_real_escape_string($conn,$_POST['client_name']);
+    $client_cnic=mysqli_real_escape_string($conn,$_POST['client_cnic']);
+    $gender=mysqli_real_escape_string($conn,$_POST['gender']);
+    $contact_number=mysqli_real_escape_string($conn,$_POST['contact_number']);
+    $Ref_Name=mysqli_real_escape_string($conn,$_POST['Ref_Name']);
+    $Ref_No=mysqli_real_escape_string($conn,$_POST['Ref_No']);
+    $client_email=mysqli_real_escape_string($conn,$_POST['client_email']);
+    $state=mysqli_real_escape_string($conn,$_POST['state']);
+    $district=mysqli_real_escape_string($conn,$_POST['district']);
+    $full_address=mysqli_real_escape_string($conn,$_POST['full_address']);
+    $description=mysqli_real_escape_string($conn,$_POST['description']);
+    $case_category=mysqli_real_escape_string($conn,$_POST['case_category']);
+    $lawyer_name=mysqli_real_escape_string($conn,$_POST['lawyer_name']);
     $datetime=mysqli_real_escape_string($conn,$_POST['datetime']);
-    $sta="unaccepted";
-   $query="SELECT * FROM `client-rec` WHERE `cemail`='$clemail' AND `clawyer`='$lawyer' ";
-   $run=mysqli_query($query);
-   if($run){
-    $asql="INSERT INTO `appointment-rec` (`clname` , `clcnic`,`clgen` ,`clmob`,`clrefn`,`clrefno`,`clemail`,`clstate`,`cldis`,`cladd`,`cldes`,`casecat`,`clawyer`,`datetime`,`sta`) VALUES ('$clname','$clcnic','$clgen','$clmob','$clrefn','$clrefno','$clemail','$clstate','$cldis','$cladd','$cldes','$casecat','$clawyer','$datetime','$sta') ";
+    $statuss="unaccepted";
+    $ssql="SELECT * FROM `appointment-rec` WHERE `client_email`='$client_email' and `lawyer_name`='$lawyer_name'";
+    $srun=mysqli_query($conn,$ssql);
+    if(mysqli_num_rows($srun)>0){
+      echo "<script>alert ('Plz Change the lawyer , U already appoint this lawyer')</script>";
+    }else{
+    $asql="INSERT INTO `appointment-rec` (`client_name` , `client_cnic`,`gender` ,`contact_number`,`Ref_Name`,`Ref_No`,`client_email`,`state`,`district`,`full_address`,`description`,`case_category`,`lawyer_name`,`datetime`,`statuss`) VALUES ('$client_name','$client_cnic','$gender','$contact_number','$Ref_Name','$Ref_No','$client_email','$state','$district','$full_address','$description','$case_category','$lawyer_name','$datetime','$statuss') ";
     $arun=mysqli_query($conn,$asql);
     if($arun){
         echo "<script>alert('Appointment Request has been sent')</script>";
@@ -39,95 +41,119 @@ if(isset($_POST['sub'])){
     }
 }
 }
+
 include ('./include/header.php');
 ?>
-<body>
-    <div class="container-fluid pt-4 px-4 ">
-        
-          
-                <div class="bg-light rounded h-100 p-4">
-                    <h4 class="mb-4 d-flex justify-content-center text-success">Register Clients</h4>
-                    <form  method="post">
-            <div class="row g-4 ">
-                        <div class="mb-3 col-lg-4">
-                            <label class="form-label" for="name">Name</label>
-                            <input type="text" class="form-control" id="clname" name="clname" value="<?php echo $fet['cname']; ?>" readonly/>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label for="cnic" class="form-label">CNIC</label>
-                            <input type="number" class="form-control" id="clcnic" name="clcnic" value="<?php echo $fet['ccnic']; ?>" readonly/>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label  class="form-label">Gender</label>
-                            <select class="form-select mb-3 form-control" aria-label="Default select example" name="clgen" readonly>
-                            <?php 
-       if($fet['gender']=="male"){
-         $m="selected";
-       }else{
-        $f="selected";
-       }
-    ?>
-                                <option value="" disabled selected>Gender</option>
-                        <option value="male"<?php echo @$m; ?>> Male</option>
-                        <option value="female" <?php echo @$f; ?> >Female</option>
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Bootstrap CSS -->
+		<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/all.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style2.css">
+		<link rel="stylesheet" href="css/media.css">
+		<title>Log In here</title>
+<style>
+  .has-error .help-block {
+  color: red;
+}
+  </style>
+	</head>
+	<body>
+		<section class="registerform">
+			<div class="container mt-5 badge-light p-3">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>Hello User <i class="fas fa-user-tie"></i> !!</h1></br></br>
+						<h2>please Fill This For Send Request Of Appointment <i class="fas fa-hand-point-right"></i></h2>
+					</div>
+					<div class="col-md-6">
+						<form   method="post" enctype="multipart/form-data"  id="validateForm">
+							<div class="form-row">
+								<div class="form-group col-md-6">
+                                <label class="form-label" for="name">Name</label>
+                            <input type="text" class="form-control" id="client_name" name="client_name" value="<?php echo $fet['first_Name']; ?>" readonly/>
+								</div>
+								<div class="form-group col-md-6">
+                                <label for="cnic" class="form-label">CNIC</label>
+                            <input type="number" class="form-control" id="client_cnic" name="client_cnic" />
+								</div>
+							</div>
+                            <div class="form-row">
+								<div class="form-group col-md-6">
+                                <label  class="form-label">Gender</label>
+                            <select class="form-select mb-3 form-control" aria-label="Default select example" name="gender" >
+                         <option value="" disabled selected>Gender</option>
+                        <option value="male"> Male</option>
+                        <option value="female">Female</option>
                             </select>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label for="phoneno" class="form-label">Mobile No.</label>
-                            <input type="number" class="form-control" id="clmob" name="clmob"
-                            value="<?php echo $fet['mobno']; ?>" readonly>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label for="phoneno" class="form-label">Referance Name</label>
-                            <input type="text" class="form-control" id="clrefn" name="clrefn"
-                            value="<?php echo $fet['refname']; ?>" readonly/>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label for="phoneno" class="form-label">Refrence No.</label>
-                            <input type="number" class="form-control" id="clrefno" name="clrefno"
-                            value="<?php echo $fet['refno']; ?>" readonly />
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="clemail" name="clemail"
-                                aria-describedby="emailHelp" value="<?php echo $fet['cemail']; ?>" readonly/>
-                        </div>
-                        <!-- <div class="mb-3 col-lg-4">
-                            <label class="form-label" for="password">Password</label>
-                            <input type="number" class="form-control" id="cpass" name="cpass" />
-                       </div> -->
-                        <div class="mb-3 col-lg-4">
-                      
-                            <label  class="form-label">State</label>
-                            <select class="form-select mb-3 form-control" aria-label="Default select example" name="clstate">
+								</div>
+								<div class="form-group col-md-6">
+								<label for="phoneno" class="form-label">Contact Number</label>
+                            <input type="number" class="form-control" id="contact_number" name="contact_number"
+                            value="<?php echo $fet['contact_number']; ?>" readonly>
+								</div>
+							</div>
+                            <div class="form-row">
+								<div class="form-group col-md-6">
+                                <label for="phoneno" class="form-label">Referance Name</label>
+                            <input type="text" class="form-control" id="Ref_Name" name="Ref_Name"/>
+								</div>
+								<div class="form-group col-md-6">
+                                <label for="phoneno" class="form-label">Refrence No.</label>
+                            <input type="number" class="form-control" id="Ref_No" name="Ref_No" />
+								</div>
+							</div>
+							<div class="form-group">
+								
+							</div>
+                            <div class="form-row">
+								<div class="form-group col-md-6">
+                                <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="client_email" name="client_email"
+                                aria-describedby="emailHelp" value="<?php echo $fet['user_Email']; ?>" readonly/>
+								</div>
+								<div class="form-group col-md-6">
+                                <label  class="form-label">State</label>
+                            <select class="form-select mb-3 form-control" aria-label="Default select example" name="state">
                                 <option ></option>
                                 <option >Jaranwala</option>
                                 <option >nshataabad</option>
                                 <option >shah kout</option>
                             </select>
-                           
-                        </div>
-                    <div class="mb-3 col-lg-4">
-                        <label class="form-label">District</label>
-                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="cldis">
+								</div>
+							</div>
+							
+							<div class="form-row">
+								<div class="form-group col-md-6">
+                                <label class="form-label">District</label>
+                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="district">
                                 <option selected>Choose district</option>
                                 <option >FSD</option>
                                 <option >LHR</option>
                                 <option >Sargodha</option>
                                 <option >Gujranwala</option>
                             </select>
-                    </div>
-                    <div class="mb-3 col-lg-4">
-                            <label class="form-label" for="password">Address</label>
-                            <input type="text" class="form-control" id="cladd" name="cladd" value="<?php echo $fet['cadd']; ?>" readonly/>
-                       </div>
-                        <div class="mb-3 col-lg-4">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-control" aria-label="With textarea" name="cldes" value="write few words about case" readonly><?php echo $fet['des']; ?></textarea>
-                        </div>
-                        <div class="mb-3 col-lg-4">
-                        <label class="form-label">Select Case Category</label>
-                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="casecat">
+								</div>
+								<div class="form-group col-md-6">
+                                <label class="form-label" for="password">Address</label>
+                            <input type="text" class="form-control" id="full_address" name="full_address" value="<?php echo $fet['full_address']; ?>" readonly/>
+								</div>
+								<div class="form-group col-md-12">
+                                <label class="form-label">Description</label>
+                            <textarea class="form-control" aria-label="With textarea" name="description" value="write few words about case" ></textarea>
+								</div>
+							</div>
+                            <div class="form-row">
+								<div class="form-group col-md-6">
+                                <label class="form-label">Select Case Category</label>
+                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="case_category">
                                 <option selected>Choose Case Category</option>
                                 <?php 
                                 $ssql="SELECT * FROM `case-type`";
@@ -139,33 +165,208 @@ include ('./include/header.php');
                                 }
                             ?>
                             </select>
-                    </div>
-                    <div class="mb-3 col-lg-4">
-                        <label class="form-label">Choose Lawyer</label>
-                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="clawyer">
+								</div>
+							
+							<div class="form-group col-md-6">
+                            <label class="form-label">Choose Lawyer</label>
+                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="lawyer_name">
                                 <option selected>Choose Lawyer</option>
                                 <?php 
                                 $lsql="SELECT * FROM `lawyers-rec` where `status`='approved'";
                                 $lrun=mysqli_query($conn,$lsql);
                                 while($lfet=mysqli_fetch_assoc($lrun)){
                                     ?>
-                                <option value="<?php echo $lfet['lawyerid'] ?>"><?php echo $lfet['name']; ?></option>
+                                <option value="<?php echo $lfet['lawyerid'] ?>"><?php echo $lfet['first_Name']; ?></option>
                             <?php
                                 }
                             ?>
                             </select>
-                    </div>
-                    <div class="mb-3 col-lg-4">
-                            <label for="datetime" class="form-label">Time for appointment</label>
+							</div>
+                            </div>
+						<div class="form-group">
+                        <label for="datetime" class="form-label">Time for appointment</label>
                             <input type="datetime-local" class="form-control" id="datetime" name="datetime"
                                 aria-describedby="emailHelp"/>
                         </div>
-                        <button type="submit" class="btn btn-primary bg-success form-control" name="sub">Sends Request</button>
-                        </div>
-                    </form>
-                
-            
-            </div>
-    </div>
-</body>
+							<div class="form-group">
+								<div class="form-check">
+
+									<input id="accept" name="agree" type="checkbox" value="y" /><strong>I Agree with terms & conditions </strong>
+								</div>
+							</div>
+							<input name="sub" type="submit" class="btn btn-block btn-dark" value="Sent Request" />
+							<!--after signup redirect lawyer dashboard page-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+
+
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery -->
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+
+		<script>
+			$('#validateForm').bootstrapValidator({
+				feedbackIcons: {
+					valid: 'glyphicon glyphicon-ok',
+					validating: 'glyphicon glyphicon-refresh'
+				},
+				fields: {
+					first_Name: {
+						validators: {
+							stringLength: {
+								min: 3,
+								message: 'Please Enter your First name with minimum 3 letters length',
+							},
+							notEmpty: {
+								message: 'Please Enter your First name'
+							}
+						}
+					},
+					last_Name: {
+						validators: {
+							stringLength: {
+								min: 3,
+								message: 'Please Enter your Last name with minimum 3 letters length',
+							},
+							notEmpty: {
+								message: 'Please Enter your Last name'
+							}
+						}
+					},
+					lawyer_email: {
+						validators: {
+							notEmpty: {
+								message: 'Please Enter your email address'
+							},
+							emailAddress: {
+								message: 'Please Enter a valid email address'
+							}
+						}
+					},
+					contact_number: {
+						validators: {
+							stringLength: {
+								min: 11,
+								max:11,
+								message: 'Contract Number Must be 11 Digit',
+							},
+							numeric: {
+								message: 'The phone no must be a number'
+							},
+							notEmpty: {
+								message: 'Please Enter your phone number'
+							}
+						}
+					},
+					profile_image: {
+						validators: {
+							notEmpty: {
+								message: 'Please Upload Your Image'
+							}
+						}
+					},
+                    bar_license: {
+						validators: {
+							notEmpty: {
+								message: 'Please Upload Your Image'
+							}
+						}
+					},
+					university_College: {
+						validators: {
+							notEmpty: {
+								message: 'Please Enter Your University or College'
+							}
+						}
+					},
+					degree: {
+						validators: {
+							notEmpty: {
+								message: 'Choose your Degree'
+							}
+						}
+					},
+					passing_year: {
+						validators: {
+							notEmpty: {
+								message: 'Choose Passing Year'
+							}
+						}
+					},
+					full_address: {
+						validators: {
+							notEmpty: {
+								message: 'Please Upload Your Image'
+							}
+						}
+					},
+					zip_code: {
+						validators: {
+							stringLength: {
+								min: 4,
+								max:4,
+								message: 'Zip Code Must be 4 Digit',
+							},
+							numeric: {
+								message: 'Zip Code must be a number'
+							},
+							notEmpty: {
+								message: 'Please Enter Zip Code'
+							}
+						}
+					},
+					city: {
+						validators: {
+							notEmpty: {
+								message: 'Choose your user City'
+							}
+						}
+					},
+					agree: {
+						validators: {
+							notEmpty: {
+								message: 'Please Check Terms & Conditions is required'
+							}
+						}
+					},
+					practice_Length: {
+						validators: {
+							notEmpty: {
+								message: 'Choose your Practise Length'
+							}
+						}
+					},
+					'case_handle[]': {
+						validators: {
+							notEmpty: {
+								message: 'Please Select Types of case handle'
+							}
+						}
+					},
+					speciality: {
+						validators: {
+							notEmpty: {
+								message: 'Choose your Speciality'
+							}
+						}
+					},
+				}
+			});
+
+		</script>
+
+	</body>
+</html>
+
+    <!-- Form End -->
 <?php include ('./include/footer.php'); ?>

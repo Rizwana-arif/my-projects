@@ -79,7 +79,7 @@
                                 <a href="./view-FAQ's.php" class="nav-item nav-link">FAQ's</a>
 
                                 <?php
-                                if(@$_SESSION['estatus']=="client"){
+                                if(@$_SESSION['estatus']=="user"){
                                 ?>
                                 <a href="clients-profile.php" class="nav-item nav-link">MyProfile</a>
                                 <a href="../admin panel/logout.php" class="nav-item nav-link">Logout</a>
@@ -102,13 +102,14 @@
                                     <a href="#" class=" nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                     <div class="dropdown-menu">
                                         <a href="./register-lawyers.php" class="dropdown-item">As Lawyer</a>
-                                        <a href="./register-clients.php" class="dropdown-item">As Client</a>
+                                        <a href="./register-users.php" class="dropdown-item">As User</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
                                     <a href="#" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
                                     <div class="dropdown-menu">
+                                         <a href="../admin panel/login.php" class="dropdown-item">As Admin</a>
                                         <a href="../admin panel/login.php" class="dropdown-item">As Lawyer</a>
                                         <a href="../admin panel/login.php"class="dropdown-item">As Client</a>
                                         <a href="../admin panel/login.php" class="dropdown-item">As Team</a>

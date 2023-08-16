@@ -1,32 +1,6 @@
-<?php
-include ("./include/connection.php");
-session_start();
-if(empty($_SESSION['email'])){
-  header("location:./login.php");
-}
-if(isset($_POST['sub'])){
-  $ctgname=strtolower(mysqli_real_escape_string($conn,$_POST['ctgname']));
-$descrip=mysqli_real_escape_string($conn,$_POST['descrip']);
-$date=date ("m-d-y");
-$s="SELECT * FROM `category-rec` WHERE `ctgname`='$ctgname'";
-$r=mysqli_query($conn,$s);
-if(mysqli_num_rows($r)>0){
-  echo "<script>alert ('category already exist')</script>";
-}
-else{
-  $sql="INSERT INTO `category-rec` (`ctgname`,`descrip`,`date`) VALUES ('$ctgname','$descrip','$date')";
-  $run=mysqli_query($conn,$sql);
-  if ($run){
-    echo "<script>alert ('category has been inserted')</script>";
-  }
-  else{
-    echo "<script>alert ('category has not been inserted')</script>";
-  }
-}
-}
+<?php 
 include ("./include/header.php");
 include ("./include/sidebar.php");
-
 ?>
 <style>
   .btn{
@@ -39,7 +13,7 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                       <h4>Add Category</h4>
                       <button class="btn btn-primary" onclick="location.href='./view-category.php'">View</button>
@@ -57,7 +31,7 @@ include ("./include/sidebar.php");
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">Submit</button>
+                      <button class="btn btn-primary" name="sub" id="sub">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -81,10 +55,44 @@ include ("./include/sidebar.php");
       }
     }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+         $("#sub").on("click",(e)=>{
+              e.preventDefault();
+            var myData=new FormData(data);
+            $.ajax({
+               url:"./ajax/category.php",
+               method:"POST",
+               contentType:false,
+               processData:false,
+               data:myData,
+               success:function(val){
+                       if(val==1){
+                         alert("category already exist");
+                         $("form").trigger("reset");
+                         load();
+                       }else if(val==2){
+                        alert("data has  been inserted");
+                       }else{
+                        alert("data has not been inserted");
+                       }
+               }  
+            
+            });
+         });
 
+    //      function load(){
+    //                      $.ajax({
+    //                      url:"./ajax/singleview.php",
+    //                      method:"GET",
+    //                      success:function(res){
+    //                        $("#view").html(res);
+    //                      }
+    //                      });
+    //                 }
 
-
-
-<?php 
-include ("./include/footer.php");
-?>
+    //                 load();
+    });
+  </script>
+<?php include ("./include/footer.php"); ?>

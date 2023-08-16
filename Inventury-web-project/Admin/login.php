@@ -4,7 +4,7 @@ SESSION_START();
 if(isset($_POST['login'])){
   $email=mysqli_real_escape_string($conn,$_POST['email']);
   $password=mysqli_real_escape_string($conn,$_POST['password']);
-  $sql="SELECT * FROM `admin-reg` WHERE `email`='$email' and `password`='$password'";
+  $sql="SELECT * FROM `admin` WHERE `email`='$email' and `password`='$password'";
   $run=mysqli_query($conn,$sql);
   $fet=mysqli_fetch_assoc($run);
   if(mysqli_num_rows($run)==1){

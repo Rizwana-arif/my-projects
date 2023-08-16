@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email'])){
     header("location:./login.php");
 } 
 
@@ -31,6 +31,7 @@ include ('./include/sidebar.php');
                                         <th >Email</th>
                                         <th >Mobile No</th>
                                         <th >Query</th>
+                                        
                                         <th >Status</th>
                                         <th >Date</th>
                                         <th>Action</th>

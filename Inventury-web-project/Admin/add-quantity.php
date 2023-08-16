@@ -1,22 +1,5 @@
 <?php
-include ("./include/connection.php");
-session_start();
-if(empty($_SESSION['email'])){
-  header("location:./login.php");
-}
-if(isset($_POST['sub'])){
-  $quaname=strtolower(mysqli_real_escape_string($conn,$_POST['quaname']));
-$quadescrip=mysqli_real_escape_string($conn,$_POST['quadescrip']);
-$quadate=date ("m-d-y");
-  $sql="INSERT INTO `quantity-rec` (`quaname`,`quadescrip`,`quadate`) VALUES ('$quaname','$quadescrip','$quadate')";
-  $run=mysqli_query($conn,$sql);
-  if ($run){
-    echo "<script>alert ('Quantity has been inserted')</script>";
-  }
-  else{
-    echo "<script>alert ('Quantity has not been inserted')</script>";
-  }
-}
+
 include ("./include/header.php");
 include ("./include/sidebar.php");
 
@@ -33,7 +16,7 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                       <h4>Add Quantity</h4>
                       <button class="btn btn-primary" onclick="location.href='./view-quantity.php'">View</button>
@@ -51,7 +34,7 @@ include ("./include/sidebar.php");
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">Submit</button>
+                      <button class="btn btn-primary" name="sub" id="sub">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -76,7 +59,33 @@ include ("./include/sidebar.php");
     }
   </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <script>
+    $(document).ready(function(){
+         $("#sub").on("click",(e)=>{
+              e.preventDefault();
+            var myData=new FormData(data);
+           
+            $.ajax({
+               url:"./ajax/quantity.php",
+               method:"POST",
+               contentType:false,
+               processData:false,
+               data:myData,
+               success:function(val){
+              
+                       if(val==1){
+                         alert("Quantity has been inserted");
+                         $("form").trigger("reset");
+                       }else{
+                        alert("Quantity has not been inserted");
+                       }
+               }
+            });
+         });
+    });
+  </script>
 
 
 <?php 

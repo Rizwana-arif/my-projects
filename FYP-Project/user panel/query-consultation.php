@@ -9,6 +9,8 @@ if(isset($_POST['sub'])){
     $email=mysqli_real_escape_string($conn,$_POST['email']);
     $mobno=mysqli_real_escape_string($conn,$_POST['mobno']);
     $query=mysqli_real_escape_string($conn,$_POST['query']);
+    $reply="";
+    $reply_by="";
     $status="not replyed";
     $date=date("d-m-y");
 

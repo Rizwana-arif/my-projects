@@ -1,32 +1,6 @@
 <?php
 include ("./include/connection.php");
-session_start();
-if(empty($_SESSION['email'])){
-  header("location:./login.php");
-}
-if(isset($_POST['sub'])){
-    $catname=mysqli_real_escape_string($conn,$_POST['catname']);
-  $subname=strtolower(mysqli_real_escape_string($conn,$_POST['subname']));
-$subdescrip=mysqli_real_escape_string($conn,$_POST['subdescrip']);
-$subdate=date ("m-d-y");
-$s="SELECT * FROM `sub-category-rec` WHERE `catname`='$catname' and `subname`='$subname'";
-$r=mysqli_query($conn,$s);
-if(mysqli_num_rows($r)>0){
-  echo "<script>alert ('SubCategory already exist')</script>";
-}
-else{
-  $sql="INSERT INTO `sub-category-rec` (`catname`,`subname`,`subdescrip`,`subdate`) VALUES ('$catname','$subname','$subdescrip','$subdate')";
-  $run=mysqli_query($conn,$sql);
-  if ($run){
 
-    echo "<script>alert ('SubCategory has been inserted')</script>";
-    header("refresh:0, url=./add-sub-category.php");
-  }
-  else{
-    echo "<script>alert ('SubCategory has not been inserted')</script>";
-  }
-}
-}
 include ("./include/header.php");
 include ("./include/sidebar.php");
 
@@ -45,7 +19,7 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                       <h4>Add Category</h4>
                       <button class="btn btn-primary" onclick="location.href='./view-sub-category.php'">View</button>
@@ -80,7 +54,7 @@ include ("./include/sidebar.php");
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">Submit</button>
+                      <button class="btn btn-primary" name="sub" id="sub">Submit</button>
                     </div>
                   </form>
                 </div>
@@ -105,7 +79,33 @@ include ("./include/sidebar.php");
     }
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+  $(document).ready(function(){
+       $("#sub").on("click",(e)=>{
+            e.preventDefault();
+          var myData=new FormData(data);
+         
+          $.ajax({
+             url:"./ajax/sub-category.php",
+             method:"POST",
+             contentType:false,
+             processData:false,
+             data:myData,
+             success:function(val){
+            
+                     if(val==1){
+                       alert("SubCategory has been inserted");
+                       $("form").trigger("reset");
+                     }else{
+                      alert("SubCategory has not been inserted");
+                     }
+             }
+          });
+       });
+  });
+</script>
 
 
 <?php 

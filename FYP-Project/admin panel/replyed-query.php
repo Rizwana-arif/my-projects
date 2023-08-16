@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email'])){
     header("location:./login.php");
 } 
 
@@ -31,6 +31,8 @@ include ('./include/sidebar.php');
                                         <th >Email</th>
                                         <th >Mobile No</th>
                                         <th >Query</th>
+                                        <th>Reply</th>
+                                        <th>Reply_By</th>
                                         <th >Status</th>
                                         <th >Date</th>
                                         
@@ -48,6 +50,8 @@ include ('./include/sidebar.php');
                                         <td><?php echo $fet['email'] ;?></td>
                                         <td><?php echo $fet['mobno'] ;?></td>
                                         <td><?php echo $fet['query'] ;?></td>
+                                        <td><?php echo $fet['reply'] ;?></td>
+                                        <td><?php echo $fet['reply_by'] ;?></td>
                                         <td><?php echo $fet['status'] ;?></td>
                                        <td><?php echo $fet['date'] ;?></td>
                                        

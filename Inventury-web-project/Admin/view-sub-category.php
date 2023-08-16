@@ -1,9 +1,5 @@
 <?php 
-include ("./include/connection.php");
-session_start();
-if(empty($_SESSION['email'])){
-  header("location:./login.php");
-}
+
 include ("./include/header.php");
 include ("./include/sidebar.php");
 
@@ -55,23 +51,10 @@ i:hover{
                             
                           </tr>
                         </thead>
-                        <?php 
-                          $sql="SELECT * FROM `sub-category-rec` sub INNER JOIN `category-rec` c ON sub.catname=c.ctgid";
-                          $run=mysqli_query($conn,$sql);
-                          while ($fet=mysqli_fetch_assoc($run)){
-                        ?>
-                        <tbody>
-                          <tr>
-                          <td><?php echo $fet['subid'] ;?></td>
-                          <td><?php echo $fet['ctgname'] ;?></td>
-                            <td><?php echo $fet['subname'] ;?></td>
-                            <td><?php echo $fet['subdescrip'] ;?></td>
-                            <td><?php echo $fet['subdate'] ;?></td>
-                            <td><a  href="./update-subcategory.php?subid=<?php echo $fet['subid'] ;?>"><i class="fa-solid fa-file-pen"></i></a></td>
-                            <td><a  href="./delete-subcategory.php?subid=<?php echo $fet['subid'] ;?>"><i class="fa-solid fa-trash"></i></a></td>
-                            
-                          </tr>
-                          <?php } ?>
+                        
+                        <tbody id="view">
+                         
+                         
                         </tbody>
                         </table>
                     </div>
@@ -82,7 +65,23 @@ i:hover{
           </div>
         </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+  $(document).ready(function(){
+       function load(){
+                       $.ajax({
+                       url:"./ajax/sub-category-view.php",
+                       method:"GET",
+                       success:function(res){
+                         $("#view").html(res);
+                       }
+                       });
+                  }
+
+                  load();
+  });
+</script>
 
  <?php 
                           
