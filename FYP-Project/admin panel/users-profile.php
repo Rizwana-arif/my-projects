@@ -1,14 +1,16 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
-  header("location:../admin panel/login.php");
+if(empty($_SESSION['user_Email']) ){
+  header("location:./login.php");
 }
-$pro=$_SESSION['cemail'];
-    $sql="SELECT * FROM `clients-rec` where `cemail`='$pro' ";
+$pro=$_SESSION['user_Email'];
+    $sql="SELECT * FROM `users-rec` where `user_Email`='$pro' ";
     $run=mysqli_query($conn,$sql);
     $fet=mysqli_fetch_assoc($run);
 include ('./include/header.php');
+include ('./include/sidebar.php');
+
 ?>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -73,15 +75,15 @@ include ('./include/header.php');
         <div class="main-body">
         
             
-              <div class="page-header">
+              <!-- <div class="page-header">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2><?php echo $fet['cname']; ?></h2>
+                            <h2></h2>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
               <!-- /Breadcrumb -->
         
               <div class="row gutters-sm">
@@ -89,13 +91,13 @@ include ('./include/header.php');
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="<?php echo './data/client-img/' . $fet['img']; ?>" alt="Admin" class="rounded-circle" width="150">
+                        <img src="<?php echo './data/user-img/' . $fet['image']; ?>" alt="User" class="rounded-circle" width="150">
                         <div class="mt-3">
-                          <h4><?php echo $fet['cname']; ?></h4>
-                          <p class="text-secondary mb-1"><?php echo $fet['des']; ?></p>
-                          <p class="text-muted font-size-sm"><?php echo $fet['cemail'] ?></p>
-                          <!-- <a href="./appointment.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-outline-primary" name="sub">Profile </button></a>
-                          <button class="btn btn-outline-primary">Message</button> -->
+                          <h4><?php echo $fet['first_Name']; ?></h4>
+                          <p class="text-secondary mb-1"><?php echo $fet['full_address']; ?></p>
+                          <p class="text-muted font-size-sm"><?php echo $fet['user_Email'] ?></p>
+                          <a href="./update-user-profile.php?userid=<?php echo $fet['userid']; ?>"><button type="submit" class="btn btn-outline-primary" >Edit </button></a>
+                          <!-- <button class="btn btn-outline-primary">Message</button> -->
                         </div>
                       </div>
                     </div>
@@ -133,7 +135,7 @@ include ('./include/header.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['cname']; ?>
+                        <?php echo $fet['first_Name'] . "  " . $fet['last_Name']; ?>
                         </div>
                       </div>
                       <hr>
@@ -142,7 +144,7 @@ include ('./include/header.php');
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['cemail']; ?>
+                        <?php echo $fet['user_Email']; ?>
                         </div>
                       </div>
                       <hr>
@@ -151,64 +153,32 @@ include ('./include/header.php');
                           <h6 class="mb-0">Phone No</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['mobno']; ?>
+                        <?php echo $fet['contact_number']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">CNIC</h6>
+                          <h6 class="mb-0">Password</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['ccnic']; ?>
+                        <?php echo $fet['password']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">State</h6>
+                          <h6 class="mb-0">Zip_code</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['state']; ?>
+                        <?php echo $fet['zip_code']; ?>
                         </div>
                       </div>
                       <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">District</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['dis']; ?>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Address</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['cadd']; ?>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Refrence Name</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['refname']; ?>
-                        </div>
-                      </div>
-
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Refrence No.</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['refno']; ?>
-                        </div>
-                      </div>
+                     
+                     
+                    
+                     
                       <div class="row">
                         <!-- <div class="col-sm-12">
                           <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>

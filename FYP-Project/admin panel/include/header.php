@@ -126,17 +126,16 @@
                     </div>
                     <div class="nav-item dropdown">
                         <?php
-                        // $sql="SELECT * FROM `lawyers-rec` WHERE `lawyerid`='$lawyerid'";
-                        // $run=mysqli_query($conn,$sql);
-                        // $fet=mysqli_fetch_assoc($run);
+                        if($_SESSION['estatus']=="admin"){
                         ?>
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="#" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex"><?php  ?></span>
+                            <img class="rounded-circle me-lg-2" src="../img/admin.jpg" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">Admin</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="./lawyer-profile-login.php" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Settings</a>
+                            <!-- <a href="./lawyer-profile-login.php" class="dropdown-item">My Profile</a>
+                            <a href="#" class="dropdown-item">Settings</a> -->
+                            <?php } ?>
                             <a href="./logout.php" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

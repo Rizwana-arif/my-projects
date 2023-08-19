@@ -4,21 +4,7 @@ $ctgid=$_GET['ctgid'];
 $sql="SELECT * FROM `category-rec` WHERE `ctgid`='$ctgid'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
-if(isset($_POST['sub'])){
-    $ctgname=strtolower(mysqli_real_escape_string($conn,$_POST['ctgname']));
-    $descrip=mysqli_real_escape_string($conn,$_POST['descrip']);
-    $date=date ("m-d-y");
-    $usql="UPDATE `category-rec` SET `ctgname`='$ctgname', `descrip`='$descrip' , `date`='$date' WHERE `ctgid`='$ctgid'";
-    $urun=mysqli_query($conn,$usql);
-    if ($urun){
-      header("Refresh:0, url=./view-category.php");
-        echo "<script>alert ('category has been updated')</script>";
-        
-      }
-      else{
-        echo "<script>alert ('category has not been updated')</script>";
-      }
-}
+
 
 include ("./include/header.php");
 include ("./include/sidebar.php");
@@ -36,7 +22,7 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                     
                       <h4>Update Category</h4>
@@ -46,6 +32,8 @@ include ("./include/sidebar.php");
                       <div class="form-group">
                         <label>Category Name</label>
                         <input type="text" class="form-control" name="ctgname" required="" value="<?php echo $fet['ctgname']; ?>">
+                        <input type="hidden" class="form-control" name="ctgid"  value="<?php echo $fet['ctgid']; ?>">
+
                       </div>
                      
                       <div class="form-group mb-0">
@@ -54,7 +42,7 @@ include ("./include/sidebar.php");
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub" >Update</button>
+                      <button class="btn btn-primary" name="sub" id="update" >Update</button>
                     </div>
                   </form>
                 </div>
@@ -63,7 +51,39 @@ include ("./include/sidebar.php");
 </div>
 </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+  $(document).ready(function(){
+       $("#update").on("click",(e)=>{
+            e.preventDefault();
+          var myData=new FormData(data);
+          $.ajax({
+             url:"./ajax/category-update.php",
+             method:"POST",
+             contentType:false,
+             processData:false,
+             data:myData,
+             success:function(val){
+              // alert(val);
+                     if(val==1){
+                       alert("category has been updated");
+                       $("form").trigger("reset");
+                   window.location="./view-category.php";
+
+                     }else
+                     {
+                      alert("category has not been updated");
+                     }
+             }  
+          
+          });
+       });
+
+
+  });
+</script>
+   
 <?php 
 include ("./include/footer.php");
 ?>

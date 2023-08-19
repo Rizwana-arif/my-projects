@@ -75,19 +75,20 @@
                                 <a href="#" class="nav-item nav-link">About</a>
                                 <!-- <a href="service.html" class="nav-item nav-link">Practice</a> -->
                                 <a href="./lawyers.php" class="nav-item nav-link">Lawyers</a>
-                                <a href="#" class="nav-item nav-link">Case Studies</a>
+                                <a href="./portfolio.html" class="nav-item nav-link">Case Studies</a>
                                 <a href="./view-FAQ's.php" class="nav-item nav-link">FAQ's</a>
 
                                 <?php
                                 if(@$_SESSION['estatus']=="user"){
                                 ?>
-                                <a href="clients-profile.php" class="nav-item nav-link">MyProfile</a>
+                                <a href="../admin panel/users-profile.php" class="nav-item nav-link">MyProfile</a>
                                 <a href="../admin panel/logout.php" class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <?php
                                 if(@$_SESSION['estatus']=="lawyer"){
                                 ?>
                                 <a href="./lawyers-profile.php" class="nav-item nav-link">Profile</a>
+                                <a href="../admin panel/index.php" class="nav-item nav-link">Dashboard</a>
                                 <a href="../admin panel/logout.php"class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <!-- <div class="nav-item dropdown">
@@ -107,13 +108,15 @@
                                 </div>
                             </div>
                             <div class="nav-item dropdown">
-                                    <a href="#" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a>
-                                    <div class="dropdown-menu">
+                                    <!-- <a href="../admin panel/login.php" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a> -->
+                                <a class="btn" href="../admin panel/login.php">Login</a>
+
+                                    <!-- <div class="dropdown-menu">
                                          <a href="../admin panel/login.php" class="dropdown-item">As Admin</a>
                                         <a href="../admin panel/login.php" class="dropdown-item">As Lawyer</a>
                                         <a href="../admin panel/login.php"class="dropdown-item">As Client</a>
                                         <a href="../admin panel/login.php" class="dropdown-item">As Team</a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             <div class="ml-auto">
                                 <a class="btn" href="./appointment.php">Get Appointment</a>

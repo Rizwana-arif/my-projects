@@ -34,7 +34,7 @@ if(isset($_POST['sub'])){
     $asql="INSERT INTO `appointment-rec` (`client_name` , `client_cnic`,`gender` ,`contact_number`,`Ref_Name`,`Ref_No`,`client_email`,`state`,`district`,`full_address`,`description`,`case_category`,`lawyer_name`,`datetime`,`statuss`) VALUES ('$client_name','$client_cnic','$gender','$contact_number','$Ref_Name','$Ref_No','$client_email','$state','$district','$full_address','$description','$case_category','$lawyer_name','$datetime','$statuss') ";
     $arun=mysqli_query($conn,$asql);
     if($arun){
-        echo "<script>alert('Appointment Request has been sent')</script>";
+        echo "<script>alert('Appointment Request has been sent Plz wait for Confirmation Mail')</script>";
         header("Refresh:0, url=./index.php");
     }else{
         echo "<script>alert('Appointment Request has not been sent')</script>";

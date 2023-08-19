@@ -3,17 +3,17 @@ include ('./include/connection.php');
 
 include ('./include/header.php');
 ?>
-          
+     <style>
+     .faqs{
+        margin-left : 10%; 
+     }
+     </style>
           <!-- FAQs Start -->
             <div class="faqs">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-5">
-                            <div class="faqs-img">
-                                <img src="img/faqs.jpg" alt="Image">
-                            </div>
-                        </div>
-                        <div class="col-md-7">
+                        
+                        <div class="col-md-8">
                             <div class="section-header">
                                 <h2>Have A Questions?</h2>
                             </div>
@@ -43,7 +43,7 @@ include ('./include/header.php');
                             $c++;
                         } 
                     }?>
-                            <a class="btn" href="./view-FAQ's.php">See more</a>
+                           
                         </div>
                     </div>
                 </div>

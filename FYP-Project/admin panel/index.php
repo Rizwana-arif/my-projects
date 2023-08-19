@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['user_email']) && empty($_SESSION['uemail']) && empty($_SESSION['lawyer_email']) ){
+if(empty($_SESSION['email'])  && empty($_SESSION['lawyer_email']) && empty($_SESSION['user_Email']) ){
     header("location:./login.php");
 }
 include ('./include/header.php');

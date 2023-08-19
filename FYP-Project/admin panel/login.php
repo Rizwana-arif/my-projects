@@ -26,15 +26,16 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
            header("location:./index.php");
          }
         else{
-                $sql="SELECT * FROM `users-rec` WHERE `user_email`='$email' AND `password`='$password'";
+                $sql="SELECT * FROM `users-rec` WHERE `user_Email`='$email' AND `password`='$password'";
                 $run=mysqli_query($conn,$sql);
                 $fet=mysqli_fetch_assoc($run);
                 
                 if(mysqli_num_rows($run)==1 && $fet['estatus']=="user" ){
-                      $_SESSION['user_email']=$email;
+                      $_SESSION['user_Email']=$email;
                       $luserid=$fet['userid'];
                     //   $id=$_SESSION['cemail'];
                       $_SESSION['userid']=$userid;
+					  $_SESSION['first_Name']=$username;
                       $_SESSION['estatus']="user";
                       header("location:../user panel/index.php");
                     }else{

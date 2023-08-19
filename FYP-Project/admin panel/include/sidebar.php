@@ -195,9 +195,14 @@ if($_SESSION['estatus']=="lawyer"){
                     </div>
 
 
-                    <?php } ?>
+                    <?php } 
+                     if($_SESSION['estatus']=="user"){
+                    ?>
+                      <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>User</a>
+                    <a href="./lawyers-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Lawyers History</a>
+                    <a href="./case-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Case History</a>
 
-                    
+                    <?php } ?>
                     <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Lawyers</a>
                         <div class="dropdown-menu bg-transparent border-0">

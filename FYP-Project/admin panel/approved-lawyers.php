@@ -102,7 +102,7 @@ include ('./include/sidebar.php');
                 <td><?php echo $fet['full_address'] ; ?></td>
                 <td><?php echo $fet['city'] ; ?></td>
                 <td><?php echo $fet['zip_code'] ; ?></td>
-                <td><?php echo $fet['practice_length'] ; ?></td>
+                <td><?php echo $fet['practice_Length'] ; ?></td>
                 <td>
                 <?php
                                         $arr=unserialize($fet['case_handle']);
