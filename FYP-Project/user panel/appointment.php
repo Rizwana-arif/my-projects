@@ -1,13 +1,13 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if( empty($_SESSION['user_email']) ){
+if( empty($_SESSION['user_Email']) ){
     header("location:../admin panel/login.php");
 }
-$appoin=$_SESSION['user_email'];
+$appoin=$_SESSION['user_Email'];
 // $lawyer=$_SESSION['lawyerid'];
 
-$sql="SELECT * FROM `users-rec` where `user_email`='$appoin'";
+$sql="SELECT * FROM `users-rec` where `user_Email`='$appoin'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
 if(isset($_POST['sub'])){
@@ -26,19 +26,27 @@ if(isset($_POST['sub'])){
     $lawyer_name=mysqli_real_escape_string($conn,$_POST['lawyer_name']);
     $datetime=mysqli_real_escape_string($conn,$_POST['datetime']);
     $statuss="unaccepted";
-    $ssql="SELECT * FROM `appointment-rec` WHERE `client_email`='$client_email' and `lawyer_name`='$lawyer_name'";
+    $ssql="SELECT * FROM `users-rec` WHERE `user_Email`='$client_email' and `assign_lawyer`='$lawyer_name'";
     $srun=mysqli_query($conn,$ssql);
     if(mysqli_num_rows($srun)>0){
-      echo "<script>alert ('Plz Change the lawyer , U already appoint this lawyer')</script>";
+		$asql="INSERT INTO `appointment-rec` (`client_name` , `client_cnic`,`gender` ,`contact_number`,`Ref_Name`,`Ref_No`,`client_email`,`state`,`district`,`full_address`,`description`,`case_category`,`lawyer_name`,`datetime`,`statuss`) VALUES ('$client_name','$client_cnic','$gender','$contact_number','$Ref_Name','$Ref_No','$client_email','$state','$district','$full_address','$description','$case_category','$lawyer_name','$datetime','$statuss') ";
+		$arun=mysqli_query($conn,$asql);
+		if($arun){
+			echo "<script>alert('Appointment Request has been sent Plz wait for Confirmation Mail')</script>";
+			header("Refresh:0, url=./index.php");
+		}else{
+			echo "<script>alert('Appointment Request has not been sent')</script>";
+		}
     }else{
-    $asql="INSERT INTO `appointment-rec` (`client_name` , `client_cnic`,`gender` ,`contact_number`,`Ref_Name`,`Ref_No`,`client_email`,`state`,`district`,`full_address`,`description`,`case_category`,`lawyer_name`,`datetime`,`statuss`) VALUES ('$client_name','$client_cnic','$gender','$contact_number','$Ref_Name','$Ref_No','$client_email','$state','$district','$full_address','$description','$case_category','$lawyer_name','$datetime','$statuss') ";
-    $arun=mysqli_query($conn,$asql);
-    if($arun){
-        echo "<script>alert('Appointment Request has been sent Plz wait for Confirmation Mail')</script>";
-        header("Refresh:0, url=./index.php");
-    }else{
-        echo "<script>alert('Appointment Request has not been sent')</script>";
-    }
+		$asql="INSERT INTO `appointment-rec` (`client_name` , `client_cnic`,`gender` ,`contact_number`,`Ref_Name`,`Ref_No`,`client_email`,`state`,`district`,`full_address`,`description`,`case_category`,`lawyer_name`,`datetime`,`statuss`) VALUES ('$client_name','$client_cnic','$gender','$contact_number','$Ref_Name','$Ref_No','$client_email','$state','$district','$full_address','$description','$case_category','$lawyer_name','$datetime','$statuss') ";
+		$arun=mysqli_query($conn,$asql);
+		if($arun){
+			echo "<script>alert('Appointment Request has been sent for a lawyer Plz wait for Confirmation Mail')</script>";
+			header("Refresh:0, url=./index.php");
+		}else{
+			echo "<script>alert('U alredy appoint a lawyer plz! change the lawyer')</script>";
+			header("Refresh:0, url=./appointment.php");
+		}
 }
 }
 

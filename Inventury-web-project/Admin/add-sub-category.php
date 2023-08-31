@@ -29,18 +29,10 @@ include ("./include/sidebar.php");
                     <div class="card-body">
                       <div class="form-group">
                     <label>Select Category Name</label>
-                    <select name="catname" class="form-control ml-0">
+                    <select name="catname" class="form-control ml-0" id="category_id">
                     
              <option value="">Select Category type</option>
-             <?php 
-                  $subsql="SELECT * FROM `category-rec`";
-                  $subrun=mysqli_query($conn,$subsql);
-                  while($subfet=mysqli_fetch_assoc($subrun)){
-                    ?>
-                 <option value="<?php echo $subfet['ctgid'] ?>"><?php echo $subfet['ctgname']; ?></option>
-                    <?php
-                  }
-              ?>
+             
         </select></div>
                       <div class="form-group">
                         <label>SubCategory Name</label>
@@ -103,8 +95,25 @@ include ("./include/sidebar.php");
                      }
              }
           });
+          
        });
   });
+
+  $(document).ready(function(){
+      function loadData(type , category_id){
+         
+          $.ajax({
+             url:"./ajax/category-load.php",
+             method:"POST",
+             data: {type : type , id : category_id},
+             success:function(data){
+                $("#category").html(data);
+             }
+          });
+        
+        }
+       });
+
 </script>
 
 

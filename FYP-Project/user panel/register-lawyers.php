@@ -5,6 +5,8 @@ include ('./include/connection.php');
 //     header("location:../admin panel/login.php");
 // }
 if(isset($_POST['post'])){
+	$random=rand(99999,999999);
+	$reg_id="LAW-" . $random; 
     $first_Name=mysqli_real_escape_string($conn,$_POST['first_Name']);
     $last_Name=mysqli_real_escape_string($conn,$_POST['last_Name']);
     $contact_number=mysqli_real_escape_string($conn,$_POST['contact_number']);
@@ -34,7 +36,7 @@ if(isset($_POST['post'])){
         $rand=rand(10000,999999);
         $pic=$profile_image."." .$rand. ".".$a;
         $idf=$bar_license."." .$rand. ".".$a1;
-        $sql="INSERT INTO `lawyers-rec`(`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
         $run=mysqli_query($conn,$sql);
         if($run){
 

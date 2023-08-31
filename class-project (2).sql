@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2023 at 08:09 AM
+-- Generation Time: Aug 31, 2023 at 06:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -44,6 +44,23 @@ INSERT INTO `admin` (`adminid`, `email`, `password`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart-rec`
+--
+
+CREATE TABLE `cart-rec` (
+  `cart_id` bigint(255) NOT NULL,
+  `p_id` varchar(255) NOT NULL,
+  `p_name` varchar(255) NOT NULL,
+  `p_price` varchar(255) NOT NULL,
+  `p_code` varchar(255) NOT NULL,
+  `p_pic` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `qty` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `category-rec`
 --
 
@@ -59,8 +76,8 @@ CREATE TABLE `category-rec` (
 --
 
 INSERT INTO `category-rec` (`ctgid`, `ctgname`, `descrip`, `date`) VALUES
-(24, 'clothes', 'we have clothes of best quality', '06-09-23'),
-(25, 'shoes', 'u find best shoes on this platform', '06-09-23'),
+(24, 'clothes', 'we have clothes of best quality.', '08-29-23'),
+(25, 'shoes', 'u find best shoes on this platform . so, choose our platform', '08-17-23'),
 (26, 'toys', 'secret of your kids smile', '06-09-23'),
 (31, 'watches', 'the best quality of watches are available', '06-12-23'),
 (32, 'bags', 'the best quality bags ', '06-14-23'),
@@ -159,7 +176,7 @@ INSERT INTO `product-rec` (`pid`, `pctg`, `psubctg`, `psupname`, `pcode`, `pname
 (89, '32', '48', '25', '035', '3 in 1 laptop bag', 'laptop bag 3 in 1 in premium quality waterproof              ', '3000', '3100', '17', '50', 'a:2:{i:0;s:10:\"29153.jpeg\";i:1;s:10:\"59587.jpeg\";}', 'online', '06-15-23'),
 (90, '32', '48', '24', '036', 'Del Laptop bag', '     waterprrof laptop bag with inner phone pocket or comfortable                    ', '1200', '1200', '15', '25', 'a:2:{i:0;s:10:\"10463.jpeg\";i:1;s:10:\"18504.jpeg\";}', 'online', '06-15-23'),
 (91, '31', '50', '24', '433', 'Madonna Murphy', 'Laborum ratione labo', '80', '29', '16', '37', 'a:3:{i:0;s:9:\"95563.png\";i:1;s:9:\"36741.jpg\";i:2;s:9:\"86280.jpg\";}', 'online', '08-16-23'),
-(92, '34', '27', '24', '41', 'Brittany Wilson', 'Adipisicing odit ut ', '35', '711', '19', '98', 'a:2:{i:0;s:9:\"32569.png\";i:1;s:9:\"28365.jpg\";}', 'online', '08-16-23');
+(92, '34', '27', '24', '41', 'Brittany Wilson', '                        Adipisicing odit ut                         ', '35', '711', '19', '100000', 'a:2:{i:0;s:9:\"32569.png\";i:1;s:9:\"28365.jpg\";}', 'online', '08-16-23');
 
 -- --------------------------------------------------------
 
@@ -179,7 +196,7 @@ CREATE TABLE `quantity-rec` (
 --
 
 INSERT INTO `quantity-rec` (`quaid`, `quaname`, `quadescrip`, `quadate`) VALUES
-(14, '100 ', 'hurry up! sale is almost end', '06-10-23'),
+(14, '100 ', 'hurry up! sale is almost end.......', '08-29-23'),
 (15, '25', 'company made more ', '06-10-23'),
 (16, '5', 'end of the season', '06-10-23'),
 (17, '50', 'hurry up ! stock is finished quickly', '06-10-23'),
@@ -206,7 +223,7 @@ CREATE TABLE `sub-category-rec` (
 --
 
 INSERT INTO `sub-category-rec` (`subid`, `catname`, `subname`, `subdescrip`, `subdate`) VALUES
-(23, '24', 'womens', 'stylish dresses for ladies', '06-09-23'),
+(23, '24', 'womens', 'stylish dresses for ladies...................', '08-29-23'),
 (25, '24', 'mens', 'mens  comfort is here', '06-09-23'),
 (26, '24', 'kids', 'comfortable stuff for your kids', '06-09-23'),
 (27, '25', 'womens', 'shoes of new styles', '06-09-23'),
@@ -248,7 +265,7 @@ CREATE TABLE `supplier-rec` (
 --
 
 INSERT INTO `supplier-rec` (`supid`, `supname`, `supemail`, `supnum`, `supdate`) VALUES
-(11, 'jaf spot', 'jafspot123@gmail.com', '1232745835', '06-10-23'),
+(11, 'jaf spot', 'jafspot123@gmail.com', '03001234567', '08-29-23'),
 (12, 'RCG', 'detyjikoxi@mailinator.com', '72364372', '06-10-23'),
 (13, 'skechers', 'rypar@mailinator.com', '091248923', '06-10-23'),
 (14, 'brownsshoes', 'kynevasuge@mailinator.com', '092834783', '06-10-23'),
@@ -266,6 +283,36 @@ INSERT INTO `supplier-rec` (`supid`, `supname`, `supemail`, `supnum`, `supdate`)
 (26, 'MENSPE', 'menspe23@gmail.com', '83257865', '06-14-23'),
 (27, 'Baker Cain', 'divavady@mailinator.com', 'Neque anim ', '08-16-23');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users-rec`
+--
+
+CREATE TABLE `users-rec` (
+  `userid` bigint(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact_number` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `postal_code` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `address2` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `password_confirm` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users-rec`
+--
+
+INSERT INTO `users-rec` (`userid`, `first_name`, `last_name`, `email`, `contact_number`, `country`, `state`, `city`, `postal_code`, `address`, `address2`, `password`, `password_confirm`, `status`) VALUES
+(4, 'hareem', 'noor', 'hareem@gmail.com', '03001234567', 'pakistan', 'punjab', 'Faisalabad', '3301', 'faisalabad', 'faisalabad', '123456', '123456', 'user');
+
 --
 -- Indexes for dumped tables
 --
@@ -275,6 +322,12 @@ INSERT INTO `supplier-rec` (`supid`, `supname`, `supemail`, `supnum`, `supdate`)
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminid`);
+
+--
+-- Indexes for table `cart-rec`
+--
+ALTER TABLE `cart-rec`
+  ADD PRIMARY KEY (`cart_id`);
 
 --
 -- Indexes for table `category-rec`
@@ -307,6 +360,12 @@ ALTER TABLE `supplier-rec`
   ADD PRIMARY KEY (`supid`);
 
 --
+-- Indexes for table `users-rec`
+--
+ALTER TABLE `users-rec`
+  ADD PRIMARY KEY (`userid`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -315,6 +374,12 @@ ALTER TABLE `supplier-rec`
 --
 ALTER TABLE `admin`
   MODIFY `adminid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `cart-rec`
+--
+ALTER TABLE `cart-rec`
+  MODIFY `cart_id` bigint(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category-rec`
@@ -345,6 +410,12 @@ ALTER TABLE `sub-category-rec`
 --
 ALTER TABLE `supplier-rec`
   MODIFY `supid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `users-rec`
+--
+ALTER TABLE `users-rec`
+  MODIFY `userid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

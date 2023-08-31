@@ -86,7 +86,7 @@ include ('../Admin/include/connection.php');
 								<li><i class="ti-location-pin"></i> Store location</li>
 								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
 								<li><i class="ti-user"></i> <a href="#">My account</a></li>
-								<li><i class="ti-power-off"></i><a href="login.html#">Login</a></li>
+								<li><i class="ti-power-off"></i><a href="../Admin/login.php">Login</a></li>
 							</ul>
 						</div>
 						<!-- End Top Right -->
@@ -188,7 +188,7 @@ include ('../Admin/include/connection.php');
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="all-category">
-								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
+								<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="false"></i>CATEGORIES</h3>
 								<ul class="main-category">
 									<?php
 									$sql="SELECT * FROM `category-rec`";
@@ -196,7 +196,7 @@ include ('../Admin/include/connection.php');
 									while($fet=mysqli_fetch_assoc($run)){
 									?>
 									<li><a href="./category.php?ctgid=<?php echo $fet['ctgid']; ?>">
-									<?php echo $fet['ctgname']; ?><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+									<?php echo $fet['ctgname']; ?><i class="fa fa-angle-right" aria-hidden="false"></i></a>
 										<ul class="sub-category">
 											<?php 
 											$myid=$fet['ctgid'];

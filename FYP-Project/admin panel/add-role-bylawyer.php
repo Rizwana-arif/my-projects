@@ -1,10 +1,10 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
-$lawyer=$_SESSION['email'];
+$lawyer=$_SESSION['lawyer_email'];
 if(isset($_POST['sub'])){
     $role=mysqli_real_escape_string($conn,$_POST['role']);
     $access_user=mysqli_real_escape_string($conn,$_POST['access_user']);

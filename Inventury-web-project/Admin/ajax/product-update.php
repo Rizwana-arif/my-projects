@@ -36,7 +36,7 @@
         if($mymsg=="right"){
             $dpic=unserialize($fet['pfile']);
             foreach($dpic as $key=>$p){
-                unlink("./product-imgs/".$p);
+                unlink("../product-imgs/".$p);
              }
         }
         if($mymsg=="right"){
@@ -52,12 +52,11 @@
               // echo "<script>alert ('Data has been updated')</script>";
                
              }else{
-                echo "<script>alert ('Product has been updated')</script>";
+                echo 1;
              }
     
          }else{
-          echo "<script>alert ('Product has been updated also updated images')</script>";
-          header("Refresh:0, url=./view-product.php");
+          echo 2;
          }
      }
      else{
@@ -67,10 +66,9 @@
         $run=mysqli_query($conn,$sql);
         if($run){
           
-          echo "<script>alert ('Product has been updated but U dont updated images')</script>";
-            header("Refresh:0, url=./view-product.php"); 
+          echo 3;
         }else{
-            echo "<script>alert ('Product has not been updated')</script>";
+            echo 4;
           }
      }
 ?>

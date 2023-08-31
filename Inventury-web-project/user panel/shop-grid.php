@@ -1,5 +1,10 @@
 <?php
 include ('../Admin/include/connection.php');
+session_start();
+if(empty($_SESSION['email'])){
+  header("location:../Admin/login.php");
+}
+@$email=$_SESSION['email'];
 include ('./include/header2.php');
 ?>
 		
@@ -121,9 +126,24 @@ include ('./include/header2.php');
 												<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
 												<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
 											</div>
+											<form id="cartform">
+											<input id="p_id" type="hidden" class="form-control" name="p_id" 
+											value="<?php echo $pfet['pid'];  ?>" >
+											<input id="p_name" type="hidden" class="form-control" name="p_name" 
+											value="<?php echo $pfet['pname'];  ?>" >
+											<input id="p_price" type="hidden" class="form-control" name="p_price" 
+											value="<?php echo $pfet['sprice'];  ?>" >
+											<input id="p_code" type="hidden" class="form-control" name="p_code" 
+											value="<?php echo $pfet['pcode'];  ?>" >
+											<input id="p_pic" type="hidden" class="form-control" name="p_pic" 
+											value="<?php echo $pfet['pfile'];  ?>" >
+											<input id="email" type="hidden" class="form-control" name="email" 
+											value="<?php echo $email;  ?>" >
+
 											<div class="product-action-2">
-												<a title="Add to cart" href="#">Add to cart</a>
+												<a title="Add to cart" id="addtocart">Add to cart</a>
 											</div>
+										</form>
 										</div>
 									</div>
 									<div class="product-content">
@@ -279,5 +299,58 @@ include ('./include/header2.php');
 				</div>
 			</div>
 			<!-- Modal end -->
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+   $(document).ready(function(){
+    $(document).on("click", "#addtocart", function(e) {
+        var form = $(this).closest("#cartform");
+        var p_id = form.find("#p_id").val();
+        var p_name = form.find("#p_name").val();
+        var p_price = form.find("#p_price").val();
+        var p_code = form.find("#p_code").val();
+        var p_pic = form.find("#p_pic").val();
+        var email = form.find("#email").val();
+
+            $.ajax({
+               url:"./cart.php",
+               method:"POST",
+               data:{
+				p_id:p_id,
+				p_name : p_name,
+				p_price: p_price,
+				p_code: p_code,
+				p_pic : p_pic,
+				email: email,
+				 },
+               success:function(val){
+				
+                       if(val==1){
+                         alert("Plz login first");
+                         $("form").trigger("reset");
+						 window.location="../Admin/login.php";
+                        
+                       }else if(val==2){
+                        alert("Cart Category already exist");
+                       }else if(val==3){
+                        alert("Successfully added into cart");
+                       }else{
+						alert("Failed not inserted");
+					   }
+               } 
+			  
+            
+          
+    });
+       
+    });
+});
+
+
+
+
+
+
+
 		
+  </script>
 		<?php include ('./include/footer.php');

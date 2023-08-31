@@ -33,6 +33,7 @@ include ("./include/sidebar.php");
                       <button class="btn btn-primary" onclick="location.href='./view-product.php'">View Product</button>
                     </div>
                     <div class="card-body">
+                    <input type="hidden" class="form-control" name="pid"  value="<?php echo $fet['pid']; ?>">
                     <div class="form-group">
                     <label>Select Category</label>
                     <select name="pctg" class="form-control ml-0"  >
@@ -86,8 +87,6 @@ include ("./include/sidebar.php");
                         <label>product Name</label>
                         <input type="text" class="form-control" name="pname" required=""
                         value="<?php echo $fet['pname'] ?>">
-                        <input type="hidden" class="form-control" name="pid" 
-                        value="<?php echo $fet['pid'] ?>">
                       </div>
                       <div class="form-group mb-0">
                         <label>Product Description</label>
@@ -160,28 +159,28 @@ include ("./include/sidebar.php");
             e.preventDefault();
           var myData=new FormData(data);
           $.ajax({
-             url:"./ajax/category-update.php",
+             url:"./ajax/product-update.php",
              method:"POST",
              contentType:false,
              processData:false,
              data:myData,
              success:function(val){
               // alert(val);
-              if(val==1){
-                         alert("Category already exist");
-                         $("form").trigger("reset");
-                       }else if(val==2){
-                        alert("Subcategory alredy exist");
-                       }else if(val==3){
-                        alert("Supplier  already exist");
-                       }else if(val==4){
-                        alert("product of this code  already exist");
-                       }else if(val==5){
-                        alert("Product has  been inserted , Successfully!");
-                       }else{
-                        alert("Product has not been inserted ! plz try again");
-                       }
-             }  
+                     if(val==1){
+                       alert("Product has been updated also Images Updated");
+                       $("form").trigger("reset");
+                   window.location="./view-product.php";
+
+                     }else if(val==3)
+                     {
+                      alert("Product has been updated But images not updated");
+                      $("form").trigger("reset");
+                   window.location="./view-product.php";
+                     }
+                     else{
+                      alert("Product has not been updated");
+                     }
+             }   
           
           });
        });

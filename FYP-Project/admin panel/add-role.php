@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if( empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
 if(isset($_POST['sub'])){
@@ -74,7 +74,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Role</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Role</button>
       </div>
       </div>
     
@@ -113,59 +113,78 @@ include ('./include/sidebar.php');
  <!-- Modal end of add cases -->
 
 <!-- start table of case -->
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
+<body>
+    <!--wrapper-->
+    <div class="wrapper">
+
+
+        <!--end header -->
+        <!--start page wrapper -->
+        <div class="page-wrapper">
+
+            <!--end breadcrumb-->
+
+           
+            <div class="card">
+                <div class="card-body">
+                     <div class="row">
+                        <div class="col-6">
+                        <h3>List of Role</h3>
+                        </div>
+                        <div class="col-6">
+                        <a class="btn btn-sm " href="./add-lawyers.php" style="margin-left: 62%;        background-color: #000;color: #ddd;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        class="fa fa-user-plus"></i>Add New</a>
+                        </div>
+                        <!-- <div class="card-header">
                             <h6>View Role Details</h6>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add Role
-</button>
+</button> -->
                             </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
+                  
+                     </div>
+                    <div class="table-responsive">
+                    
+                        <table id="example2" class="table table-striped table-bordered border-3">
+                        <thead>
+            <tr>
+            <th scope="col">Sr.No</th>
                                             <th scope="col">Role Name</th>
                                             <th scope="col">Role Description</th>
                                             <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `role-rec` ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['roleid']; ?></th>
+            </tr>
+        </thead>
+       
+                        <tbody>
+                        <?php
+       $ssql="SELECT * FROM `role-rec` ";
+        $run=mysqli_query($conn,$ssql);
+        while($fet=mysqli_fetch_assoc($run)){
+        ?>
+                          
+       
+       <tr>
+       <th><?php echo $fet['roleid']; ?></th>
                                             <td><?php echo $fet['rolen']; ?></td>
                                             <td><?php echo $fet['descrip']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis"></i>
 
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-role.php?roleid=<?php echo $fet['roleid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-role.php?roleid=<?php echo $fet['roleid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
-
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+           
+           <td class="text-right">
+           <a class="btn btn-sm btn-success" href="./update-role.php?roleid=<?php echo $fet['roleid']; ?>"><i class="fa fa-edit"></i>Edit</a>
+            <a class="btn btn-sm btn-danger" href="./delete-role.php?roleid=<?php echo $fet['roleid']; ?>"><i class="fa-solid fa-trash"></i></a>
+           </td>
+          </tr>
+      
+          <?php } ?>
+               </tbody>
+                     </table>
                     </div>
-                    <!-- end table of case -->
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
 </body>
-</html>
 <?php 
 include ('./include/footer.php');
 ?>

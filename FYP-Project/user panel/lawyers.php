@@ -6,7 +6,24 @@ session_start();
 // } 
 include ('./include/header.php');
 ?>
-            
+      <style>
+   .team .team-text .btnnn {
+    color: #ffffff;
+    border: 2px solid #aa9166;
+    border-radius: 0;
+    padding: 5px 30px 5px 30px;
+
+}
+
+.team .team-text .btnnn:hover {
+    color: #ffffff;
+    background: #aa9166;
+}
+.team .team-text p {
+    margin-bottom: 7px;
+    color: #999999;
+}
+   </style>         
             
             <!-- Page Header Start -->
             <div class="page-header">
@@ -53,8 +70,6 @@ include ('./include/header.php');
             </div>
             <!-- About End -->
 
-
-            <!-- Team Start -->
             <div class="team">
                 <div class="container">
                     <div class="section-header">
@@ -69,12 +84,12 @@ include ('./include/header.php');
                         <div class="col-lg-3 col-md-6">
                             <div class="team-item">
                                 <div class="team-img">
-                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/profile/' . $fet['pfile']; ?>" alt="Team Image">
+                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>" alt="Team Image">
                                 </div>
                                 <div class="team-text">
-                                    <h2>Adam Phillips</h2>
+                                    <h2><?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?></h2>
                                     <p>Business Consultant</p>
-                                    <a href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-white bg-white form-control" name="sub">Profile </button></a>
+                                    <a class="btnnn " href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>">  Profile</a>
                                     <div class="team-social">
                                         <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
                                         <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>

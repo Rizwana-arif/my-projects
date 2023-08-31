@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2023 at 08:09 AM
+-- Generation Time: Aug 31, 2023 at 06:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -46,15 +46,16 @@ INSERT INTO `act-rec` (`actid`, `act`) VALUES
 --
 
 CREATE TABLE `add-case-bylawyers` (
-  `caid` bigint(255) NOT NULL,
-  `lawyerid` varchar(255) NOT NULL,
-  `clientn` varchar(255) NOT NULL,
-  `ccnic` varchar(255) NOT NULL,
-  `cmobno` varchar(255) NOT NULL,
-  `pname` varchar(255) NOT NULL,
-  `aname` varchar(255) NOT NULL,
-  `rname` varchar(255) NOT NULL,
-  `arname` varchar(255) NOT NULL,
+  `case_id` bigint(255) NOT NULL,
+  `l_name` varchar(255) NOT NULL,
+  `case_condition` varchar(255) NOT NULL,
+  `client_name` varchar(255) NOT NULL,
+  `client_email` varchar(255) NOT NULL,
+  `mob_no` varchar(255) NOT NULL,
+  `petitioner_name` varchar(255) NOT NULL,
+  `adv_name` varchar(255) NOT NULL,
+  `respondent_name` varchar(255) NOT NULL,
+  `respondent_adv` varchar(255) NOT NULL,
   `pro` varchar(255) NOT NULL,
   `dis` varchar(255) NOT NULL,
   `teh` varchar(255) NOT NULL,
@@ -83,16 +84,10 @@ CREATE TABLE `add-case-bylawyers` (
 -- Dumping data for table `add-case-bylawyers`
 --
 
-INSERT INTO `add-case-bylawyers` (`caid`, `lawyerid`, `clientn`, `ccnic`, `cmobno`, `pname`, `aname`, `rname`, `arname`, `pro`, `dis`, `teh`, `court`, `jname`, `caset`, `ccat`, `csub`, `cno`, `cdate`, `refno`, `rdate`, `pstation`, `fno`, `fdate`, `fnum`, `fidate`, `atype`, `us`, `ldate`, `ndate`, `ph`) VALUES
-(1, '', '21', '26', '28', 'Libby Rodriguez', 'Caleb Stokes', 'Ima Greer', 'Alexis Bender', '2', '2', '2', '1', 'Zoe Norman', '5', '', '1', '36', '2020-12-31', '18', '1991-11-30', 'Jaranwala', '56', '1995-08-13', '54', '1973-03-17', 'LHR', 'Et exercitationem ea', '1974-01-16', '2016-11-03', 'Voluptatum voluptas '),
-(2, '', '28', '28', '24', 'Vera Sutton', 'Vance Hodges', 'Beck Espinoza', 'Teegan Gamble', '2', '1', '2', '1', 'Ocean Waters', '5', '', '1', '83', '1991-08-20', '92', '1990-11-06', 'nshataabad', '81', '1976-09-13', '32', '2017-08-05', 'FSD', 'Nostrum velit id mo', '1980-03-19', '1981-09-20', 'Ea do sapiente irure'),
-(3, '31', '28', '28', '24', 'Megan Howe', 'Dillon Francis', 'Karleigh Vinson', 'Kelsey Owen', '2', '2', '1', '1', 'Isaiah Stark', '5', '', '2', '14', '2007-01-21', '15', '1988-07-01', 'Jaranwala', '16', '2019-11-26', '44', '2004-06-10', 'Gujranwala', 'Impedit duis nobis ', '1991-05-06', '2021-06-18', 'Et magna aliquid id '),
-(4, '31', '28', '26', '24', 'Quon Buck', 'Raphael Chen', 'Piper Bruce', 'Alma Melton', '1', '2', '2', '3', 'Constance Cook', '4', '', '2', '23', '1993-11-24', '80', '2004-09-22', 'nshataabad', '12', '1981-05-12', '97', '1997-05-04', 'FSD', 'Dignissimos reprehen', '1996-05-01', '2001-10-05', 'Nam autem quo offici'),
-(5, '31', '28', '21', '26', 'Akeem Berg', 'Aladdin Walters', 'Gretchen Perkins', 'Zachery Gardner', '2', '2', '2', '1', 'Shad Cantu', '4', '', '2', '33', '1993-06-27', '31', '2020-10-26', 'shah kout', '93', '1985-05-19', '55', '1992-04-21', 'LHR', 'Voluptatibus dolorum', '2023-02-12', '1993-01-18', 'Eaque corporis error'),
-(6, '31', '21', '24', '28', 'Ian White', 'Magee Stafford', 'Lyle Mayer', 'Zachery Dominguez', '2', '1', '1', '3', 'Emerald Nolan', '5', '6', '1', '13', '1978-05-18', '4', '2003-09-02', 'Jaranwala', '30', '2017-10-15', '49', '1972-03-15', 'Sargodha', 'Expedita laboris ver', '1982-03-05', '1980-11-14', 'Numquam magna molest'),
-(7, '29', '12', '12', '12', 'Zeph Hurst', 'Blythe Graves', 'Adria Hawkins', 'Lilah Poole', '1', '2', '2', '1', 'Lareina Gibson', '5', '4', '2', '33', '2013-06-20', '90', '1992-10-18', 'shah kout', '75', '1981-09-10', '408', '1970-02-10', 'Sargodha', 'Eiusmod sed eu volup', '2012-09-22', '1984-09-07', 'Similique dignissimo'),
-(8, '29', '12', '12', '12', 'Jena Merritt', 'Medge Buchanan', 'Orli Bowman', 'Dale Meyer', '2', '2', '2', '1', 'Keiko Barry', '5', '6', '1', '73', '2006-09-21', '34', '2003-03-07', 'shah kout', '9', '1984-03-30', '197', '1990-06-29', 'LHR', 'Voluptatibus minima ', '1993-07-19', '1998-02-15', 'Aut quis rerum molli'),
-(9, '29', '12', '12', '12', 'Lance Compton', 'Xenos Burnett', 'Dennis Velasquez', 'Britanni Norris', '1', '2', '2', '1', 'Robert Phillips', '4', '4', '1', '31', '2022-10-09', '76', '1997-07-23', 'Jaranwala', '82', '1974-11-01', '412', '1985-08-24', 'LHR', 'Placeat deserunt eo', '1983-11-18', '1996-06-21', 'Saepe fugiat id dol');
+INSERT INTO `add-case-bylawyers` (`case_id`, `l_name`, `case_condition`, `client_name`, `client_email`, `mob_no`, `petitioner_name`, `adv_name`, `respondent_name`, `respondent_adv`, `pro`, `dis`, `teh`, `court`, `jname`, `caset`, `ccat`, `csub`, `cno`, `cdate`, `refno`, `rdate`, `pstation`, `fno`, `fdate`, `fnum`, `fidate`, `atype`, `us`, `ldate`, `ndate`, `ph`) VALUES
+(12, '44', 'Processing', '24', '24', '24', 'Brendan Palmer', 'Cade Carroll', 'Hilel Chen', 'Earum odit alias cul', '1', '1', '2', '1', 'Kareem Washington', '5', '4', '3', '30', '1977-11-22', '34', '1972-07-21', 'Jaranwala', '59', '1976-04-29', '560', '2009-03-25', 'Sargodha', 'Eius quia commodo fu', '2004-03-22', '2004-02-08', 'In consequatur cons'),
+(14, '44', 'Wining', '24', '24', '24', 'Tasha Garner', 'Luke Porter', 'Briar Donaldson', 'Dolorem atque in ut ', '1', '2', '1', '3', 'Gay Chambers', '5', '7', '3', '21', '1991-11-19', '73', '1973-03-12', 'nshataabad', '49', '1988-06-17', '253', '1987-08-29', 'Gujranwala', 'Perspiciatis quia b', '1992-05-10', '2005-07-25', 'Aut vitae accusamus '),
+(15, '44', 'Losing', '24', '24', '24', 'Emi Owen', 'Naomi Pruitt', 'Beau Mann', 'Consequatur corpori', '1', '2', '1', '3', 'Graiden Moody', '4', '5', '3', '49', '2004-06-07', '9', '2005-07-10', 'Jaranwala', '28', '2008-04-30', '375', '1971-05-18', 'Gujranwala', 'Autem ullam tenetur ', '2002-04-02', '1995-06-23', 'Ipsa non molestias ');
 
 -- --------------------------------------------------------
 
@@ -144,24 +139,12 @@ CREATE TABLE `appointment-rec` (
 --
 
 INSERT INTO `appointment-rec` (`appoinid`, `client_name`, `client_cnic`, `gender`, `contact_number`, `Ref_Name`, `Ref_No`, `client_email`, `state`, `district`, `full_address`, `description`, `case_category`, `lawyer_name`, `datetime`, `statuss`) VALUES
-(29, 'ali', '88', 'male', '60672468723', 'Barclay Manning', '82', 'ali@gmail.com', 'shah kout', 'FSD', 'Ullam incididunt nih', 'Optio soluta ad max', '4', '47', '1985-02-18T19:29', 'unaccepted'),
-(30, 'ali', '17', 'female', '60672468723', 'Madison Rodgers', '9', 'ali@gmail.com', 'shah kout', 'Sargodha', 'Ullam incididunt nih', 'Ut deserunt reprehen', '5', '46', '1971-07-06T08:31', 'unaccepted'),
-(31, 'ali', '56', 'female', '60672468723', 'Rosalyn Bryant', '14', 'ali@gmail.com', 'shah kout', 'Sargodha', 'Ullam incididunt nih', 'Sunt ipsum maiores', 'Choose Case Category', '44', '2004-10-05T03:52', 'unaccepted'),
-(32, 'sana', '97', 'male', '21623762776', 'Brittany Holden', '96', 'sana@gmail.com', 'nshataabad', 'LHR', 'Excepturi veritatis ', 'Libero molestiae ame', '4', '44', '2006-04-13T07:25', 'unaccepted'),
-(33, 'sana', '18', 'female', '21623762776', 'Mia Maxwell', '45', 'sana@gmail.com', 'nshataabad', 'FSD', 'Excepturi veritatis ', 'Nihil earum ut a cum', '4', '45', '2000-12-09T09:17', 'unaccepted'),
-(34, 'sana', '23', 'male', '21623762776', 'Chava England', '30', 'sana@gmail.com', 'Jaranwala', 'Gujranwala', 'Excepturi veritatis ', 'Tempor sequi ducimus', '5', '46', '2003-09-10T21:29', 'unaccepted'),
-(35, 'sana', '85', 'female', '21623762776', 'Aladdin Odom', '26', 'sana@gmail.com', 'shah kout', 'LHR', 'Excepturi veritatis ', 'Qui natus debitis es', '5', '47', '1986-07-23T10:26', 'accept'),
-(36, 'sana', '5', 'female', '21623762776', 'Finn Skinner', '4', 'sana@gmail.com', 'shah kout', 'Choose district', 'Excepturi veritatis ', 'Molestiae omnis vita', '4', '48', '1977-07-01T05:45', 'unaccepted'),
-(37, 'sana', '53', 'male', '21623762776', 'Isaac Calhoun', '67', 'sana@gmail.com', 'shah kout', 'Gujranwala', 'Excepturi veritatis ', 'Incidunt quis offic', 'Choose Case Category', '49', '1991-10-06T21:17', 'unaccepted'),
-(38, 'ali', '100', 'female', '60672468723', 'Wyatt Oliver', '76', 'ali@gmail.com', 'nshataabad', 'Sargodha', 'Ullam incididunt nih', 'Aliquam saepe qui et', '5', '45', '2018-12-18T07:26', 'accept'),
-(39, 'ali', '80', 'male', '60672468723', 'Honorato Winters', '15', 'ali@gmail.com', 'Jaranwala', 'LHR', 'Ullam incididunt nih', 'Mollit sunt sit cons', '4', '48', '2007-07-17T05:09', 'unaccepted'),
-(40, 'ali', '49', 'male', '60672468723', 'Amanda Lara', '64', 'ali@gmail.com', 'shah kout', 'FSD', 'Ullam incididunt nih', 'Ut laborum qui sit ', '5', '49', '1997-02-12T10:20', 'accept'),
-(41, 'Abdul', '35', 'male', '50878786766', 'Conan Guerra', '89', 'abdul@gmail.com', 'nshataabad', 'FSD', 'Voluptatum dolor est', 'Nihil rerum dolores ', '5', '44', '1999-12-17T07:36', 'unaccepted'),
-(42, 'Abdul', '13', 'male', '50878786766', 'Colt Rowland', '34', 'abdul@gmail.com', 'Jaranwala', 'Choose district', 'Voluptatum dolor est', 'Maiores non excepteu', '5', '45', '1984-08-02T07:37', 'unaccepted'),
-(43, 'Abdul', '69', 'male', '50878786766', 'Evangeline Kemp', '47', 'abdul@gmail.com', 'nshataabad', 'FSD', 'Voluptatum dolor est', 'Qui culpa repellendu', '5', '46', '2011-10-25T10:14', 'accept'),
-(44, 'Abdul', '13', 'female', '50878786766', 'Isadora Morrison', '58', 'abdul@gmail.com', 'nshataabad', 'FSD', 'Voluptatum dolor est', 'Odit inventore velit', '5', '47', '2023-10-15T18:31', 'accept'),
-(45, 'Abdul', '83', 'female', '50878786766', 'Graiden Paul', '48', 'abdul@gmail.com', 'shah kout', 'FSD', 'Voluptatum dolor est', 'Harum quis sed corpo', 'Choose Case Category', '48', '2021-02-08T05:04', 'unaccepted'),
-(46, 'Abdul', '21', 'male', '50878786766', 'Nola Grant', '33', 'abdul@gmail.com', 'shah kout', 'FSD', 'Voluptatum dolor est', 'Adipisicing voluptat', '5', '49', '1976-03-21T01:28', 'accept');
+(49, 'sana', '10', 'female', '21623762776', 'Vera Wilcox', '77', 'sana@gmail.com', 'nshataabad', 'FSD', 'Excepturi veritatis ', 'Magna laudantium au', '5', '44', '1976-03-15T13:01', 'accept'),
+(50, 'sana', '10', 'male', '21623762776', 'Briar Raymond', '88', 'sana@gmail.com', 'Jaranwala', 'Sargodha', 'Excepturi veritatis ', 'Sed aut quo adipisic', '4', '44', '1980-06-12T08:36', 'accept'),
+(51, 'sana', '21', 'female', '21623762776', 'Mufutau Solomon', '68', 'sana@gmail.com', 'nshataabad', 'LHR', 'Excepturi veritatis ', 'Autem aliqua Blandi', '5', '44', '1984-12-25T13:58', 'accept'),
+(54, 'Abdul', '88', 'male', '50878786766', 'Karleigh Franco', '50', 'abdul@gmail.com', 'shah kout', 'FSD', 'Voluptatum dolor est', 'Aliqua Rem amet au', '4', '46', '1973-05-09T19:26', 'accept'),
+(57, 'Imran', '19', 'female', '16587487888', 'Nevada Talley', '55', 'imran@gmail.com', 'nshataabad', 'FSD', 'Voluptatibus excepte', 'Reprehenderit ut su', '5', '49', '1972-08-20T09:42', 'accept'),
+(58, 'Imran', '24', 'female', '16587487888', 'Beverly Jarvis', '96', 'imran@gmail.com', 'shah kout', 'Sargodha', 'Voluptatibus excepte', 'Cumque nihil recusan', '5', '49', '1977-05-18T16:24', 'accept');
 
 -- --------------------------------------------------------
 
@@ -301,6 +284,7 @@ INSERT INTO `faqs-rec` (`FAQid`, `que`, `ans`, `date`) VALUES
 
 CREATE TABLE `lawyers-rec` (
   `lawyerid` int(255) NOT NULL,
+  `reg_id` varchar(255) NOT NULL,
   `first_Name` varchar(255) NOT NULL,
   `last_Name` varchar(255) NOT NULL,
   `contact_number` varchar(255) NOT NULL,
@@ -328,13 +312,14 @@ CREATE TABLE `lawyers-rec` (
 -- Dumping data for table `lawyers-rec`
 --
 
-INSERT INTO `lawyers-rec` (`lawyerid`, `first_Name`, `last_Name`, `contact_number`, `cnic`, `lawyer_email`, `password`, `profile_image`, `bar_license`, `university_college`, `degree`, `passing_year`, `full_address`, `city`, `zip_code`, `practice_Length`, `case_handle`, `speciality`, `about`, `agree`, `estatus`, `status`) VALUES
-(44, 'Akbar', 'Raza', '48373882828', 'Esse odio facilis s', 'vysufic@mailinator.com', 'Pa$$w0rd!', 'depositphotos_6963207-stock-photo-businessman-portrait.jpg.280795.jpg', 'images.png.280795.png', 'Hector Miles', 'LLB', '2009', 'Dolore aut consectet', 'Lahore', '8450', '11-15 years', 'a:7:{i:0;s:12:\"Civil matter\";i:1;s:17:\"Commercial matter\";i:2;s:16:\"Construction law\";i:3;s:22:\"Information Technology\";i:4;s:16:\"Religious Matter\";i:5;s:10:\"Labour Law\";i:6;s:6:\"Others\";}', 'Civil law', 'Culpa atque delenit', 'y', 'lawyer', 'approved'),
-(45, 'Raheela', 'shareef', '99746773828', 'Dolore et ipsum max', 'raheela@gmail.com', 'Pa$$w0rd!', 'depositphotos_9222678-stock-photo-female-lawyer.jpg.854900.jpg', 'images.png.854900.png', 'Brock Justice', 'LLM', '2008', 'Qui minim totam pari', 'Faisalabad', '3816', 'Most Senior', 'a:9:{i:0;s:15:\"Criminal matter\";i:1;s:17:\"Writ Jurisdiction\";i:2;s:12:\"Contract law\";i:3;s:17:\"Commercial matter\";i:4;s:16:\"Religious Matter\";i:5;s:10:\"Labour Law\";i:6;s:12:\"Property Law\";i:7;s:15:\"Taxation Matter\";i:8;s:6:\"Others\";}', 'Taxation law', 'Voluptas reprehender', 'y', 'lawyer', 'approved'),
-(46, 'Zohaib', 'Ali', '31343423423', 'Error esse aliquid e', 'zohaib@gmail.com', 'Pa$$w0rd!', 'images.jpg.43015.jpg', 'images.png.43015.png', 'Tanner Foster', 'LLM', '2010', 'Molestias perspiciat', 'Gujranwala', '3860', '11-15 years', 'a:8:{i:0;s:17:\"Writ Jurisdiction\";i:1;s:11:\"Company law\";i:2;s:12:\"Contract law\";i:3;s:17:\"Commercial matter\";i:4;s:16:\"Construction law\";i:5;s:17:\"Investment Matter\";i:6;s:12:\"Property Law\";i:7;s:6:\"Others\";}', 'Investment law', 'Quia animi sed eos ', 'y', 'lawyer', 'approved'),
-(47, 'Sadia', 'Ali', '92837847888', 'Quasi laborum Et Na', 'sadia@gmail.com', 'Pa$$w0rd!', 'lovepik-young-female-lawyer-holding-book-png-image_401877981_wh1200.png.184922.png', 'images.png.184922.png', 'Hop Diaz', 'LLB', '2004', 'Exercitation officia', 'Karachi', '8901', '16-20 years', 'a:9:{i:0;s:15:\"Criminal matter\";i:1;s:12:\"Civil matter\";i:2;s:11:\"Company law\";i:3;s:12:\"Contract law\";i:4;s:17:\"Commercial matter\";i:5;s:16:\"Construction law\";i:6;s:22:\"Information Technology\";i:7;s:16:\"Religious Matter\";i:8;s:10:\"Labour Law\";}', 'Construction law', 'Nostrum sit aut proi', 'y', 'lawyer', 'approved'),
-(48, 'Hassan', 'Zafar', '40627382788', 'Voluptatibus illum ', 'hassan@gmail.com', 'Pa$$w0rd!', 'photo-1560250097-0b93528c311a.jpg.956899.jpg', 'images.png.956899.png', 'Tara Soto', 'LLB', '2021', 'Amet commodi sint e', 'Sargodha', '5727', '16-20 years', 'a:7:{i:0;s:15:\"Criminal matter\";i:1;s:17:\"Writ Jurisdiction\";i:2;s:11:\"Company law\";i:3;s:16:\"Construction law\";i:4;s:22:\"Information Technology\";i:5;s:10:\"Family Law\";i:6;s:12:\"Property Law\";}', 'Criminal law', 'Voluptas in facilis ', 'y', 'lawyer', 'approved'),
-(49, 'Ashar', 'raza', '74865666666', 'Elit velit assumend', 'ashar@gmail.com', 'Pa$$w0rd!', 'depositphotos_58846129-stock-photo-happy-businessman-with-crossed-arms.jpg.978806.jpg', 'images.png.978806.png', 'Buckminster Cole', 'LLB', '2000', 'Sunt dolore similiq', 'Rawalpindi', '9127', '11-15 years', 'a:4:{i:0;s:12:\"Contract law\";i:1;s:22:\"Information Technology\";i:2;s:10:\"Family Law\";i:3;s:6:\"Others\";}', 'Civil law', 'Irure voluptate qui ', 'y', 'lawyer', 'approved');
+INSERT INTO `lawyers-rec` (`lawyerid`, `reg_id`, `first_Name`, `last_Name`, `contact_number`, `cnic`, `lawyer_email`, `password`, `profile_image`, `bar_license`, `university_college`, `degree`, `passing_year`, `full_address`, `city`, `zip_code`, `practice_Length`, `case_handle`, `speciality`, `about`, `agree`, `estatus`, `status`) VALUES
+(44, '', 'Akbar', 'Raza', '48373882828', 'Esse odio facilis s', 'vysufic@mailinator.com', 'Pa$$w0rd!', 'depositphotos_6963207-stock-photo-businessman-portrait.jpg.280795.jpg', 'images.png.280795.png', 'Hector Miles', 'LLB', '2009', 'Dolore aut consectet', 'Lahore', '8450', '11-15 years', 'a:7:{i:0;s:12:\"Civil matter\";i:1;s:17:\"Commercial matter\";i:2;s:16:\"Construction law\";i:3;s:22:\"Information Technology\";i:4;s:16:\"Religious Matter\";i:5;s:10:\"Labour Law\";i:6;s:6:\"Others\";}', 'Civil law', 'Culpa atque delenit', 'y', 'lawyer', 'approved'),
+(46, '', 'Zohaib', 'Ali', '31343423423', 'Error esse aliquid e', 'zohaib@gmail.com', 'Pa$$w0rd!', 'images.jpg.43015.jpg', 'images.png.43015.png', 'Tanner Foster', 'LLM', '2010', 'Molestias perspiciat', 'Gujranwala', '3860', '11-15 years', 'a:8:{i:0;s:17:\"Writ Jurisdiction\";i:1;s:11:\"Company law\";i:2;s:12:\"Contract law\";i:3;s:17:\"Commercial matter\";i:4;s:16:\"Construction law\";i:5;s:17:\"Investment Matter\";i:6;s:12:\"Property Law\";i:7;s:6:\"Others\";}', 'Investment law', 'Quia animi sed eos ', 'y', 'lawyer', 'approved'),
+(47, '', 'Sadia', 'Ali', '92837847888', 'Quasi laborum Et Na', 'sadia@gmail.com', 'Pa$$w0rd!', 'lovepik-young-female-lawyer-holding-book-png-image_401877981_wh1200.png.184922.png', 'images.png.184922.png', 'Hop Diaz', 'LLB', '2004', 'Exercitation officia', 'Karachi', '8901', '16-20 years', 'a:9:{i:0;s:15:\"Criminal matter\";i:1;s:12:\"Civil matter\";i:2;s:11:\"Company law\";i:3;s:12:\"Contract law\";i:4;s:17:\"Commercial matter\";i:5;s:16:\"Construction law\";i:6;s:22:\"Information Technology\";i:7;s:16:\"Religious Matter\";i:8;s:10:\"Labour Law\";}', 'Construction law', 'Nostrum sit aut proi', 'y', 'lawyer', 'approved'),
+(48, '', 'Hassan', 'Zafar', '40627382788', 'Voluptatibus illum ', 'hassan@gmail.com', 'Pa$$w0rd!', 'photo-1560250097-0b93528c311a.jpg.956899.jpg', 'images.png.956899.png', 'Tara Soto', 'LLB', '2021', 'Amet commodi sint e', 'Sargodha', '5727', '16-20 years', 'a:7:{i:0;s:15:\"Criminal matter\";i:1;s:17:\"Writ Jurisdiction\";i:2;s:11:\"Company law\";i:3;s:16:\"Construction law\";i:4;s:22:\"Information Technology\";i:5;s:10:\"Family Law\";i:6;s:12:\"Property Law\";}', 'Criminal law', 'Voluptas in facilis ', 'y', 'lawyer', 'approved'),
+(49, '', 'Ashar', 'raza', '74865666666', 'Elit velit assumend', 'ashar@gmail.com', 'Pa$$w0rd!', 'depositphotos_58846129-stock-photo-happy-businessman-with-crossed-arms.jpg.978806.jpg', 'images.png.978806.png', 'Buckminster Cole', 'LLB', '2000', 'Sunt dolore similiq', 'Rawalpindi', '9127', '11-15 years', 'a:4:{i:0;s:12:\"Contract law\";i:1;s:22:\"Information Technology\";i:2;s:10:\"Family Law\";i:3;s:6:\"Others\";}', 'Civil law', 'Irure voluptate qui ', 'y', 'lawyer', 'approved'),
+(50, '', 'ayesha', 'nasir', '39745544444', 'Esse impedit rerum ', 'ashu@gmail.com', 'Pa$$w0rd!', 'depositphotos_9222678-stock-photo-female-lawyer.jpg.458788.jpg', 'images.png.458788.png', 'Laura Hale', 'LLB', '2013', 'Dolore dolore volupt', 'Faisalabad', '6304', '16-20 years', 'a:8:{i:0;s:15:\"Criminal matter\";i:1;s:11:\"Company law\";i:2;s:16:\"Construction law\";i:3;s:10:\"Family Law\";i:4;s:16:\"Religious Matter\";i:5;s:17:\"Investment Matter\";i:6;s:10:\"Labour Law\";i:7;s:12:\"Property Law\";}', 'Family law', 'Est dolores aut hic', 'y', 'lawyer', 'disapproved'),
+(51, 'LAW-372272', 'Sadia', 'Mobeen', '03186274758', '33100123123', 'sadiaadv@gmail.com', '1234567', 'istockphoto-1159560350-612x612.jpg.220695.jpg', 'images.png.220695.png', 'Toppers law college', 'LLB', '2023', 'gate no.4 champer no.14', 'Faisalabad', '3310', '1-5 years', 'a:6:{i:0;s:15:\"Criminal matter\";i:1;s:12:\"Civil matter\";i:2;s:11:\"Company law\";i:3;s:16:\"Construction law\";i:4;s:10:\"Family Law\";i:5;s:12:\"Property Law\";}', 'Family law', 'hey! im the lawyer', 'y', 'lawyer', 'disapproved');
 
 -- --------------------------------------------------------
 
@@ -361,6 +346,30 @@ CREATE TABLE `members-rec` (
 INSERT INTO `members-rec` (`mid`, `fname`, `prov`, `dist`, `tehs`, `role`, `mobile`, `memail`, `addr`) VALUES
 (1, 'Cheryl Meyer', '1', '1', '2', 'Select Role', 'Consequatur porro ul', 'wikisoly@mailinator.com', 'Esse cupiditate aut'),
 (2, 'Lamar Wallace', '1', '2', '1', '2', 'Voluptatibus officia', 'lybysiwy@mailinator.com', 'Dolor iure voluptas ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment-rec`
+--
+
+CREATE TABLE `payment-rec` (
+  `pay_id` bigint(255) NOT NULL,
+  `u_email` varchar(255) NOT NULL,
+  `Lawyer_id` varchar(255) NOT NULL,
+  `payment` varchar(255) NOT NULL,
+  `receipt` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment-rec`
+--
+
+INSERT INTO `payment-rec` (`pay_id`, `u_email`, `Lawyer_id`, `payment`, `receipt`, `date`) VALUES
+(1, 'sana@gmail.com', '44', '30000', 'images.png.388878.png', '22-08-23'),
+(2, 'sana@gmail.com', '44', '50000', 'images.png.993318.png', '23-08-23'),
+(3, 'sana@gmail.com', '44', '12000', 'images.png.800158.png', '23-08-23');
 
 -- --------------------------------------------------------
 
@@ -427,10 +436,39 @@ CREATE TABLE `query-rec` (
 
 INSERT INTO `query-rec` (`queryid`, `name`, `email`, `mobno`, `query`, `reply`, `reply_by`, `status`, `date`) VALUES
 (1, 'Gretchen Chandler', 'vaduwofape@mailinator.com', '3746237846', 'Voluptatem corporis ', 'Est dolor in vel vol', 'Cullen Bolton', 'replyed', '10-08-23'),
-(2, 'Amber Johnson', 'coluqodemi@mailinator.com', '238748', 'Reiciendis aut quibu', '', '', 'not replyed', '10-08-23'),
 (3, 'Maisie Freeman', 'byqekib@mailinator.com', '4324535', 'Veniam laboriosam ', '', '', 'not replyed', '10-08-23'),
 (4, 'Colin Rodgers', 'gofenyf@mailinator.com', '4234233434', 'Deserunt placeat ve', '', '', 'not replyed', '10-08-23'),
 (5, 'Ross Mccoy', 'foxy@mailinator.com', '34523545345', 'Deserunt molestiae c', '', '', 'not replyed', '10-08-23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rating-lawyer`
+--
+
+CREATE TABLE `rating-lawyer` (
+  `rating_id` bigint(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `lawyer_id` varchar(255) NOT NULL,
+  `stars` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `rating-lawyer`
+--
+
+INSERT INTO `rating-lawyer` (`rating_id`, `email`, `lawyer_id`, `stars`, `comment`) VALUES
+(1, 'sana@gmail.com', '44', '4', 'Duis nesciunt recus'),
+(2, 'sana@gmail.com', '44', '5', 'Quia ipsum quibusdam'),
+(3, 'ali@gmail.com', '47', '4', 'Eos non nihil ut dis'),
+(4, 'ali@gmail.com', '47', '5', 'Nihil magni in quide'),
+(5, 'abdul@gmail.com', '46', '5', 'Quo aut dolor volupt'),
+(6, 'abdul@gmail.com', '46', '4', 'Dolor similique quis'),
+(7, 'abdul@gmail.com', '46', '2', 'Sed quia accusamus e'),
+(8, 'imran@gmail.com', '49', '1', 'Sunt doloribus cillu'),
+(9, 'imran@gmail.com', '49', '4', 'Consectetur aperiam '),
+(10, 'imran@gmail.com', '49', '5', 'Similique vel hic il');
 
 -- --------------------------------------------------------
 
@@ -476,7 +514,7 @@ CREATE TABLE `role-rec` (
 --
 
 INSERT INTO `role-rec` (`roleid`, `rolen`, `descrip`) VALUES
-(2, 'Geraldine Jenkins', 'Lorem ut consectetur'),
+(2, 'Geraldine ', 'Lorem ut consectetur'),
 (3, 'Austin Stephens', 'Praesentium in quasi');
 
 -- --------------------------------------------------------
@@ -534,8 +572,8 @@ INSERT INTO `user-role-rec` (`uroleid`, `uname`, `uemail`, `password`, `cpass`, 
 
 CREATE TABLE `users-rec` (
   `userid` bigint(255) NOT NULL,
-  `first_Name` varchar(255) NOT NULL,
-  `last_Name` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   `user_Email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `contact_number` varchar(255) NOT NULL,
@@ -552,12 +590,10 @@ CREATE TABLE `users-rec` (
 -- Dumping data for table `users-rec`
 --
 
-INSERT INTO `users-rec` (`userid`, `first_Name`, `last_Name`, `user_Email`, `password`, `contact_number`, `image`, `full_address`, `city`, `zip_code`, `agree`, `estatus`, `assign_lawyer`) VALUES
-(23, 'ali', 'raza', 'ali@gmail.com', 'Pa$$w0rd!', '60672468723', 'images.jpg.770619.jpg', 'Ullam incididunt nih', 'Gujranwala', '8020', 'y', 'user', '45'),
-(24, 'sana', 'ali', 'sana@gmail.com', 'Pa$$w0rd!', '21623762776', 'png-transparent-computer-icons-user-avatar-woman-avatar-computer-business-conversation-thumbnail.png.605607.png', 'Excepturi veritatis ', 'Gujrat', '4229', 'y', 'user', '47'),
-(25, 'Abdul', 'Wasi', 'abdul@gmail.com', 'Pa$$w0rd!', '50878786766', 'images.png.809185.png', 'Voluptatum dolor est', 'Gujrat', '3718', 'y', 'user', '46'),
-(26, 'roomi', 'ali', 'roomi@gmail.com', 'Pa$$w0rd!', '49478676666', 'istockphoto-1159560350-612x612.jpg.523952.jpg', 'Et veritatis cumque ', 'Sialkot', '5152', 'y', 'user', ''),
-(27, 'Imran', 'ali', 'imran@gmail.com', 'Pa$$w0rd!', '16587487888', 'istockphoto-1131324870-612x612.jpg.875529.jpg', 'Voluptatibus excepte', 'Karachi', '2541', 'y', 'user', '');
+INSERT INTO `users-rec` (`userid`, `first_name`, `last_name`, `user_Email`, `password`, `contact_number`, `image`, `full_address`, `city`, `zip_code`, `agree`, `estatus`, `assign_lawyer`) VALUES
+(23, 'ali', 'raza', 'ali@gmail.com', 'ali1234$A', '60672468723', 'images.jpg.770619.jpg', 'Ullam incididunt nih', 'Gujranwala', '8020', 'y', 'user', '47'),
+(24, 'sana', 'ali', 'sana@gmail.com', 'Pa$$w0rd!', '03001234567', 'png-transparent-computer-icons-user-avatar-woman-avatar-computer-business-conversation-thumbnail.png.605607.png', 'Excepturi veritatis ', 'Islamabad', '4229', 'y', 'user', '44'),
+(27, 'Imran', 'ali', 'imran@gmail.com', 'Pa$$w0rd!', '16587487888', 'istockphoto-1131324870-612x612.jpg.875529.jpg', 'Voluptatibus excepte', 'Karachi', '2541', 'y', 'user', '49');
 
 --
 -- Indexes for dumped tables
@@ -573,7 +609,7 @@ ALTER TABLE `act-rec`
 -- Indexes for table `add-case-bylawyers`
 --
 ALTER TABLE `add-case-bylawyers`
-  ADD PRIMARY KEY (`caid`);
+  ADD PRIMARY KEY (`case_id`);
 
 --
 -- Indexes for table `admin`
@@ -636,6 +672,12 @@ ALTER TABLE `members-rec`
   ADD PRIMARY KEY (`mid`);
 
 --
+-- Indexes for table `payment-rec`
+--
+ALTER TABLE `payment-rec`
+  ADD PRIMARY KEY (`pay_id`);
+
+--
 -- Indexes for table `province-rec`
 --
 ALTER TABLE `province-rec`
@@ -652,6 +694,12 @@ ALTER TABLE `pstation-rec`
 --
 ALTER TABLE `query-rec`
   ADD PRIMARY KEY (`queryid`);
+
+--
+-- Indexes for table `rating-lawyer`
+--
+ALTER TABLE `rating-lawyer`
+  ADD PRIMARY KEY (`rating_id`);
 
 --
 -- Indexes for table `role-add-bylawyer`
@@ -697,7 +745,7 @@ ALTER TABLE `act-rec`
 -- AUTO_INCREMENT for table `add-case-bylawyers`
 --
 ALTER TABLE `add-case-bylawyers`
-  MODIFY `caid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `case_id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -709,7 +757,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointment-rec`
 --
 ALTER TABLE `appointment-rec`
-  MODIFY `appoinid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `appoinid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `case-category`
@@ -751,13 +799,19 @@ ALTER TABLE `faqs-rec`
 -- AUTO_INCREMENT for table `lawyers-rec`
 --
 ALTER TABLE `lawyers-rec`
-  MODIFY `lawyerid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `lawyerid` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `members-rec`
 --
 ALTER TABLE `members-rec`
   MODIFY `mid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `payment-rec`
+--
+ALTER TABLE `payment-rec`
+  MODIFY `pay_id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `province-rec`
@@ -776,6 +830,12 @@ ALTER TABLE `pstation-rec`
 --
 ALTER TABLE `query-rec`
   MODIFY `queryid` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `rating-lawyer`
+--
+ALTER TABLE `rating-lawyer`
+  MODIFY `rating_id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `role-add-bylawyer`

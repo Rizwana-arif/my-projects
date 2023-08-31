@@ -1,19 +1,20 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['lawyer_email'])){
+if( empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
-$lawyer=$_SESSION['lawyerid'];
+ $mylawyer=$_SESSION['lawyerid'];
 if(isset($_POST['sub'])){
-    $lawyerid=$lawyer;
-    $clientn=mysqli_real_escape_string($conn,$_POST['clientn']);
-    $ccnic=mysqli_real_escape_string($conn,$_POST['ccnic']);
-    $cmobno=mysqli_real_escape_string($conn,$_POST['cmobno']);
-    $pname=mysqli_real_escape_string($conn,$_POST['pname']);
-    $aname=mysqli_real_escape_string($conn,$_POST['aname']);
-    $rname=mysqli_real_escape_string($conn,$_POST['rname']);
-    $arname=mysqli_real_escape_string($conn,$_POST['arname']);
+    $l_name=$_SESSION['lawyerid'];
+    $case_condition=mysqli_real_escape_string($conn,$_POST['case_condition']);
+    $client_name=mysqli_real_escape_string($conn,$_POST['client_name']);
+    $client_email=mysqli_real_escape_string($conn,$_POST['client_email']);
+    $mob_no=mysqli_real_escape_string($conn,$_POST['mob_no']);
+    $petitioner_name=mysqli_real_escape_string($conn,$_POST['petitioner_name']);
+    $adv_name=mysqli_real_escape_string($conn,$_POST['adv_name']);
+    $respondent_name=mysqli_real_escape_string($conn,$_POST['respondent_name']);
+    $respondent_adv=mysqli_real_escape_string($conn,$_POST['respondent_adv']);
     $pro=mysqli_real_escape_string($conn,$_POST['pro']);
     $dis=mysqli_real_escape_string($conn,$_POST['dis']);
     $teh=mysqli_real_escape_string($conn,$_POST['teh']);
@@ -36,7 +37,7 @@ if(isset($_POST['sub'])){
     $ldate=mysqli_real_escape_string($conn,$_POST['ldate']);
     $ndate=mysqli_real_escape_string($conn,$_POST['ndate']);
     $ph=mysqli_real_escape_string($conn,$_POST['ph']);
-    $sql="INSERT INTO `add-case-bylawyers` (`lawyerid`,`clientn` , `ccnic` , `cmobno` , `pname` ,`aname` , `rname`,`arname`,`pro`,`dis`,`teh`,`court`,`jname`,`caset`,`ccat`,`csub`,`cno`,`cdate`,`refno`,`rdate`,`pstation`,`fno`,`fdate`,`fnum`,`fidate`,`atype`,`us`,`ldate`,`ndate`,`ph`) VALUES ('$lawyerid','$clientn','$ccnic','$cmobno','$pname','$aname','$rname','$arname','$pro','$dis','$teh','$court','$jname','$caset','$ccat','$csub','$cno','$cdate','$refno','$rdate','$pstation','$fno','$fdate','$fnum','$fidate','$atype','$us','$ldate','$ndate','$ph')";
+    $sql="INSERT INTO `add-case-bylawyers` (`l_name`,`case_condition`,`client_name` , `client_email` , `mob_no` , `petitioner_name` ,`adv_name` , `respondent_name`,`respondent_adv`,`pro`,`dis`,`teh`,`court`,`jname`,`caset`,`ccat`,`csub`,`cno`,`cdate`,`refno`,`rdate`,`pstation`,`fno`,`fdate`,`fnum`,`fidate`,`atype`,`us`,`ldate`,`ndate`,`ph`) VALUES ('$l_name','$case_condition','$client_name','$client_email','$mob_no','$petitioner_name','$adv_name','$respondent_name','$respondent_adv','$pro','$dis','$teh','$court','$jname','$caset','$ccat','$csub','$cno','$cdate','$refno','$rdate','$pstation','$fno','$fdate','$fnum','$fidate','$atype','$us','$ldate','$ndate','$ph')";
     $run=mysqli_query($conn,$sql);
     if($run){
          echo "<script> alert ('Successfully ! Case has been added....') </script>";
@@ -51,23 +52,42 @@ include ('./include/header.php');
 include ('./include/sidebar.php'); 
 ?>
 <body>
+
     <div class="container-fluid pt-4 px-4 ">
         
-          
+          <div class="row justify-content-center">
                 <div class="bg-light rounded h-100 p-4 w-75">
-                    <h4 class="mb-4 d-flex justify-content-center text-success">Add New Cases</h4>
+                    <h4 class="mb-4 d-flex justify-content-center text-dark">Add New Cases
+                    <a class="btn btn-sm " href="./view-cases-addbylawyer.php" style="margin-left: 62%;        background-color: #000;color: #ddd;"><i
+                        class="fa-solid fa-eye"></i>View Cases</a>
+                    </h4>
                     <form  method="post">
             <div class="row g-4 ">
+            <div class="mb-3 col-lg-6 ">
+                      
+                      <label  class="form-label">Case Condition</label>
+                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="case_condition">
+                          
+                          <option selected>Processing</option>
+                          <option >Wining</option>
+                          <option >Losing</option>
+                      </select>
+                     
+                  </div>
+               
+                  <h5 align="center">Client Information</h5>
                     <div class="mb-3 col-lg-4">
                         <label class="form-label">clients name</label>
-                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="clientn">
+                        <select class="form-select mb-3 form-control" aria-label="Default select example" name="client_name">
                                 <option ></option>
                                 <?php 
-                                $nsql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
+                          
+                                $nsql="SELECT * FROM `users-rec` where `assign_lawyer`='$mylawyer'";
                                 $nrun=mysqli_query($conn,$nsql);
                                 while($nfet=mysqli_fetch_assoc($nrun)){
+                                    print_r($nfet);
                                     ?>
-                                 <option selected value="<?php echo $nfet['clientid'] ?>"><?php echo $nfet['cname']; ?></option>
+                                 <option selected value="<?php echo $nfet['userid'] ?>"><?php echo $nfet['first_name']; ?></option>
 
                                
                             <?php
@@ -77,14 +97,14 @@ include ('./include/sidebar.php');
                     </div>
                   <div class="mb-3 col-lg-4">
                       
-                      <label  class="form-label">Client cnic</label>
-                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="ccnic">
+                      <label  class="form-label">Client Email</label>
+                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="client_email">
                         <?php 
-                         $csql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
+                         $csql="SELECT * FROM `users-rec` where `assign_lawyer`='$mylawyer'";
                         $crun=mysqli_query($conn,$csql);
                         while($cfet=mysqli_fetch_assoc($crun)){
                         ?>
-                        <option selected value="<?php echo $cfet['clientid'] ?>"><?php echo $cfet['ccnic']; ?></option>
+                        <option selected value="<?php echo $cfet['userid'] ?>"><?php echo $cfet['user_Email']; ?></option>
 
                           <?php } ?>
                       </select>
@@ -93,41 +113,41 @@ include ('./include/sidebar.php');
                   <div class="mb-3 col-lg-4">
                       
                       <label  class="form-label">Client Mobile No.</label>
-                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="cmobno">
+                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="mob_no">
                       <?php 
-                        $csql="SELECT * FROM `clients-rec` where `assign_lawyer`='$lawyer'";
+                        $csql="SELECT * FROM `users-rec` where `assign_lawyer`='$mylawyer'";
                         $crun=mysqli_query($conn,$csql);
                         while($cfet=mysqli_fetch_assoc($crun)){
                         ?>
-                         <option selected value="<?php echo $cfet['clientid'] ?>"><?php echo $cfet['mobno']; ?></option>
+                         <option selected value="<?php echo $cfet['userid'] ?>"><?php echo $cfet['contact_number']; ?></option>
 
                           <?php } ?>
                       </select>
                      
                   </div>
-                  <h1 align="center">Case Information</h1>
-                  <h3 align="center">Party Information</h3>
+                  <h5 align="center">Case Information</h5>
+                  <h6 align="center">Party Information</h6>
                         <div class="mb-3 col-lg-6">
                             <label class="form-label" for="pname">Petitioner Name</label>
-                            <input type="text" class="form-control" id="pname" name="pname" oninput="checkname()" />
+                            <input type="text" class="form-control" id="petitioner_name" name="petitioner_name" oninput="checkname()" />
                         <span id="perror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="mb-3 col-lg-6">
                             <label for="cnic" class="form-label">Advocate Name</label>
-                            <input type="text" class="form-control" id="aname" name="aname" placeholder="Petitioner Advocate" oninput="checkadvocate()">
+                            <input type="text" class="form-control" id="adv_name" name="adv_name" placeholder="Petitioner Advocate" oninput="checkadvocate()">
                         <span id="aerror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="mb-3 col-lg-6">
                             <label for="cnic" class="form-label">Respondent Name</label>
-                            <input type="text" class="form-control" id="rname" name="rname" oninput="checkres()">
+                            <input type="text" class="form-control" id="respondent_name" name="respondent_name" oninput="checkres()">
                         <span id="rerror" style="color:red;font-size:10px"></span>
                         </div>
                         <div class="mb-3 col-lg-6">
                             <label for="phoneno" class="form-label">Advocate Name</label>
-                            <input type="text" class="form-control" id="arname" name="arname" placeholder="Respondent Advocate" oninput="checkresasdv()">
+                            <input type="text" class="form-control" id="respondent_adv" name="respondent_adv" placeholder="Respondent Advocate" oninput="checkresasdv()">
                         <span id="aderror" style="color:red;font-size:10px"></span>
                         </div>
-                    <h3 align="center">Area</h3>
+                    <h5 align="center">Area</h5>
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">Province</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="pro">
@@ -173,7 +193,7 @@ include ('./include/sidebar.php');
                             ?>
                             </select>
                         </div>
-                    <h3 align="center">Court</h3>
+                    <h5 align="center">Court</h5>
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">Court Name</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="court">
@@ -193,7 +213,7 @@ include ('./include/sidebar.php');
                             <label for="cnic" class="form-label">Judge</label>
                             <input type="text" class="form-control" id="jname" name="jname" oninput="checkjudge()">
                         </div>
-                    <h3 align="center">Case</h3>
+                    <h5 align="center">Case</h5>
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">Case Type</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="caset">
@@ -247,7 +267,7 @@ include ('./include/sidebar.php');
                             <label for="phoneno" class="form-label">Case Date</label>
                             <input type="date" class="form-control" id="cdate" name="cdate" >
                         </div>
-                    <h3 align="center">Registeration</h3>
+                    <h5 align="center">Registeration</h5>
                         <div class="mb-3 col-lg-6">
                             <label for="phoneno" class="form-label">CNR/Refrence Number</label>
                             <input type="number" class="form-control" id="refno" name="refno" oninput="checkrefno()">
@@ -256,7 +276,7 @@ include ('./include/sidebar.php');
                             <label class="form-label" for="password">Registeration Date</label>
                             <input type="date" class="form-control" id="rdate" name="rdate" />
                        </div>
-                    <h3 align="center">FIR Number</h3>
+                    <h5 align="center">FIR Number</h5>
                         <div class="mb-3 col-lg-4">
                       
                             <label  class="form-label">Police Station</label>
@@ -276,7 +296,7 @@ include ('./include/sidebar.php');
                             <label class="form-label" for="password">FIR Date</label>
                             <input type="date" class="form-control" id="fdate" name="fdate" />
                        </div>
-                    <h3 align="center">Filling Number</h3>
+                    <h5 align="center">Filling Number</h5>
                        <div class="mb-3 col-lg-6">
                             <label class="form-label" for="fnum">File Number</label>
                             <input type="number" class="form-control" id="fnum" name="fnum" oninput="checkfnumber()"/>
@@ -285,7 +305,7 @@ include ('./include/sidebar.php');
                             <label class="form-label" for="password">File Date</label>
                             <input type="date" class="form-control" id="fidate" name="fidate" />
                        </div>
-                    <h3 align="center" >ACT</h3>
+                    <h5 align="center" >ACT</h5>
                         <div class="mb-3 col-lg-6">
                         <label class="form-label">Act Type</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="atype">
@@ -299,7 +319,7 @@ include ('./include/sidebar.php');
                             <label class="form-label" for="password">Under Section</label>
                             <input type="text" class="form-control" id="us" name="us" oninput="checksection()"/>
                        </div>
-                    <h3 align="center">Case Hearing</h3>
+                    <h5 align="center">Case Hearing</h5>
                        <div class="mb-3 col-lg-4">
                             <label class="form-label" for="password">Last Date</label>
                             <input type="date" class="form-control" id="ldate" name="ldate" />
@@ -312,11 +332,11 @@ include ('./include/sidebar.php');
                             <label class="form-label" for="password">Purpose Of Hearing</label>
                             <input type="text" class="form-control" id="ph" name="ph" oninput="checkhearing()"/>
                        </div>
-                        <button type="submit" class="btn btn-primary bg-success form-control" name="sub">Add Case </button>
+                        <button type="submit" class="btn btn-secondary bg-dark form-control" name="sub">Add Case </button>
                         </div>
                     </form>
                 
-            
+                            </div>
             </div>
     </div>
 </body>

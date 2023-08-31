@@ -4,21 +4,7 @@ $supid=$_GET['supid'];
 $sql="SELECT * FROM `supplier-rec` WHERE `supid`='$supid'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
-if(isset($_POST['sub'])){
-    $supname=strtolower(mysqli_real_escape_string($conn,$_POST['supname']));
-    $supemail=mysqli_real_escape_string($conn,$_POST['supemail']);
-    $supnum=mysqli_real_escape_string($conn,$_POST['supnum']);
-    $supdate=date ("m-d-y");
-    $usql="UPDATE `supplier-rec` SET `supname`='$supname', `supemail`='$supemail' ,`supnum`='$supnum', `supdate`='$supdate' WHERE `supid`='$supid'";
-    $urun=mysqli_query($conn,$usql);
-    if ($urun){
-        echo "<script>alert ('Supplier has been updated')</script>";
-        header("Refresh:2, url=./view-supplier.php");
-      }
-      else{
-        echo "<script>alert ('Supplier has not been updated')</script>";
-      }
-}
+
 include ("./include/header.php");
 include ("./include/sidebar.php");
 
@@ -37,7 +23,7 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                       <h4>Update Supplier</h4>
                       <button class="btn btn-primary" onclick="location.href='./view-supplier.php'">View</button>
@@ -46,6 +32,7 @@ include ("./include/sidebar.php");
                       <div class="form-group">
                         <label>Supplier Name</label>
                         <input type="text" class="form-control" name="supname" required="" value="<?php echo $fet['supname']; ?>">
+                        <input type="hidden" class="form-control" name="supid" required="" value="<?php echo $fet['supid']; ?>">
                       </div>
                       <div class="form-group">
                         <label>Supplier Email</label>
@@ -59,7 +46,7 @@ include ("./include/sidebar.php");
                       
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub">Update</button>
+                      <button class="btn btn-primary" name="sub" id="update">Update</button>
                     </div>
                   </form>
                 </div>
@@ -68,7 +55,38 @@ include ("./include/sidebar.php");
 </div>
 </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+  $(document).ready(function(){
+       $("#update").on("click",(e)=>{
+            e.preventDefault();
+          var myData=new FormData(data);
+          $.ajax({
+             url:"./ajax/supplier-update.php",
+             method:"POST",
+             contentType:false,
+             processData:false,
+             data:myData,
+             success:function(val){
+              // alert(val);
+                     if(val==1){
+                       alert("Supplier has been updated");
+                       $("form").trigger("reset");
+                   window.location="./view-supplier.php";
+
+                     }else
+                     {
+                      alert("Supplier has not been updated");
+                     }
+             }  
+          
+          });
+       });
+
+
+  });
+</script>
 <?php 
 include ("./include/footer.php");
 ?>

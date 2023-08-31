@@ -5,7 +5,7 @@
  ?>
  
  <!-- Sidebar Start -->
- <div class="sidebar pe-4 pb-3">
+ <div class="sidebar pe-0 pb-0">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.html" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>LEGAL</h3>
@@ -33,6 +33,8 @@
                         </div>
                     </div>
                     <a href="./users-rec-view.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
+                    <a href="./view-payment-admin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Payments</a>
+
                     <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Lawyers</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -41,7 +43,7 @@
                             <a href="./disapproved-lawyers.php" class="dropdown-item">Disapproved Lawyers</a>
                         </div>
                     </div> -->
-                    <a href="./disapproved-lawyers.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Requests</a>
+                    <!-- <a href="./disapproved-lawyers.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Requests</a> -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Appointment</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -51,15 +53,15 @@
                         </div>
                     </div>
 
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Feedback</a>
+                    <!-- <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Feedback</a> -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="./not-replyed-query-admin.php" class="dropdown-item">Not replyed</a>
+                            <a href="./not-replyed-query.php" class="dropdown-item">Not replyed</a>
                             <a href="./replyed-query.php" class="dropdown-item">Replyed</a>
                         </div>
                     </div>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
+                    <a href="./update-password.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
                     <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
                     <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
@@ -99,6 +101,8 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./view-user-role.php" class="dropdown-item">View User Role</a>
                         </div>
                     </div>
+                    <a href="./view-payment-lawyer.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Payments</a>
+                    <a href="./visiting-card.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>My Visiting Card</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -121,6 +125,7 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./add-pstation.php" class="dropdown-item">Police Station</a>
                             <a href="./add-act.php" class="dropdown-item">Act</a>
                         </div>
+                        <a href="./update-password.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
                         <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
                     </div>
                     <?php }
@@ -191,6 +196,7 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./add-act.php" class="dropdown-item">Act</a>
                         </div>
                         <?php } ?>
+                        <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
                         <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
                     </div>
 
@@ -200,7 +206,18 @@ if($_SESSION['estatus']=="lawyer"){
                     ?>
                       <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>User</a>
                     <a href="./lawyers-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Lawyers History</a>
-                    <a href="./case-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Case History</a>
+                    <a href="./cases-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Case History</a>
+                    <a href="./rating-lawyer.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Rating</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Payments</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="./add-payments.php" class="dropdown-item">Send Payment</a>
+                            <a href="./view-payments.php" class="dropdown-item">View Payment Record</a>
+                        </div>
+                    </div>
+                    <a href="./update-password.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Change Password</a>
+                    <a href="./logout.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Logout</a>
+
 
                     <?php } ?>
                     <!-- <div class="nav-item dropdown">

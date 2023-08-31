@@ -5,8 +5,8 @@ include ('./include/connection.php');
 //     header("location:../admin panel/login.php");
 // }
 if(isset($_POST['sub'])){
-    $first_Name=mysqli_real_escape_string($conn,$_POST['first_Name']);
-    $last_Name=mysqli_real_escape_string($conn,$_POST['last_Name']);
+    $first_name=mysqli_real_escape_string($conn,$_POST['first_name']);
+    $last_name=mysqli_real_escape_string($conn,$_POST['last_name']);
     $user_Email=mysqli_real_escape_string($conn,$_POST['user_Email']);
 	$password=mysqli_real_escape_string($conn,$_POST['password']);
     $contact_number=mysqli_real_escape_string($conn,$_POST['contact_number']);
@@ -22,7 +22,7 @@ if(isset($_POST['sub'])){
     if(in_array($a,$arr)){
         $rand=rand(10000,999999);
         $pic=$image."." .$rand. ".".$a;
-        $sql="INSERT INTO `users-rec` (`first_Name`,`last_Name`,`user_Email`,`password`,`contact_number`,`image`,`full_address`,`city`,`zip_code`,`agree`,`estatus`,`assign_lawyer`) VALUES ('$first_Name','$last_Name','$user_Email','$password','$contact_number','$pic','$full_address','$city','$zip_code','$agree','$estatus','$assign_lawyer')";
+        $sql="INSERT INTO `users-rec` (`first_name`,`last_name`,`user_Email`,`password`,`contact_number`,`image`,`full_address`,`city`,`zip_code`,`agree`,`estatus`,`assign_lawyer`) VALUES ('$first_name','$last_name','$user_Email','$password','$contact_number','$pic','$full_address','$city','$zip_code','$agree','$estatus','$assign_lawyer')";
         $run=mysqli_query($conn,$sql);
         if($run){
             move_uploaded_file($_FILES['image']['tmp_name'],"../admin panel/data/user-img/".$pic);
@@ -84,11 +84,11 @@ section{
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="fname">First Name</label>
-									<input type="text" class="form-control" name="first_Name"  id="first_Name" placeholder="first name">
+									<input type="text" class="form-control" name="first_name"  id="first_name" placeholder="first name">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="lname">Last Name</label>
-									<input type="text" class="form-control" name="last_Name"  id="last_Name" placeholder="last name">
+									<input type="text" class="form-control" name="last_name"  id="last_name" placeholder="last name">
 								</div>
 							</div>
 							<div class="form-row">

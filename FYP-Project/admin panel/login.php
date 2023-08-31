@@ -8,7 +8,9 @@ if(isset($_POST['login'])){
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
 if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
+	$password=$fet['password'];
       $_SESSION['email']=$email;
+	  $_SESSION['password']=$password;
       $_SESSION['estatus']="admin";
       header("location:./index.php");
     }
@@ -19,10 +21,13 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
     
      if(mysqli_num_rows($lrun)==1 && $lfet['estatus']=="lawyer" ){
           $lawyerid=$lfet['lawyerid'];
+		  $password=$lfet['password'];
            $_SESSION['lawyer_email']=$email;
          $_SESSION['estatus']="lawyer";
-		 $_SESSION['first_Name']=$name;
+		 $_SESSION['profile_image']=$image;
+		//  $_SESSION['first_Name']=$name;
          $_SESSION['lawyerid']=$lawyerid;
+		 $_SESSION['password']=$password;
            header("location:./index.php");
          }
         else{
@@ -31,11 +36,16 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
                 $fet=mysqli_fetch_assoc($run);
                 
                 if(mysqli_num_rows($run)==1 && $fet['estatus']=="user" ){
+					$password=$fet['password'];
                       $_SESSION['user_Email']=$email;
-                      $luserid=$fet['userid'];
+                      $userid=$fet['userid'];
+					  $u_name=$fet['first_name'];
+					  $image=$fet['image'];
                     //   $id=$_SESSION['cemail'];
+					$_SESSION['password']=$password;
                       $_SESSION['userid']=$userid;
-					  $_SESSION['first_Name']=$username;
+					  $_SESSION['first_name']=$u_name;
+					  $_SESSION['image']=$image;
                       $_SESSION['estatus']="user";
                       header("location:../user panel/index.php");
                     }else{

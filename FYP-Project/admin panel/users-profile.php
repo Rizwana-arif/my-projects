@@ -25,7 +25,7 @@ include ('./include/sidebar.php');
     padding: 15px;
 }
 .card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 2px 1px 3px 2px rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
 }
 
 .card {
@@ -36,7 +36,7 @@ include ('./include/sidebar.php');
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 2px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
 
@@ -66,7 +66,7 @@ include ('./include/sidebar.php');
     height: 100%!important;
 }
 .shadow-none {
-    box-shadow: none!important;
+    box-shadow: 2px!important;
 }
     </style>
 </head>
@@ -91,18 +91,20 @@ include ('./include/sidebar.php');
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="<?php echo './data/user-img/' . $fet['image']; ?>" alt="User" class="rounded-circle" width="150">
+                       <a href="<?php echo './data/user-img/' . $fet['image']; ?>"> <img src="<?php echo './data/user-img/' . $fet['image']; ?>" alt="User" class="rounded-circle" width="150"></a>
                         <div class="mt-3">
-                          <h4><?php echo $fet['first_Name']; ?></h4>
+                          <h4><?php echo $fet['first_name']; ?></h4>
                           <p class="text-secondary mb-1"><?php echo $fet['full_address']; ?></p>
                           <p class="text-muted font-size-sm"><?php echo $fet['user_Email'] ?></p>
-                          <a href="./update-user-profile.php?userid=<?php echo $fet['userid']; ?>"><button type="submit" class="btn btn-outline-primary" >Edit </button></a>
+                          <a href="./update-user-profile.php?userid=<?php echo $fet['userid']; ?>"><button type="submit" class="btn btn-outline-dark" >Edit </button></a>
+                          <!-- <a href="./update-user-image.php?userid=<?php echo $fet['userid']; ?>"><button type="submit" class="btn btn-outline-dark" >Change Profile</button></a> -->
                           <!-- <button class="btn btn-outline-primary">Message</button> -->
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card mt-3">
+                  
+                  <!-- <div class="card mt-3">
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
@@ -125,7 +127,7 @@ include ('./include/sidebar.php');
                         <span class="text-secondary">bootdey</span>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-md-8">
                   <div class="card mb-3">
@@ -135,7 +137,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['first_Name'] . "  " . $fet['last_Name']; ?>
+                        <?php echo $fet['first_name'] . "  " . $fet['last_name']; ?>
                         </div>
                       </div>
                       <hr>

@@ -7,16 +7,27 @@ if(isset($_POST['login'])){
   $sql="SELECT * FROM `admin` WHERE `email`='$email' and `password`='$password'";
   $run=mysqli_query($conn,$sql);
   $fet=mysqli_fetch_assoc($run);
-  if(mysqli_num_rows($run)==1){
-    if($fet['status']=="admin"){
+  if(mysqli_num_rows($run)==1 && $fet['status']=="admin"){
       $_SESSION['email']=$email;
-      header("location:./index-main.php");
+      header("location:../user panel/index.php");
     }
-    }else{
-      echo "<script> alert ('Invalid Details')</script>";
-  }
+    else{
+      $rsql="SELECT * FROM `users-rec` WHERE `email`='$email' AND `password`='$password'";
+      $rrun=mysqli_query($conn,$rsql);
+      $fet=mysqli_fetch_assoc($rrun);
+      
+      if(mysqli_num_rows($rrun)==1 && $fet['status']=="user" ){
+          
+            echo $_SESSION['email']=$email;
+            echo $_SESSION['status']="user";
+            header("location:../user panel/index.php");
+          }else{
+            echo "<script> alert ('Invalid Details')</script>";
+        }
+    }
 
 }
+
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -88,11 +99,21 @@ if(isset($_POST['login'])){
                     </div>
                   </div>
                  
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" name="login">
-                      Login
+                  <div class="d-flex justify-content-between">
+                    <div class="form-group w-50">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" name="login">
+                        Sign In
+                      </button>
+                    </div>
+
+                  <div class="form-group w-50">
+                    <button class="btn btn-primary btn-lg btn-block" tabindex="4"  
+                    onclick="location.href='../user panel/register.php'">
+                      Sign Up
                     </button>
+                   
                   </div>
+                </div>
                 </form>
 
 

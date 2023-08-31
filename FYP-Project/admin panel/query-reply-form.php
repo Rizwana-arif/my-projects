@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if( empty($_SESSION['lawyer_email'])  ){
+if( empty($_SESSION['lawyer_email']) && empty($_SESSION['email'])  ){
     header("location:./login.php");
 }
 $queryid=$_GET['queryid'];
@@ -44,12 +44,12 @@ $mail->Subject = ($subject);
 $mail->Body = $message;
 
 if ($mail->send()) {
-  $usql="UPDATE `query-rec` SET `status`='replyed' , `reply`='$subject' , `reply_by`='$name'  WHERE `queryid`='$queryid'";
+  $usql="UPDATE `query-rec` SET `status`='replyed' , `reply`='$message' , `reply_by`='$name'  WHERE `queryid`='$queryid'";
   $urun=mysqli_query($conn,$usql);
   if($urun){
   
       echo "<script>alert('Successfully!Mail sent.')</script>";
-      header("Refresh:0, url=./replyed-query.php");
+      header("Refresh:0, url=./index.php");
    }
       
   }else {
@@ -60,6 +60,8 @@ if ($mail->send()) {
 }
 		  
        
+include ('./include/header.php');
+include ('./include/sidebar.php');
 
 
 

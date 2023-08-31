@@ -1,8 +1,7 @@
 <?php 
 include ('./include/connection.php');
-include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if( empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
  $roleid=$_GET['roleid'];
@@ -32,23 +31,55 @@ include ('./include/sidebar.php');
 
 
 
-<div class="container-fluid pt-4 px-4 ">
-        <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update Assigned Role</h4>
-            <form  method="post" >
-                <div class="mb-3 col-lg-4">
-                    <label class="form-label" for="rolen">Role Name</label>
+<style>
+.main-content{
+margin-top : 10%;
+}
+</style>
+<body> 
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="section-body">
+            <div class="row justify-content-center" >
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="card">
+                  <form method="Post" enctype="multipart/form-data">
+                    <div class="card-header justify-content-center" >
+                      <h4 align=center>Rating
+                      <!-- <a href="./viewcategory.php"></a> -->
+                      </h4>
+
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                      <label class="form-label" for="rolen">Role Name</label>
                     <input type="text" class="form-control" id="rolen" name="rolen" value="<?php echo $ufet['rolen']; ?>"/>
-                </div>
-                <div class="mb-3 col-lg-4">
-                    <label class="form-label" for="casetype">Role Description</label>
+                      
+                      </div>
+                      <div class="form-group">
+                      <label class="form-label" for="casetype">Role Description</label>
                     <input type="text" class="form-control" id="descrip" name="descrip" value="<?php echo $ufet['descrip']; ?>"/>
+                      
+                      </div>
+                    </div>
+                    <div class="card-footer text-right ">
+                      <button class="btn btn-dark justify-content-right w-100" name="update"  value="Update">Update</button>
+                    </div>
+                  </form>
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
-                </div>
-            </form>
-        </div>
-</div>
+              
+              </div>
+             
+            </div>
+          </div>
+        </section>
+        
+     
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+
+</body>
 
 <?php include ('./include/footer.php'); ?>

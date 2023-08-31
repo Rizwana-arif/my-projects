@@ -1,9 +1,9 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
-  header("location:../admin panel/login.php");
-}
+// if(empty($_SESSION['email']) && empty($_SESSION['lawyer_email']) && empty($_SESSION['user_Email'])){
+//   header("location:../admin panel/login.php");
+// }
 $lawyerid=$_GET['lawyerid'];
     $sql="SELECT * FROM `lawyers-rec` where `lawyerid`='$lawyerid' ";
     $run=mysqli_query($conn,$sql);
@@ -23,7 +23,7 @@ include ('./include/header.php');
     padding: 15px;
 }
 .card {
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 2px 1px 3px 2px rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
 }
 
 .card {
@@ -34,7 +34,7 @@ include ('./include/header.php');
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: 0 solid rgba(0,0,0,.125);
+    border: 2px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
 
@@ -64,7 +64,7 @@ include ('./include/header.php');
     height: 100%!important;
 }
 .shadow-none {
-    box-shadow: none!important;
+    box-shadow: 2px!important;
 }
     </style>
 </head>
@@ -77,7 +77,7 @@ include ('./include/header.php');
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2><?php echo $fet['name']; ?></h2>
+                            <h2><?php echo $fet['first_Name']; ?></h2>
                         </div>
                     </div>
                 </div>
@@ -89,18 +89,18 @@ include ('./include/header.php');
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="<?php echo '../admin panel/data/profile/' . $fet['pfile']; ?>" alt="Admin" class="rounded-circle" width="150">
+                       <a href="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>"> <img src="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>" alt="Admin" class="rounded-circle" width="150"></a>
                         <div class="mt-3">
-                          <h4><?php echo $fet['name']; ?></h4>
-                          <p class="text-secondary mb-1"><?php echo $fet['quali']; ?></p>
-                          <p class="text-muted font-size-sm"><?php echo $fet['intro'] ?></p>
-                          <a href="./appointment.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-outline-primary" name="sub">Profile </button></a>
-                          <button class="btn btn-outline-primary">Message</button>
+                          <h4><?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?></h4>
+                          <p class="text-secondary mb-1"><?php echo $fet['full_address']; ?></p>
+                          <p class="text-muted font-size-sm"><?php echo $fet['contact_number'];?></p>
+                          <!-- <a href="./update-lawyer-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-outline-primary" >Edit </button></a> -->
+                         
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="card mt-3">
+                  <!-- <div class="card mt-3">
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
@@ -123,7 +123,7 @@ include ('./include/header.php');
                         <span class="text-secondary">bootdey</span>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="col-md-8">
                   <div class="card mb-3">
@@ -133,7 +133,7 @@ include ('./include/header.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['name']; ?>
+                        <?php echo $fet['first_Name'] . " " . $fet['last_Name'];?>
                         </div>
                       </div>
                       <hr>
@@ -142,16 +142,16 @@ include ('./include/header.php');
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['email']; ?>
+                        <?php echo $fet['lawyer_email']; ?>
                         </div>
                       </div>
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">Phone No</h6>
+                          <h6 class="mb-0">Contact_Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['phoneno']; ?>
+                        <?php echo $fet['contact_number']; ?>
                         </div>
                       </div>
                       <hr>
@@ -166,40 +166,12 @@ include ('./include/header.php');
                       <hr>
                       <div class="row">
                         <div class="col-sm-3">
-                          <h6 class="mb-0">State</h6>
+                          <h6 class="mb-0">Speciality</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['state']; ?>
+                        <?php echo $fet['speciality']; ?>
                         </div>
                       </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Qualification</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['quali']; ?>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Experience</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['exp']; ?>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="row">
-                        <div class="col-sm-3">
-                          <h6 class="mb-0">Experience Year</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['expyear']; ?>
-                        </div>
-                      </div>
-
                       <hr>
                       <div class="row">
                         <!-- <div class="col-sm-12">

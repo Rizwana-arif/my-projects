@@ -8,7 +8,24 @@ session_start();
 include ('./include/header.php');
 
 ?>
-            
+   <style>
+   .team .team-text .btnnn , .search: .btn{
+    color: #ffffff;
+    border: 2px solid #aa9166;
+    border-radius: 0;
+    padding: 5px 30px 5px 30px;
+
+}
+
+.team .team-text .btnnn:hover {
+    color: #ffffff;
+    background: #aa9166;
+}
+.team .team-text p {
+    margin-bottom: 7px;
+    color: #999999;
+}
+   </style>
             <!-- Carousel Start -->
             <div id="carousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -264,11 +281,45 @@ include ('./include/header.php');
                         </div>
                     </div>
                 </div>
+                
             </div>
             <!-- Feature End -->
+
+            <!-- Filter lawyer according to case category-->
+            <div class="search">
+                
             
-            
-          
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Search Lawyer</h2>
+                    </div>
+                    <div class="form w-100">
+                    <div class="d-flex justify-content-between">
+                    <div class="form-group w-50">
+                    <label for="category">Case Categories</label>
+									<select id="category" name="category" class="form-control">
+                                    <option value=" " >Choose...</option>
+                                        <?php 
+                                        $sql="SELECT * FROM `lawyers-rec`";
+                                        $run=mysqli_query($conn,$sql);
+                                        while($fet=mysqli_fetch_assoc($run)){
+                                        ?>
+										
+										<option value="<?php echo $fet['lawyerid']; ?>"  ><?php echo $fet['speciality']; ?></option>
+                                        <?php } ?>
+					</select>
+                        
+                    </div>
+
+             
+                </div>
+                        
+                    </div>
+                </div>
+           
+            </div>
+          <!-- end search -->
+
             <!-- Team Start -->
             <div class="team">
                 <div class="container">
@@ -284,12 +335,12 @@ include ('./include/header.php');
                         <div class="col-lg-3 col-md-6">
                             <div class="team-item">
                                 <div class="team-img">
-                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/profile/' . $fet['pfile']; ?>" alt="Team Image">
+                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>" alt="Team Image">
                                 </div>
                                 <div class="team-text">
-                                    <h2>Adam Phillips</h2>
+                                    <h2><?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?></h2>
                                     <p>Business Consultant</p>
-                                    <a href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><button type="submit" class="btn btn-white bg-white form-control" name="sub">Profile </button></a>
+                                    <a class="btnnn " href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>">  Profile</a>
                                     <div class="team-social">
                                         <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
                                         <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
@@ -362,125 +413,44 @@ include ('./include/header.php');
                         <h2>Review From Client</h2>
                     </div>
                     <div class="owl-carousel testimonials-carousel">
+                        <?php 
+                          $sql= "SELECT * FROM `rating-lawyer` r INNER JOIN `lawyers-rec` l ON r.lawyer_id=l.lawyerid INNER JOIN `users-rec` u ON r.email=u.user_Email";
+                            $run = mysqli_query($conn, $sql);
+                          while ($fet = mysqli_fetch_assoc($run)) {
+                              ?>
+                        
                         <div class="testimonial-item">
                             <i class="fa fa-quote-right"></i>
                             <div class="row align-items-center">
                                 <div class="col-3">
-                                    <img src="img/testimonial-1.jpg" alt="">
+                                    <img src="<?php echo '../admin panel/data/user-img/' . $fet['image'] ; ?>" alt="">
                                 </div>
                                 <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
+                                    <h2><?php echo $fet['first_Name']; ?></h2>
+                                    <p> <?php
+    // Get the number of stars from the database result
+    $numStars = intval($fet['stars']);
+    
+    // Define the colors for filled and empty stars
+    $filledStarColor = "#FFD700"; // Gold color
+    $emptyStarColor = "#CCCCCC";  // Light gray color
+    
+    // Loop to display colored star icons
+    for ($i = 1; $i <= 5; $i++) {
+        // Determine the color based on the number of stars
+        $starColor = ($i <= $numStars) ? $filledStarColor : $emptyStarColor;
+        echo '<span style="color: ' . $starColor . ';">★</span>';
+    }
+    ?></p>
                                 </div>
                                 <div class="col-12">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
+                                      <?php echo $fet['comment']; ?>
                                     </p>
                                 </div>
                             </div>
                         </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-2.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-3.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-4.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-1.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-2.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="testimonial-item">
-                            <i class="fa fa-quote-right"></i>
-                            <div class="row align-items-center">
-                                <div class="col-3">
-                                    <img src="img/testimonial-3.jpg" alt="">
-                                </div>
-                                <div class="col-9">
-                                    <h2>Client Name</h2>
-                                    <p>Profession</p>
-                                </div>
-                                <div class="col-12">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam accumsan lacus eget velit
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -611,6 +581,31 @@ include ('./include/header.php');
                 </div>
             </div>
             <!-- Newsletter End -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$(document).ready(function(){
+    filterbycategory();
+    function filterbycategory(casecategory="null"){
+        $.ajax({
+            url: "filter-lawyer.php",
+            type: "POST",
+            data: {category : casecategory},
+            success: function(res){
+            $(".team").html(res);
+            },
+            error: function(xhr, status , error){
+                console.error ("AJAX Error:" , error);
+            }
 
+            
+        })
+    }
+
+    $("#category").on("change" , function(){
+                var d=$("#category").val();
+                filterbycategory(d);
+            })
+})
+    </script>
 
 <?php include('./include/footer.php'); ?>

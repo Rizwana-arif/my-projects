@@ -2,7 +2,7 @@
 include ('./include/connection.php');
 
 session_start();
-if(empty($_SESSION['lawyer_email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
 if(isset($_POST['sub'])){

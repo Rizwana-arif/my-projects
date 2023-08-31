@@ -4,21 +4,6 @@ $subid=$_GET['subid'];
 $sql="SELECT * FROM `sub-category-rec` sb INNER JOIN `category-rec` c ON sb.catname=c.ctgid  WHERE `subid`='$subid'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);
-if(isset($_POST['sub'])){
-    $catname=mysqli_real_escape_string($conn,$_POST['catname']);
-    $subname=strtolower(mysqli_real_escape_string($conn,$_POST['subname']));
-    $subdescrip=mysqli_real_escape_string($conn,$_POST['subdescrip']);
-    $subdate=date ("m-d-y");
-    $usql="UPDATE `sub-category-rec` SET `catname`='$catname' , `subname`='$subname', `subdescrip`='$subdescrip' , `subdate`='$subdate' WHERE `subid`='$subid'";
-    $urun=mysqli_query($conn,$usql);
-    if ($urun){
-        echo "<script>alert ('Subcategory has been updated')</script>";
-        header("Refresh:0, url=./view-sub-category.php");
-      }
-      else{
-        echo "<script>alert ('Subcategory has not been updated')</script>";
-      }
-}
 include ("./include/header.php");
 include ("./include/sidebar.php");
 
@@ -32,13 +17,14 @@ include ("./include/sidebar.php");
             <div class="row justify-content-center">
               <div class="col-12 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="post">
+                  <form id="data">
                     <div class="card-header">
                     
                       <h4>Add SubCategory</h4>
                       
                     </div>
                     <div class="card-body">
+                    <input type="hidden" class="form-control" name="subid"  value="<?php echo $fet['subid']; ?>">
                       <label>Category</label>
                     <select name="catname" value="" class="form-control mb-3" >
                     <option value="<?php echo $fet['ctgid'] ?>"><?php echo $fet['ctgname']; ?></option>
@@ -63,7 +49,7 @@ include ("./include/sidebar.php");
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" name="sub" >Update</button>
+                      <button class="btn btn-primary" name="sub" id="update">Update</button>
                     </div>
                   </form>
                 </div>
@@ -72,7 +58,38 @@ include ("./include/sidebar.php");
 </div>
 </section>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+  $(document).ready(function(){
+       $("#update").on("click",(e)=>{
+            e.preventDefault();
+          var myData=new FormData(data);
+          $.ajax({
+             url:"./ajax/sub-category-update.php",
+             method:"POST",
+             contentType:false,
+             processData:false,
+             data:myData,
+             success:function(val){
+              // alert(val);
+                     if(val==1){
+                       alert("Subcategory has been updated");
+                       $("form").trigger("reset");
+                   window.location="./view-sub-category.php";
+
+                     }else
+                     {
+                      alert("Subcategory has not been updated");
+                     }
+             }  
+          
+          });
+       });
+
+
+  });
+</script>
 <?php 
 include ("./include/footer.php");
 ?>

@@ -23,16 +23,20 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"> -->
     <!-- Libraries Stylesheet -->
     <link href="./lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="./lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-
+    <link href="assets/plugins/datatable/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-extended.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Template Stylesheet -->
     <link href="./css/style.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -129,12 +133,40 @@
                         if($_SESSION['estatus']=="admin"){
                         ?>
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="../img/admin.jpg" alt="" style="width: 40px; height: 40px;">
+                            <img class="rounded-circle me-lg-2" src="./img/admin.jpg" alt="" style="width: 40px; height: 40px;">
                             <span class="d-none d-lg-inline-flex">Admin</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <!-- <a href="./lawyer-profile-login.php" class="dropdown-item">My Profile</a>
                             <a href="#" class="dropdown-item">Settings</a> -->
+                            <?php }
+                            if($_SESSION['estatus']=="lawyer"){
+                                $lawyer=$_SESSION['lawyer_email'];
+                                $sql="SELECT * FROM `lawyers-rec` WHERE `lawyer_email`='$lawyer'";
+                                $run=mysqli_query($conn,$sql);
+                                $fet=mysqli_fetch_assoc($run);
+                            ?>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="<?php echo './data/lawyer-image/' . $fet['profile_image']; ?>" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex"><?php echo $fet['first_Name']; ?></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="./lawyer-profile.php" class="dropdown-item">My Profile</a>
+                            <a href="./update-lawyer.php" class="dropdown-item">Settings</a>
+                            <?php } 
+                            if($_SESSION['estatus']=="user"){
+                                $user=$_SESSION['user_Email'];
+                                $sql="SELECT * FROM `users-rec` WHERE `user_Email`='$user'";
+                                $run=mysqli_query($conn,$sql);
+                                $fet=mysqli_fetch_assoc($run);
+                            ?>
+                               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img class="rounded-circle me-lg-2" src="<?php echo './data/user-img/' . $fet['image']; ?>" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex"><?php echo $fet ['first_name']; ?></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="./users-profile.php" class="dropdown-item">My Profile</a>
+                            <a href="./update-user.php" class="dropdown-item">Settings</a>
                             <?php } ?>
                             <a href="./logout.php" class="dropdown-item">Log Out</a>
                         </div>

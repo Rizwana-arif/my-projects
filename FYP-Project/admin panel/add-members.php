@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['lawyer_email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
 if(isset($_POST['sub'])){
@@ -160,7 +160,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Members</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Members</button>
       </div>
       </div>
     
@@ -186,19 +186,42 @@ include ('./include/sidebar.php');
     
 </script>
 
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Members Detail</h6>
+<body>
+    <!--wrapper-->
+    <div class="wrapper">
+
+
+        <!--end header -->
+        <!--start page wrapper -->
+        <div class="page-wrapper">
+
+            <!--end breadcrumb-->
+
+           
+            <div class="card">
+                <div class="card-body">
+                     <div class="row">
+                        <div class="col-6">
+                        <h3>List of Role</h3>
+                        </div>
+                        <div class="col-6">
+                        <a class="btn btn-sm " href="./add-lawyers.php" style="margin-left: 62%;        background-color: #000;color: #ddd;" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                        class="fa fa-user-plus"></i>Add New</a>
+                        </div>
+                        <!-- <div class="card-header">
+                            <h6>View Role Details</h6>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Members
-</button>
+  Add Role
+</button> -->
                             </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
+                  
+                     </div>
+                    <div class="table-responsive">
+                    
+                        <table id="example2" class="table table-striped table-bordered border-3">
+                        <thead>
+            <tr>
+            <th scope="col">Sr.No</th>
                                             <th scope="col">Full Name</th>
                                             <th >Province</th>
                                             <th>District</th>
@@ -208,17 +231,19 @@ include ('./include/sidebar.php');
                                             <th>Email</th>
                                             <th>Address</th>
                                             <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `members-rec` mr INNER JOIN `province-rec` pr ON mr.prov=pr.pid INNER JOIN `district-rec` dr ON mr.dist=dr.did INNER JOIN `tehsil-rec` tr ON mr.tehs=tr.tid INNER JOIN `role-rec` rr ON mr.role=rr.roleid";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['mid']; ?></th>
+            </tr>
+        </thead>
+       
+                        <tbody>
+                        <?php
+       $ssql="SELECT * FROM `members-rec` mr INNER JOIN `province-rec` pr ON mr.prov=pr.pid INNER JOIN `district-rec` dr ON mr.dist=dr.did INNER JOIN `tehsil-rec` tr ON mr.tehs=tr.tid INNER JOIN `role-rec` rr ON mr.role=rr.roleid";
+        $run=mysqli_query($conn,$ssql);
+        while($fet=mysqli_fetch_assoc($run)){
+        ?>
+                          
+       
+       <tr>
+       <th><?php echo $fet['mid']; ?></th>
                                             <td><?php echo $fet['fname']; ?></td>
                                             <td><?php echo $fet['prov']; ?></td>
                                             <td><?php echo $fet['dist']; ?></td>
@@ -227,28 +252,24 @@ include ('./include/sidebar.php');
                                             <td><?php echo $fet['mobile']; ?></td>
                                             <td><?php echo $fet['memail']; ?></td>
                                             <td><?php echo $fet['addr']; ?></td>
-                                         <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-members.php?mid=<?php echo $fet['mid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-members.php?mid=<?php echo $fet['mid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+           
+           <td class="text-right">
+           <a class="btn btn-sm btn-success" href="./update-members.php?mid=<?php echo $fet['mid']; ?>"><i class="fa fa-edit"></i>Edit</a>
+            <a class="btn btn-sm btn-danger" href="./delete-members.php?mid=<?php echo $fet['mid']; ?>"><i class="fa-solid fa-trash"></i></a>
+           </td>
+          </tr>
+      
+          <?php } ?>
+               </tbody>
+                     </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
 </body>
-</html>
 <?php 
 include ('./include/footer.php');
 ?>

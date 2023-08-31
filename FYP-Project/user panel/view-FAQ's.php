@@ -22,7 +22,7 @@ include ('./include/header.php');
                                 $fsql="SELECT * FROM `FAQs-rec`";
                                 $frun=mysqli_query($conn,$fsql);
                                 while($ffet=mysqli_fetch_assoc($frun)){
-                                    if($c<=5){
+                                    
                             ?>
                             <div id="accordion">
                                 <div class="card">
@@ -41,7 +41,7 @@ include ('./include/header.php');
                             </div>
                             <?php 
                             $c++;
-                        } 
+                       
                     }?>
                            
                         </div>
@@ -49,4 +49,5 @@ include ('./include/header.php');
                 </div>
             </div>
             <!-- FAQs End -->
+          <?php   include ('./include/footer.php'); ?>
 
