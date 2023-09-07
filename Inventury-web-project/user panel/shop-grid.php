@@ -5,6 +5,7 @@ if(empty($_SESSION['email'])){
   header("location:../Admin/login.php");
 }
 @$email=$_SESSION['email'];
+include ('./include/top-header.php');
 include ('./include/header2.php');
 ?>
 		
@@ -304,6 +305,8 @@ include ('./include/header2.php');
    $(document).ready(function(){
     $(document).on("click", "#addtocart", function(e) {
         var form = $(this).closest("#cartform");
+		//if we want to transfer complete form data in ajax page.
+		// var nyform=new FormData(cartform);
         var p_id = form.find("#p_id").val();
         var p_name = form.find("#p_name").val();
         var p_price = form.find("#p_price").val();
@@ -312,17 +315,24 @@ include ('./include/header2.php');
         var email = form.find("#email").val();
 
             $.ajax({
-               url:"./cart.php",
+               url:"./cart-ajax.php",
                method:"POST",
-               data:{
+			   //only used when we fetch image from the form
+			//    contentType: false,
+			//    processData: false,
+              
+			//data is a prdefined function to use for fetching value and store in ajax file,
+			data:{
 				p_id:p_id,
 				p_name : p_name,
 				p_price: p_price,
 				p_code: p_code,
 				p_pic : p_pic,
-				email: email,
+				email: email
 				 },
                success:function(val){
+				
+
 				
                        if(val==1){
                          alert("Plz login first");
@@ -333,10 +343,12 @@ include ('./include/header2.php');
                         alert("Cart Category already exist");
                        }else if(val==3){
                         alert("Successfully added into cart");
+						load_cart_items();
                        }else{
 						alert("Failed not inserted");
 					   }
                } 
+			   
 			  
             
           

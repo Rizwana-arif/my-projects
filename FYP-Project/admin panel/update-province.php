@@ -1,5 +1,9 @@
 <?php 
 include ('./include/connection.php');
+session_start();
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
+    header("location:./login.php");
+}
  $pid=$_GET['pid'];
 $usql="SELECT * FROM `province-rec` WHERE `pid`='$pid'";
 $urun=mysqli_query($conn,$usql);
@@ -24,18 +28,23 @@ include ('./include/sidebar.php');
 ?>
 
 
+<style>
+.car{
+    width: 40%;
+    margin-top : 5%;
+}
+</style>
 
-
-<div class="container-fluid pt-4 px-4 ">
+<div class="container-fluid car pt-4 px-4 ">
         <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update Province</h4>
+            <h4 class="mb-4 d-flex justify-content-center text-dark">Update Province</h4>
             <form  method="post" >
-                <div class="mb-3 col-lg-4">
+                <div class="form-group">
                     <label class="form-label" for="casetype">Province Name</label>
                     <input type="text" class="form-control" id="province" name="province" value="<?php echo $ufet['province']; ?>"/>
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
+                </div class="form-control">
+                    <button type="submit" class="btn btn-secondary bg-dark w-100" name="update">Update </button>
                 </div>
             </form>
         </div>

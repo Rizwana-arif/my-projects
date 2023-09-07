@@ -9,7 +9,7 @@ include ('./include/header.php');
 
 ?>
    <style>
-   .team .team-text .btnnn , .search: .btn{
+   .team .team-text .btnnn {
     color: #ffffff;
     border: 2px solid #aa9166;
     border-radius: 0;
@@ -305,7 +305,7 @@ include ('./include/header.php');
                                         while($fet=mysqli_fetch_assoc($run)){
                                         ?>
 										
-										<option value="<?php echo $fet['lawyerid']; ?>"  ><?php echo $fet['speciality']; ?></option>
+										<option value="<?php echo $fet['speciality']; ?>"  ><?php echo $fet['speciality']; ?></option>
                                         <?php } ?>
 					</select>
                         
@@ -326,33 +326,8 @@ include ('./include/header.php');
                     <div class="section-header">
                         <h2>Meet Our Expert Attorneys</h2>
                     </div>
-                    <div class="row">
-                    <?php 
-							$sql="SELECT * FROM `lawyers-rec` WHERE `status`='approved'";
-							$run=mysqli_query($conn,$sql);
-							while ($fet=mysqli_fetch_assoc($run)){
-							?>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="team-item">
-                                <div class="team-img">
-                                    <img style="height : 300px;" src="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>" alt="Team Image">
-                                </div>
-                                <div class="team-text">
-                                    <h2><?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?></h2>
-                                    <p>Business Consultant</p>
-                                    <a class="btnnn " href="./lawyers-profile.php?lawyerid=<?php echo $fet['lawyerid']; ?>">  Profile</a>
-                                    <div class="team-social">
-                                        <a class="social-tw" href=""><i class="fab fa-twitter"></i></a>
-                                        <a class="social-fb" href=""><i class="fab fa-facebook-f"></i></a>
-                                        <a class="social-li" href=""><i class="fab fa-linkedin-in"></i></a>
-                                        <a class="social-in" href=""><i class="fab fa-instagram"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                            <?php } ?>
-                        
+                    <div class="row" id="law">
+   
                     </div>
                 </div>
             </div>
@@ -591,7 +566,8 @@ $(document).ready(function(){
             type: "POST",
             data: {category : casecategory},
             success: function(res){
-            $(".team").html(res);
+           
+            $("#law").html(res);
             },
             error: function(xhr, status , error){
                 console.error ("AJAX Error:" , error);
@@ -601,8 +577,9 @@ $(document).ready(function(){
         })
     }
 
-    $("#category").on("change" , function(){
+    $("#category").on("change", function(){
                 var d=$("#category").val();
+              
                 filterbycategory(d);
             })
 })

@@ -24,9 +24,19 @@ include ('./include/sidebar.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Cases Type</title>
+    <title>Add Act</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
+<style>
+.card{
+    width: 60%;
+    margin-left: 150px;
+   margin-top: 20px;
+}
+/* .container-fluid{
+    display: flex;
+    
+} */
+    </style>
 </head>
 <body>
 <!-- Modal for Add cases -->
@@ -67,7 +77,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Act</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Act</button>
       </div>
       </div>
     
@@ -94,55 +104,68 @@ include ('./include/sidebar.php');
  <!-- Modal end of add cases -->
 
 <!-- start table of case -->
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Act Detail</h6>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Act
-</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Act</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `act-rec` ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['actid']; ?></th>
-                                            <td><?php echo $fet['act']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis"></i>
+<div class="wrapper">
 
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-act.php?actid=<?php echo $fet['actid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-act.php?actid=<?php echo $fet['actid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end table of case -->
+<!--end header -->
+<!--start page wrapper -->
+<div class="page-wrapper">
+
+    <!--end breadcrumb-->
+
+   
+    <div class="card">
+        <div class="card-body">
+             <div class="row">
+                <div class="col-6">
+                <h3>Record of Act</h3>
+                </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                class="fa fa-user-plus"></i>
+                Add Act
+                </button>
+                </div>
+          
+             </div>
+            <div class="table-responsive">
+            
+                <table id="example2" class="table table-striped table-bordered border-3 ">
+                <thead>
+    <tr>
+        <th>Sr No.</th>
+        
+        <th>Act</th>
+        <th>Action</th>
+    </tr>
+</thead>
+
+                <tbody>
+                <?php
+$sql="SELECT * FROM `act-rec` ";
+$run=mysqli_query($conn,$sql);
+while($fet=mysqli_fetch_assoc($run)){
+?>
+                  
+
+<tr>
+   <td><?php echo $fet['actid'] ; ?></td>
+   <td><?php echo $fet['act'] ; ?></td>
+   <td class="text-right">
+   <a class="btn btn-sm btn-success" href="./update-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" href="./delete-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   </td>
+  </tr>
+
+  <?php } ?>
+       </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php 

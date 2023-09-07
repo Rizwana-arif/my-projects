@@ -86,7 +86,7 @@ include ('./include/header.php');
 							<div class="form-row">
 								<div class="form-group col-md-6">
                                 <label class="form-label" for="name">Name</label>
-                            <input type="text" class="form-control" id="client_name" name="client_name" value="<?php echo $fet['first_Name']; ?>" readonly/>
+                            <input type="text" class="form-control" id="client_name" name="client_name" value="<?php echo $fet['first_name']; ?>" readonly/>
 								</div>
 								<div class="form-group col-md-6">
                                 <label for="cnic" class="form-label">CNIC</label>

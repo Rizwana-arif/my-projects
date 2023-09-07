@@ -39,7 +39,7 @@ include ('./include/sidebar.php');
   <form method="post">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Case Type</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Case Category</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
      
@@ -87,7 +87,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Case</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Case</button>
       </div>
       </div>
     
@@ -113,56 +113,70 @@ include ('./include/sidebar.php');
 </script>
 <!-- End Modal -->
 <!-- start table of case categories -->
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Cases Type</h6>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Cases Type
-</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Case Type</th>
-                                            <th>Case Category</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `case-category` cc INNER JOIN `case-type` ct ON cc.caset=ct.caseid ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['cctgid']; ?></th>
-                                            <td><?php echo $fet['caset']; ?></td>
-                                            <td><?php echo $fet['casectg']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      <i class="fa-solid fa-ellipsis"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-case-category.php?cctgid=<?php echo $fet['cctgid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-case-category.php?cctgid=<?php echo $fet['cctgid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
+<div class="wrapper">
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end table of case categories -->
+
+<!--end header -->
+<!--start page wrapper -->
+<div class="page-wrapper">
+
+    <!--end breadcrumb-->
+
+   
+    <div class="card">
+        <div class="card-body">
+             <div class="row">
+                <div class="col-6">
+                <h3>Record of Cases</h3>
+                </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                class="fa fa-user-plus"></i>
+                Add Case category
+                </button>
+                </div>
+          
+             </div>
+            <div class="table-responsive">
+            
+                <table id="example2" class="table table-striped table-bordered border-3 ">
+                <thead>
+    <tr>
+        <th>Sr No.</th>
+        <th>Case Type</th>
+        <th>Case Category</th>
+        <th>Action</th>
+    </tr>
+</thead>
+
+                <tbody>
+                <?php
+ $ssql="SELECT * FROM `case-category` cc INNER JOIN `case-type` ct ON cc.caset=ct.caseid ";
+$run=mysqli_query($conn,$ssql);
+while($cfet=mysqli_fetch_assoc($run)){
+?>
+                  
+
+<tr>
+   <td><?php echo $cfet['cctgid'] ; ?></td>
+   <td><?php echo $cfet['casetype'] ; ?></td>
+   <td><?php echo $cfet['casectg'] ; ?></td>
+
+   <td class="text-right">
+   <a class="btn btn-sm btn-success" href="./update-case-category.php?cctgid=<?php echo $cfet['cctgid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" href="./delete-case-category.php?cctgid=<?php echo $cfet['cctgid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   </td>
+  </tr>
+
+  <?php } ?>
+       </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php 

@@ -166,6 +166,7 @@ include ('./include/sidebar.php');
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">District</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="dis">
+                        <option>Faisalabad</option>
                                 
                                 <?php 
                                 $dsql="SELECT * FROM `district-rec`";
@@ -181,7 +182,7 @@ include ('./include/sidebar.php');
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">Tehsil</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="teh">
-                                
+                                <option>jaranwala</option>
                                 <?php 
                                 $tsql="SELECT * FROM `tehsil-rec`";
                                 $trun=mysqli_query($conn,$tsql);
@@ -197,6 +198,7 @@ include ('./include/sidebar.php');
                         <div class="mb-3 col-lg-4">
                         <label class="form-label">Court Name</label>
                         <select class="form-select mb-3 form-control" aria-label="Default select example" name="court">
+                        <option>family court</option>
                                 
                                 <?php 
                                 $cosql="SELECT * FROM `court-rec`";

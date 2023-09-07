@@ -25,6 +25,7 @@ if(isset($_POST['sub'])){
       echo "<script> alert ('Failed! Something wrong plz try later')</script>";
     }
 }
+include ('./include/top-header.php');
 include ('./include/header.php');
 ?>
 

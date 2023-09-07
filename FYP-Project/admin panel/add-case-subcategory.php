@@ -107,7 +107,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Case</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Case Subcategory</button>
       </div>
       </div>
     
@@ -133,57 +133,71 @@ include ('./include/sidebar.php');
     
 </script>
 
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Cases SubCategory</h6>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Cases SubCategory
-</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Case Type</th>
-                                            <th >Case Category</th>
-                                            <th>Case Sub Category</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `case-subcategory` cc INNER JOIN `case-type` ct ON cc.ctype=ct.caseid INNER JOIN `case-category` cct ON cc.cctg=cct.cctgid ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['csubid']; ?></th>
-                                            <td><?php echo $fet['ctype']; ?></td>
-                                            <td><?php echo $fet['cctg']; ?></td>
-                                            <td><?php echo $fet['csubctg']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis"></i>
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-case-subcategory.php?csubid=<?php echo $fet['csubid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-case-subcategory.php?csubid=<?php echo $fet['csubid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
+<div class="wrapper">
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+
+<!--end header -->
+<!--start page wrapper -->
+<div class="page-wrapper">
+
+    <!--end breadcrumb-->
+
+   
+    <div class="card">
+        <div class="card-body">
+             <div class="row">
+                <div class="col-6">
+                <h3>Record of Cases</h3>
+                </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                class="fa fa-user-plus"></i>
+                Add Cases Subcategory
+                </button>
+                </div>
+          
+             </div>
+            <div class="table-responsive">
+            
+                <table id="example2" class="table table-striped table-bordered border-3 ">
+                <thead>
+    <tr>
+        <th>Sr No.</th>
+        <th>Case Type</th>
+        <th>Case Category</th>
+        <th>Case SubCategory</th>
+        <th>Action</th>
+    </tr>
+</thead>
+
+                <tbody>
+                <?php
+ $ssql="SELECT * FROM `case-subcategory` cc INNER JOIN `case-type` ct ON cc.ctype=ct.caseid INNER JOIN `case-category` cct ON cc.cctg=cct.cctgid ";
+$run=mysqli_query($conn,$ssql);
+while($cfet=mysqli_fetch_assoc($run)){
+?>
+                  
+
+<tr>
+   <td><?php echo $cfet['csubid'] ; ?></td>
+   <td><?php echo $cfet['casetype'] ; ?></td>
+   <td><?php echo $cfet['casectg'] ; ?></td>
+   <td><?php echo $cfet['csubctg'] ; ?></td>
+   <td class="text-right">
+   <a class="btn btn-sm btn-success" href="./update-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" href="./delete-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   </td>
+  </tr>
+
+  <?php } ?>
+       </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php 

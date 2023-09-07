@@ -1,12 +1,20 @@
 <?php 
 include ('./include/connection.php');
+require_once '../admin panel/phpqrcode/qrlib.php';
+
+
+
+
 // session_start();
 // if(empty($_SESSION['email']) && empty($_SESSION['cemail']) && empty($_SESSION['uemail'])){
 //     header("location:../admin panel/login.php");
 // }
 if(isset($_POST['post'])){
+	$value='../admin panel/img/';
+	$qrcode=$value.time().".png";
 	$random=rand(99999,999999);
-	$reg_id="LAW-" . $random; 
+	$reg_id="LAW-" . $random . "-FIRM"; 
+	QRcode::png($reg_id,$qrcode,'H',4,4);
     $first_Name=mysqli_real_escape_string($conn,$_POST['first_Name']);
     $last_Name=mysqli_real_escape_string($conn,$_POST['last_Name']);
     $contact_number=mysqli_real_escape_string($conn,$_POST['contact_number']);
@@ -36,14 +44,15 @@ if(isset($_POST['post'])){
         $rand=rand(10000,999999);
         $pic=$profile_image."." .$rand. ".".$a;
         $idf=$bar_license."." .$rand. ".".$a1;
-        $sql="INSERT INTO `lawyers-rec`(`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
         $run=mysqli_query($conn,$sql);
         if($run){
 
             move_uploaded_file($_FILES['profile_image']['tmp_name'],"../admin panel/data/lawyer-image/".$pic);
             move_uploaded_file($_FILES['bar_license']['tmp_name'],"../admin panel/data/bar-license/".$idf);
 
-            echo "<script>alert('Data has been inserted')</script>";
+           
+			$msg= "right";
             header("Refresh:0, url=./register-lawyers.php");
         }
         else{
@@ -54,6 +63,13 @@ if(isset($_POST['post'])){
         $msg="invalid img";
     }
 }
+?>
+<script>
+if($msg=="right"){
+
+}
+</script>
+<?php
 include ('./include/header.php');
 ?>
 <!doctype html>
@@ -310,26 +326,19 @@ include ('./include/header.php');
 								<label for="practise">My Speciality</label>
 								<select id="practise" name="speciality" class="form-control">
 									<option value=" " selected>Choose...</option>
-									<option >Criminal law</option>
-									<option >Civil law</option>
-									<option >Writ Jurisdiction</option>
-									<option >Company law</option>
-									<option >Contract law</option>
-									<option >Commercial law</option>
-									<option >Construction law</option>
-									<option >IT law</option>
-									<option >Family law</option>
-									<option >Religious law</option>
-									<option >Investment law</option>
-									<option >Labour law</option>
-									<option >Property law</option>
-									<option >Taxation law</option>
-
+									<?php 
+									$csql="SELECT * FROM `case-type`";
+									$crun=mysqli_query($conn,$csql);
+									while($fet=mysqli_fetch_assoc($crun)){
+									?>
+									<option value="<?php echo $fet['caseid']; ?>" ><?php echo $fet['casetype']; ?></option>
+									<?php } ?>
 								</select>
 							</div>
-                            <div class="form-group w-100">
-								<textarea name="about" id="about" placeholder="introduce yourself"></textarea>
-							</div>
+                            <div class="form-group ">
+                                <label class="form-label">Introduce Yourself</label>
+                            <textarea class="form-control" aria-label="With textarea" name="about" value="write few words about case" ></textarea>
+								</div>
 							<div class="form-group">
 								<div class="form-check">
 

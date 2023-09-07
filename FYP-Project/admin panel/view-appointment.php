@@ -8,7 +8,7 @@ $pro=$_GET['appoinid'];
 $sql="SELECT * FROM `appointment-rec` a INNER JOIN `lawyers-rec` l ON  a.lawyer_name=l.lawyerid INNER JOIN `case-type` c ON a.case_category=c.caseid where `appoinid`='$pro'";
 
     $run=mysqli_query($conn,$sql);
-    $fet=mysqli_fetch_assoc($run);
+    $lfet=mysqli_fetch_assoc($run);
 include ('./include/header.php');
 include ('./include/sidebar.php');
 
@@ -95,7 +95,7 @@ include ('./include/sidebar.php');
                     <div class="card-body">
                     <h4 align=center>Appointment Details</h4>
                     <hr>
-                    <h5 align=center >Status Of Request  : <?php echo $fet['statuss']; ?></h6> 
+                    <h5 align=center >Status Of Request  : <?php echo $lfet['statuss']; ?></h6> 
                     <hr>
                         <h5 >User Detail</h5>
                         <hr>
@@ -104,7 +104,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['client_name'] ; ?>
+                        <?php echo $lfet['client_name'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -113,7 +113,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['client_email']; ?>
+                        <?php echo $lfet['client_email']; ?>
                         </div>
                       </div>
                       <hr>
@@ -122,7 +122,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">CNIC</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['client_cnic']; ?>
+                        <?php echo $lfet['client_cnic']; ?>
                         </div>
                       </div>
                       <hr>
@@ -131,7 +131,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Contact number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['contact_number']; ?>
+                        <?php echo $lfet['contact_number']; ?>
                         </div>
                       </div>
                       <hr>
@@ -140,7 +140,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Gender</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['gender']?>
+                        <?php echo $lfet['gender']?>
                         </div>
                       </div>
                       <hr>
@@ -150,7 +150,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Full Address</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['full_address']; ?>
+                        <?php echo $lfet['full_address']; ?>
                         </div>
                       </div>
                       <hr>
@@ -159,7 +159,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">State</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['state']; ?>
+                        <?php echo $lfet['state']; ?>
                         </div>
                       </div>
                       <hr>
@@ -168,7 +168,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">District</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['district']; ?>
+                        <?php echo $lfet['district']; ?>
                         </div>
                       </div>
                       <hr>
@@ -178,7 +178,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">REF name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['Ref_Name']; ?>
+                        <?php echo $lfet['Ref_Name']; ?>
                         </div>
                       </div>
                       <hr>
@@ -187,7 +187,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Ref Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['Ref_No']; ?>
+                        <?php echo $lfet['Ref_No']; ?>
                         </div>
                       </div>
                       <hr>
@@ -196,7 +196,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case Category</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['casetype']; ?>
+                        <?php echo $lfet['casetype']; ?>
                         </div>
                       </div>
                       <hr>
@@ -205,7 +205,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Description</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['description']; ?>
+                        <?php echo $lfet['description']; ?>
                         </div>
                       </div>
                       <hr>
@@ -214,7 +214,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Requested for (Lawyer Name)</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?>
+                        <?php echo $lfet['first_Name'] . " " . $lfet['last_Name']; ?>
                         </div>
                       </div>
                       <hr>
@@ -223,7 +223,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['datetime'] ; ?>
+                        <?php echo $lfet['datetime'] ; ?>
                         </div>
                       </div>
                    

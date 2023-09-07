@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
 if(isset($_POST['sub'])){
@@ -26,8 +26,15 @@ include ('./include/sidebar.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Tehsil Detail</title>
- 
+    <title>Add Tehsil</title>
+    <style>
+.card{
+    width: 70%;
+    margin-left: 150px;
+    margin-top:30px;
+   
+}
+    </style>
 </head>
 <body>
 <!-- Button trigger modal -->
@@ -40,7 +47,7 @@ include ('./include/sidebar.php');
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Tehsil Detail</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Add Tehsil</button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
      
       <div class="modal-body">
@@ -103,7 +110,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Tehsil </button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Tehsil </button>
       </div>
       </div>
     
@@ -115,57 +122,71 @@ include ('./include/sidebar.php');
 
 
 
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Tehsil Detail</h6>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Tehsil
-</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Province</th>
-                                            <th >District</th>
-                                            <th>Tehsil</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `tehsil-rec` t INNER JOIN `province-rec` p ON t.proname=p.pid INNER JOIN `district-rec` d ON t.disname=d.did ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['tid']; ?></th>
-                                            <td><?php echo $fet['proname']; ?></td>
-                                            <td><?php echo $fet['disname']; ?></td>
-                                            <td><?php echo $fet['tehsil']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <!-- <i class="fa-duotone fa-grip-dots fa-flip-horizontal" style="--fa-secondary-opacity: 0;"></i> -->
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-tehsil.php?tid=<?php echo $fet['tid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-tehsil.php?tid=<?php echo $fet['tid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
+<div class="wrapper">
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+
+<!--end header -->
+<!--start page wrapper -->
+<div class="page-wrapper">
+
+    <!--end breadcrumb-->
+
+   
+    <div class="card">
+        <div class="card-body">
+             <div class="row">
+                <div class="col-6">
+                <h3>Record of Tehsil</h3>
+                </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                class="fa fa-user-plus"></i>
+                Add Tehsil
+                </button>
+                </div>
+          
+             </div>
+            <div class="table-responsive">
+            
+                <table id="example2" class="table table-striped table-bordered border-3 ">
+                <thead>
+    <tr>
+        <th>Sr No.</th>
+        <th>Province</th>
+        <th>District</th>
+        <th>Tehsil</th>
+        <th>Action</th>
+    </tr>
+</thead>
+
+                <tbody>
+                <?php
+$ssql="SELECT * FROM `tehsil-rec` t INNER JOIN `province-rec` p ON t.proname=p.pid INNER JOIN `district-rec` d ON t.disname=d.did ";
+$run=mysqli_query($conn,$ssql);
+while($cfet=mysqli_fetch_assoc($run)){
+?>
+                  
+
+<tr>
+   <td><?php echo $cfet['tid'] ; ?></td>
+   <td><?php echo $cfet['province'] ; ?></td>
+   <td><?php echo $cfet['district'] ; ?></td>
+   <td><?php echo $cfet['tehsil'] ; ?></td>
+   <td class="text-right">
+   <a class="btn btn-sm btn-success" href="./update-tehsil.php?tid=<?php echo $cfet['tid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" href="./delete-tehsil.php?tid=<?php echo $cfet['tid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   </td>
+  </tr>
+
+  <?php } ?>
+       </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php 

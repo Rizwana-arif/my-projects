@@ -92,6 +92,9 @@ include ('./include/sidebar.php');
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
                        <a href="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>"> <img src="<?php echo '../admin panel/data/lawyer-image/' . $fet['profile_image']; ?>" alt="Admin" class="rounded-circle" width="150"></a>
+<?php echo $fet['qrcode']; ?>
+                       <a href="<?php echo './img/' . $fet['qrcode']; ?>"> 
+                       <img src="<?php echo '../admin panel/img/' . $fet['qrcode']; ?>" alt="Admin" class="rounded-circle" width="150"></a>
                         <div class="mt-3">
                           <h4><?php echo $fet['first_Name'] . " " . $fet['last_Name']; ?></h4>
                           <p class="text-secondary mb-1"><?php echo $fet['about']; ?></p>

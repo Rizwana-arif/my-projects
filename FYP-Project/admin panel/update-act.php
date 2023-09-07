@@ -1,7 +1,7 @@
 <?php 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
  $actid=$_GET['actid'];
@@ -28,18 +28,24 @@ include ('./include/sidebar.php');
 ?>
 
 
+<style>
+.car{
+    width: 40%;
+    margin-top : 10%;
+}
+    </style>
 
 
-<div class="container-fluid pt-4 px-4 ">
+<div class="container-fluid car pt-4 px-4 ">
         <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update Act Detail</h4>
+            <h4 class="mb-4 d-flex justify-content-center text-dark">Update Act Detail</h4>
             <form  method="post" >
-                <div class="mb-3 col-lg-4">
+                <div class="form-group">
                     <label class="form-label" for="casetype">Act</label>
                     <input type="text" class="form-control" id="act" name="act" value="<?php echo $ufet['act']; ?>"/>
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
+                </div class="form-group">
+                    <button type="submit" class="btn btn-primary bg-dark w-100" name="update">Update </button>
                 </div>
             </form>
         </div>

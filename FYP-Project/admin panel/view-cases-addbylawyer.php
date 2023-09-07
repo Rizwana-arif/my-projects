@@ -7,8 +7,8 @@ if( empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
  $mylawyer=$_SESSION['lawyerid'];
 // $sql="SELECT * FROM `appointment-rec` WHERE `clawyer`='$lawyer'";
 // $run=mysqli_query($conn,$sql);
-// $fet=mysqli_fetch_assoc($run);
-// $clientn=$fet['']
+// $lfet=mysqli_lfetch_assoc($run);
+// $clientn=$lfet['']
 include ('./include/header.php');
 include ('./include/sidebar.php');
 ?>
@@ -60,22 +60,22 @@ include ('./include/sidebar.php');
 
        $sql="SELECT * FROM `add-case-bylawyers` ac INNER JOIN `users-rec` cr ON  ac.client_name=cr.userid INNER JOIN `lawyers-rec` l ON ac.l_name=l.lawyerid INNER JOIN `province-rec` pr ON ac.pro=pr.pid INNER JOIN `district-rec` dr ON ac.dis=dr.did INNER JOIN `tehsil-rec` tr ON ac.teh=tr.tid INNER JOIN `court-rec` cor ON ac.court=cor.courtid INNER JOIN `case-type` ct ON ac.caset=ct.caseid INNER JOIN `case-category` cc ON ac.ccat=cc.cctgid INNER JOIN `case-subcategory` cs ON ac.csub=cs.csubid  WHERE `l_name`='$mylawyer'";
         $run=mysqli_query($conn,$sql);
-        while($fet=mysqli_fetch_assoc($run)){
+        while($lfet=mysqli_fetch_assoc($run)){
         ?>
                           
        
        <tr>
-                                        <td><?php echo $fet['first_Name'];?></td>
-                                        <td><?php echo $fet['first_name'] . " " . $fet['last_name'];?></td>
-                                        <td><?php echo $fet['court'] ;?></td>
-                                        <td><?php echo $fet['jname'] ;?></td>
-                                        <td><?php echo $fet['casetype'] ;?></td>
-                                        <td><?php echo $fet['case_condition'] ;?></td>
-                                        <td><?php echo $fet['ldate'] ;?></td>
-                                        <td><?php echo $fet['ndate'] ;?></td>
+                                        <td><?php echo $lfet['first_Name'];?></td>
+                                        <td><?php echo $lfet['first_name'] . " " . $lfet['last_name'];?></td>
+                                        <td><?php echo $lfet['court'] ;?></td>
+                                        <td><?php echo $lfet['jname'] ;?></td>
+                                        <td><?php echo $lfet['casetype'] ;?></td>
+                                        <td><?php echo $lfet['case_condition'] ;?></td>
+                                        <td><?php echo $lfet['ldate'] ;?></td>
+                                        <td><?php echo $lfet['ndate'] ;?></td>
                                        <td class="text-right">
-                         <a class="btn btn-sm btn-secondary" href="./view-case-lawyer.php?case_id=<?php echo $fet['case_id']; ?>"><i class="fa-solid fa-eye"></i></a>
-                         <a class="btn btn-sm btn-danger" href="./delete-cases-addbylawyers.php?case_id=<?php echo $fet['case_id']; ?>"><i class="fa-solid fa-trash"></i></a>
+                         <a class="btn btn-sm btn-secondary" href="./view-case-lawyer.php?case_id=<?php echo $lfet['case_id']; ?>"><i class="fa-solid fa-eye"></i></a>
+                         <a class="btn btn-sm btn-danger" href="./delete-cases-addbylawyers.php?case_id=<?php echo $lfet['case_id']; ?>"><i class="fa-solid fa-trash"></i></a>
            </td>
           </tr>
       

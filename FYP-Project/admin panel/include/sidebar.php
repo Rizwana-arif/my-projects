@@ -102,7 +102,7 @@ if($_SESSION['estatus']=="lawyer"){
                         </div>
                     </div>
                     <a href="./view-payment-lawyer.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Payments</a>
-                    <a href="./visiting-card.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>My Visiting Card</a>
+                    <a href="./visiting-lawyer-card.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>My Visiting Card</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -119,9 +119,8 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./province.php" class="dropdown-item">Province</a>
                             <a href="./district.php" class="dropdown-item">District</a>
                             <a href="./tehsil.php" class="dropdown-item">Tehsil</a>
-                            <a href="./add-court.php" class="dropdown-item">Court</a>
-                            <a href="typography.html" class="dropdown-item">Court Type</a>
-                            <a href="typography.html" class="dropdown-item">Court Name</a>
+                            <a href="./add-court.php" class="dropdown-item">Court Type</a>
+                            <a href="./add-court-name.php" class="dropdown-item">Court Name</a>
                             <a href="./add-pstation.php" class="dropdown-item">Police Station</a>
                             <a href="./add-act.php" class="dropdown-item">Act</a>
                         </div>

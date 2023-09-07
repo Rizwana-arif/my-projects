@@ -22,6 +22,7 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
      if(mysqli_num_rows($lrun)==1 && $lfet['estatus']=="lawyer" ){
           $lawyerid=$lfet['lawyerid'];
 		  $password=$lfet['password'];
+		  $reg_id=$lfet['reg_id'];
            $_SESSION['lawyer_email']=$email;
          $_SESSION['estatus']="lawyer";
 		 $_SESSION['profile_image']=$image;

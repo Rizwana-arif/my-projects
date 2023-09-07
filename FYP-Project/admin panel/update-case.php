@@ -2,7 +2,7 @@
 include ('./include/connection.php');
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
  $caseid=$_GET['caseid'];
@@ -28,19 +28,25 @@ include ('./include/header.php');
 include ('./include/sidebar.php');
 ?>
 
+<style>
+.car{
+    width: 40%;
+    margin-top : 10%;
+}
+    </style>
 
 
-
-<div class="container-fluid pt-4 px-4 ">
+<div class="container-fluid car pt-4 px-4 ">
         <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update Case</h4>
+            <h4 class="mb-4 d-flex justify-content-center text-dark">Update Case</h4>
             <form  method="post" >
-                <div class="mb-3 col-lg-4">
+                <div class="form-group">
                     <label class="form-label" for="casetype">Case Type</label>
                     <input type="text" class="form-control" id="casetype" name="casetype" value="<?php echo $ufet['casetype']; ?>"/>
+                    
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
+                <div class="form-group mt-4 ">
+                <button type="submit" class="btn btn-primary bg-dark w-100" name="update">Update </button>
                 </div>
             </form>
         </div>

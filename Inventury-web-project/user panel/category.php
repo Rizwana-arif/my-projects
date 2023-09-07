@@ -1,5 +1,6 @@
 <?php
 include ('../Admin/include/connection.php');
+include ('./include/top-header.php');
 include ('./include/header2.php');
 $getcat=$_GET['ctgid'];
 ?>

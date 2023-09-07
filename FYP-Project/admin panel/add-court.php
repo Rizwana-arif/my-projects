@@ -29,7 +29,14 @@ include ('./include/sidebar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Court</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <style>
+.card{
+    width: 90%;
+    margin-left: 50px;
+    margin-top:30px;
+   
+}
+    </style>
 </head>
 <body>
 <!-- Button trigger modal -->
@@ -122,7 +129,7 @@ include ('./include/sidebar.php');
                         </div>
                         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="sub">Add Court</button>
+        <button type="submit" class="btn btn-dark" name="sub">Add Court</button>
       </div>
       </div>
     
@@ -148,60 +155,72 @@ include ('./include/sidebar.php');
     
 </script>
 
-<div class="col-12">
-                        <div class="bg-light rounded h-100 p-4">
-                            <div class="card-header">
-                            <h6>View Court</h6>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add Court Detail
-</button>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Sr.No</th>
-                                            <th scope="col">Province</th>
-                                            <th >District</th>
-                                            <th>Tehsil</th>
-                                            <th>Court</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                   
-                                    <tbody>
-                                    <?php
-                                        $ssql="SELECT * FROM `court-rec` c INNER JOIN `province-rec` p ON c.pname=p.pid INNER JOIN `district-rec` d ON c.dname=d.did INNER JOIN `tehsil-rec` t ON c.tname=t.tid ";
-                                        $srun=mysqli_query($conn,$ssql);
-                                        while($fet=mysqli_fetch_assoc($srun)){
-                                    ?>
-                                        <tr>
-                                            <th><?php echo $fet['courtid']; ?></th>
-                                            <td><?php echo $fet['province']; ?></td>
-                                            <td><?php echo $fet['district']; ?></td>
-                                            <td><?php echo $fet['tehsil']; ?></td>
-                                            <td><?php echo $fet['court']; ?></td>
-                                            <td>
-                                        <div class="dropdown">
-                                        <button class=" dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa-solid fa-ellipsis"></i>
+<div class="wrapper">
 
-                                        </button>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="./update-court.php?courtid=<?php echo $fet['courtid']; ?>">Edit</a></li>
-                                            <li><a class="dropdown-item" href="./delete-court.php?courtid=<?php echo $fet['courtid']; ?>">Delete</a></li>
-                                            
-                                        </ul>
-                                        </div>
 
-                                        </td>
-                                        </tr>
-                                       <?php }  ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+<!--end header -->
+<!--start page wrapper -->
+<div class="page-wrapper">
+
+    <!--end breadcrumb-->
+
+   
+    <div class="card">
+        <div class="card-body">
+             <div class="row">
+                <div class="col-6">
+                <h3>Record of Tehsil</h3>
+                </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                class="fa fa-user-plus"></i>
+                Add Tehsil
+                </button>
+                </div>
+          
+             </div>
+            <div class="table-responsive">
+            
+                <table id="example2" class="table table-striped table-bordered border-3 ">
+                <thead>
+    <tr>
+        <th>Sr No.</th>
+        <th>Province</th>
+        <th>District</th>
+        <th>Tehsil</th>
+        <th>Action</th>
+    </tr>
+</thead>
+
+                <tbody>
+                <?php
+$ssql="SELECT * FROM `court-rec` c INNER JOIN `province-rec` p ON c.pname=p.pid INNER JOIN `district-rec` d ON c.dname=d.did INNER JOIN `tehsil-rec` t ON c.tname=t.tid ";
+$run=mysqli_query($conn,$ssql);
+while($cfet=mysqli_fetch_assoc($run)){
+?>
+                  
+
+<tr>
+   <td><?php echo $cfet['courtid'] ; ?></td>
+   <td><?php echo $cfet['province'] ; ?></td>
+   <td><?php echo $cfet['district'] ; ?></td>
+   <td><?php echo $cfet['tehsil'] ; ?></td>
+   <td><?php echo $cfet['court'] ; ?></td>
+   <td class="text-right">
+   <a class="btn btn-sm btn-success" href="./update-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" href="./delete-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   </td>
+  </tr>
+
+  <?php } ?>
+       </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>
 <?php 

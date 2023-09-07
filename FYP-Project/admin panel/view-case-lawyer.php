@@ -9,7 +9,7 @@ $sql="SELECT * FROM `add-case-bylawyers` ac INNER JOIN `users-rec` cr ON  ac.cli
 
     $run=mysqli_query($conn,$sql);
     if($run){
-        $cfet=mysqli_fetch_assoc($run);
+        $lcfet=mysqli_fetch_assoc($run);
     }
     else{
          
@@ -102,7 +102,7 @@ include ('./include/sidebar.php');
                     <div class="card-body">
                     <h4 align=center>Added Case Details</h4>
                     <hr>
-                    <h5 align=center >Status Of Case  : <?php echo $cfet['case_condition']; ?></h6> 
+                    <h5 align=center >Status Of Case  : <?php echo $lcfet['case_condition']; ?></h6> 
                     <hr>
                         <h5 align=center>Client Information</h5>
                         <hr>
@@ -111,7 +111,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['first_name'] . "  ". $cfet['last_name'] ; ?>
+                        <?php echo $lcfet['first_name'] . "  ". $lcfet['last_name'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -120,7 +120,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['user_Email']; ?>
+                        <?php echo $lcfet['user_Email']; ?>
                         </div>
                       </div>
                       <hr>
@@ -129,7 +129,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Contact Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['contact_number']; ?>
+                        <?php echo $lcfet['contact_number']; ?>
                         </div>
                       </div>
                       <hr>
@@ -142,7 +142,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Petitioner Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['petitioner_name']; ?>
+                        <?php echo $lcfet['petitioner_name']; ?>
                         </div>
                       </div>
                       <hr>
@@ -151,7 +151,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Petitioner Advocate Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['adv_name']?>
+                        <?php echo $lcfet['adv_name']?>
                         </div>
                       </div>
                       <hr>
@@ -160,7 +160,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Respondent Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['respondent_name']; ?>
+                        <?php echo $lcfet['respondent_name']; ?>
                         </div>
                       </div>
                       <hr>
@@ -169,7 +169,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Respondent Advocate Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['respondent_adv']; ?>
+                        <?php echo $lcfet['respondent_adv']; ?>
                         </div>
                       </div>
                       <hr>
@@ -180,7 +180,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Province</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['province']; ?>
+                        <?php echo $lcfet['province']; ?>
                         </div>
                       </div>
                       <hr>
@@ -189,7 +189,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">District</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['district']; ?>
+                        <?php echo $lcfet['district']; ?>
                         </div>
                       </div>
                       <hr>
@@ -198,7 +198,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Tehsil</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['tehsil']; ?>
+                        <?php echo $lcfet['tehsil']; ?>
                         </div>
                       </div>
                       <hr>
@@ -209,7 +209,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Court Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['court']; ?>
+                        <?php echo $lcfet['court']; ?>
                         </div>
                       </div>
                       <hr>
@@ -218,7 +218,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Judge Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['jname']; ?>
+                        <?php echo $lcfet['jname']; ?>
                         </div>
                       </div>
                       <hr>
@@ -229,7 +229,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case Type</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['casetype'] ; ?>
+                        <?php echo $lcfet['casetype'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -238,7 +238,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case Category</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['casectg'] ; ?>
+                        <?php echo $lcfet['casectg'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -247,7 +247,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case SubCategory</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['csubctg'] ; ?>
+                        <?php echo $lcfet['csubctg'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -256,7 +256,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case No.</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['cno'] ; ?>
+                        <?php echo $lcfet['cno'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -265,7 +265,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Case Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['cdate'] ; ?>
+                        <?php echo $lcfet['cdate'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -276,7 +276,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">CNR/Reference Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['refno'] ; ?>
+                        <?php echo $lcfet['refno'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -285,7 +285,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Registration Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['rdate'] ; ?>
+                        <?php echo $lcfet['rdate'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -296,7 +296,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Police Station</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['pstation'] ; ?>
+                        <?php echo $lcfet['pstation'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -305,7 +305,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">FIR No.</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['fno'] ; ?>
+                        <?php echo $lcfet['fno'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -314,7 +314,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">FIR Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['fdate'] ; ?>
+                        <?php echo $lcfet['fdate'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -325,7 +325,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">File Number</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['fnum'] ; ?>
+                        <?php echo $lcfet['fnum'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -334,7 +334,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">File Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['fidate'] ; ?>
+                        <?php echo $lcfet['fidate'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -345,7 +345,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Act Type</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['atype'] ; ?>
+                        <?php echo $lcfet['atype'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -354,7 +354,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Under Section</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['us'] ; ?>
+                        <?php echo $lcfet['us'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -365,13 +365,13 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Purpose Of Hearing</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $cfet['ph'] ; ?>
+                        <?php echo $lcfet['ph'] ; ?>
                         </div>
                       </div>
                       <hr>
-                      <h6 align=center>Last Date :  <?php echo $cfet['ldate'];  ?></h6>
+                      <h6 align=center>Last Date :  <?php echo $lcfet['ldate'];  ?></h6>
                     <hr>
-                    <h6 align=center>Next Date :  <?php echo $cfet['ndate'];  ?></h6>
+                    <h6 align=center>Next Date :  <?php echo $lcfet['ndate'];  ?></h6>
                     </div>
                   </div>
     

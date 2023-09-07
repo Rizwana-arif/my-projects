@@ -1,9 +1,13 @@
 <?php 
 include ("./include/connection.php");
+session_start();
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
+    header("location:./login.php");
+}
 $did=$_GET['did'];
 $sql="SELECT * FROM `district-rec` d INNER JOIN `province-rec` p ON d.pname=p.pid  WHERE `did`='$did'";
 $run=mysqli_query($conn,$sql);
-$fet=mysqli_fetch_assoc($run);
+$dfet=mysqli_fetch_assoc($run);
 if(isset($_POST['update'])){
     $pname=mysqli_real_escape_string($conn,$_POST['pname']);
     $district=mysqli_real_escape_string($conn,$_POST['district']);
@@ -21,15 +25,20 @@ if(isset($_POST['update'])){
 include ("./include/header.php");
 include ("./include/sidebar.php");
 ?>
-
-<div class="container-fluid pt-4 px-4 ">
+<style>
+.car{
+    width: 40%;
+    margin-top : 5%;
+}
+</style>
+<div class="container-fluid car pt-4 px-4 ">
         <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update District</h4>
+            <h4 class="mb-4 d-flex justify-content-center text-dark">Update District</h4>
             <form  method="post" >
-            <div class="mb-3 col-lg-4">
+            <div class="form-group">
                         <label class="form-label">Province Name</label>
                         <select class="form-select mb-3" aria-label="Default select example" name="pname">
-                        <option value="<?php echo $fet['pid'] ?>"><?php echo $fet['province']; ?></option>
+                        <option value="<?php echo $dfet['pid'] ?>"><?php echo $dfet['province']; ?></option>
                     <?php 
                        $csql="SELECT * FROM `province-rec`";
                         $crun=mysqli_query($conn,$csql);
@@ -41,12 +50,12 @@ include ("./include/sidebar.php");
                     ?>
                         </select>
                     </div>
-                <div class="mb-3 col-lg-4">
+                <div class="form-group">
                     <label class="form-label" for="casectg">District</label>
-                    <input type="text" class="form-control" id="district" name="district" value="<?php echo $fet['district']; ?>"/>
+                    <input type="text" class="form-control" id="district" name="district" value="<?php echo $dfet['district']; ?>"/>
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
+                </div class="form-group">
+                    <button type="submit" class="btn btn-primary bg-dark w-100" name="update">Update </button>
                 </div>
             </form>
         </div>

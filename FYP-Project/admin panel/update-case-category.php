@@ -1,9 +1,13 @@
 <?php 
 include ("./include/connection.php");
+session_start();
+if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
+    header("location:./login.php");
+}
 $cctgid=$_GET['cctgid'];
 $sql="SELECT * FROM `case-category` cc INNER JOIN `case-type` ct ON cc.caset=ct.caseid  WHERE `cctgid`='$cctgid'";
 $run=mysqli_query($conn,$sql);
-$fet=mysqli_fetch_assoc($run);
+$llfet=mysqli_fetch_assoc($run);
 if(isset($_POST['update'])){
     $caset=mysqli_real_escape_string($conn,$_POST['caset']);
     $casectg=mysqli_real_escape_string($conn,$_POST['casectg']);
@@ -21,15 +25,20 @@ if(isset($_POST['update'])){
 include ("./include/header.php");
 include ("./include/sidebar.php");
 ?>
-
-<div class="container-fluid pt-4 px-4 ">
+<style>
+.car{
+    width: 40%;
+    margin-top : 5%;
+}
+</style>
+<div class="container-fluid car pt-4 px-4 ">
         <div class="bg-light rounded h-100 p-4">
-            <h4 class="mb-4 d-flex justify-content-center text-success">Update Case Category</h4>
+            <h4 class="mb-4 d-flex justify-content-center text-dark">Update Case Category</h4>
             <form  method="post" >
-            <div class="mb-3 col-lg-4">
+            <div class="form-group">
                         <label class="form-label">Case Type</label>
                         <select class="form-select mb-3" aria-label="Default select example" name="caset">
-                        <option value="<?php echo $fet['caseid'] ?>"><?php echo $fet['casetype']; ?></option>
+                        <option value="<?php echo $llfet['caseid']; ?>"><?php echo $llfet['casetype']; ?></option>
                     <?php 
                        $csql="SELECT * FROM `case-type`";
                         $crun=mysqli_query($conn,$csql);
@@ -41,12 +50,12 @@ include ("./include/sidebar.php");
                     ?>
                         </select>
                     </div>
-                <div class="mb-3 col-lg-4">
+                <div class="form-group">
                     <label class="form-label" for="casectg">Case category</label>
-                    <input type="text" class="form-control" id="casectg" name="casectg" value="<?php echo $fet['casectg']; ?>"/>
+                    <input type="text" class="form-control" id="casectg" name="casectg" value="<?php echo $llfet['casectg']; ?>"/>
                 </div>
-                </div>
-                    <button type="submit" class="btn btn-primary bg-success" name="update">Update </button>
+                </div class="form-group">
+                    <button type="submit" class="btn btn-primary bg-dark w-100" name="update">Update </button>
                 </div>
             </form>
         </div>
