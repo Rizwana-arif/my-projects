@@ -5,7 +5,7 @@ if(empty($_SESSION['lawyer_email']) ){
   header("location:./login.php");
 }
 $pro=$_SESSION['lawyer_email'];
-    $sql="SELECT * FROM `lawyers-rec` where `lawyer_email`='$pro' ";
+    $sql="SELECT * FROM `lawyers-rec` l INNER JOIN `case-type` c ON l.speciality=c.caseid where `lawyer_email`='$pro' ";
     $run=mysqli_query($conn,$sql);
     $fet=mysqli_fetch_assoc($run);
 include ('./include/header.php');
@@ -244,7 +244,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Speciality</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['speciality']; ?>
+                        <?php echo $fet['casetype']; ?>
                         </div>
                       </div>
                       <hr>

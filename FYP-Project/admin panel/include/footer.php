@@ -65,7 +65,7 @@
                     className: 'btn btn-dark rounded-0 text-white',
                     text: '<i class="fas fa-print"></i> Print',
                     exportOptions: {
-                        columns: [0,1,2,3,4,5,6,7]
+                        columns: [1,2,3,4,5,6]
                     }
                 }
                 ]

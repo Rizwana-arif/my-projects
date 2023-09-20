@@ -8,7 +8,7 @@ require "./PHPMailer/Exception.php";
 
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['email']) && empty($_SESSION['lawyer_email'])){
     header("location:./login.php");
 } 
 $appoinid=$_GET['appoinid'];

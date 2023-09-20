@@ -285,53 +285,7 @@ include ('./include/header.php');
             </div>
             <!-- Feature End -->
 
-            <!-- Filter lawyer according to case category-->
-            <div class="search">
-                
-            
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Search Lawyer</h2>
-                    </div>
-                    <div class="form w-100">
-                    <div class="d-flex justify-content-between">
-                    <div class="form-group w-50">
-                    <label for="category">Case Categories</label>
-									<select id="category" name="category" class="form-control">
-                                    <option value=" " >Choose...</option>
-                                        <?php 
-                                        $sql="SELECT * FROM `lawyers-rec`";
-                                        $run=mysqli_query($conn,$sql);
-                                        while($fet=mysqli_fetch_assoc($run)){
-                                        ?>
-										
-										<option value="<?php echo $fet['speciality']; ?>"  ><?php echo $fet['speciality']; ?></option>
-                                        <?php } ?>
-					</select>
-                        
-                    </div>
-
-             
-                </div>
-                        
-                    </div>
-                </div>
-           
-            </div>
-          <!-- end search -->
-
-            <!-- Team Start -->
-            <div class="team">
-                <div class="container">
-                    <div class="section-header">
-                        <h2>Meet Our Expert Attorneys</h2>
-                    </div>
-                    <div class="row" id="law">
-   
-                    </div>
-                </div>
-            </div>
-            <!-- Team End -->
+       
 
 
             <!-- FAQs Start -->
@@ -556,33 +510,6 @@ include ('./include/header.php');
                 </div>
             </div>
             <!-- Newsletter End -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-$(document).ready(function(){
-    filterbycategory();
-    function filterbycategory(casecategory="null"){
-        $.ajax({
-            url: "filter-lawyer.php",
-            type: "POST",
-            data: {category : casecategory},
-            success: function(res){
-           
-            $("#law").html(res);
-            },
-            error: function(xhr, status , error){
-                console.error ("AJAX Error:" , error);
-            }
 
-            
-        })
-    }
-
-    $("#category").on("change", function(){
-                var d=$("#category").val();
-              
-                filterbycategory(d);
-            })
-})
-    </script>
 
 <?php include('./include/footer.php'); ?>

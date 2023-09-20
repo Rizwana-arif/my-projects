@@ -68,13 +68,13 @@ include ('./include/header2.php');
 								<td class="qty" data-title="Qty"><!-- Input Order -->
 									<div class="input-group">
 										<div class="button minus">
-											<button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[<?php echo $abc; ?>]">
+											<button type="button" class="btn btn-primary btn-number" data-type="minus" data-field="quant[<?php echo $abc; ?>]">
 												<i class="ti-minus"></i>
 											</button>
 										</div>
 										<input type="hidden" id="cart_id" value="<?php echo $fet['cart_id']; ?>">
 										<input type="hidden" id="p_price" value="<?php echo $fet['p_price']; ?>">
-										<input type="text" name="quant[1]" id="qty" class="input-number"  data-min="1" data-max="100" value="<?php echo $fet['qty']; ?>">
+										<input type="text" name="quant[<?php echo $abc; ?>]" id="qty" class="input-number"  data-min="1" data-max="100" value="<?php echo $fet['qty']; ?>">
 										<div class="button plus">
 											<button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[<?php echo $abc; ?>]">
 												<i class="ti-plus"></i>
@@ -83,16 +83,15 @@ include ('./include/header2.php');
 									</div>
 									<!--/ End Input Order -->
 								</td>
-								
-								<td class="total-amount" data-title="Total"><span><?php echo $fet['sprice']; ?></span></td>
+								<td class="total-amount" data-title="Total"><span><?php echo $fet['total_price']; ?></span></td>
 								<td class="action" data-title="Remove"><a herf="#" ><i  data-del="<?php echo $fet['cart_id']; ?>" class="ti-trash remove-icon remo"></i></a></td>
 							</tr>
 							<?php 
 							
-							$gtotal=$gtotal+$fet['sprice'];
-							
+							$gtotal=$gtotal+$fet['total_price'];
+							$abc++;
 								}
-								$abc++;
+								
 								
 						?>
 						</tbody>
@@ -341,6 +340,7 @@ include ('./include/header2.php');
 									    if (res == 1) {
                                        alert   ('data has been delete');
                                         $(msg).closest("tr").fadeOut();
+										load_cart_items();
                                         }
 										else{
 											alert   ('data has not been delete');
@@ -359,6 +359,7 @@ include ('./include/header2.php');
 									    if (res == 1) {
                                        alert   ('data has been delete');
                                         $(msg).closest("tr").fadeOut();
+										load_cart_items();
                                         }
 										else{
 											alert   ('data has not been delete');
@@ -369,25 +370,25 @@ include ('./include/header2.php');
 	$(document).on("change",".input-number",function () {
 		var data=$(this).closest("tr");
 		var cart_id=data.find("#cart_id").val();
-		// var cart_id=data.find("#cart_id").val();
-		// var cart_id=data.find("#cart_id").val();
-alert(cart_id);
-							
-					// $.ajax({
-                    //                url: "./cart-ajax.php",
-                    //                method: "POST",
-                    //                data: { action: "delete" },
-                    //                success: function (res) {
-									
-					// 				    if (res == 1) {
-                    //                    alert   ('data has been delete');
-                    //                     $(msg).closest("tr").fadeOut();
-                    //                     }
-					// 					else{
-					// 						alert   ('data has not been delete');
-					// 					}
-                    //                }
-                    //           });
+		var p_price=data.find("#p_price").val();
+		var qty=data.find("#qty").val();
+			$.ajax({
+				url: "./cart-ajax.php",
+				method: "POST",
+				data: { cart_id: cart_id,
+						p_price: p_price,
+						qty: qty
+				},
+				success: function (res) {
+				
+					if (res == 1) {
+					window.location.reload();
+					}
+					else{
+						alert   ('Quantity has not been increased');
+					}
+				}
+			});
 	})
  })
 		</script>

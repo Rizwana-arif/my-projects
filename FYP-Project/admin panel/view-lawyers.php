@@ -5,7 +5,7 @@ if(empty($_SESSION['email'])){
   header("location:./login.php");
 }
 $lawyerid=$_GET['lawyerid'];
-    $sql="SELECT * FROM `lawyers-rec` where `lawyerid`='$lawyerid' ";
+    $sql="SELECT * FROM `lawyers-rec` l INNER JOIN `case-type` c ON l.speciality=c.caseid where `lawyerid`='$lawyerid' ";
     $run=mysqli_query($conn,$sql);
     $fet=mysqli_fetch_assoc($run);
 include ('./include/header.php');
@@ -172,10 +172,25 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Speciality</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['speciality']; ?>
+                        <?php echo $fet['casetype']; ?>
                         </div>
                       </div>
                       <hr>
+                      <div class="row">
+                      <div class="col-sm-3">
+                          <h6 class="mb-0">Case Handle</h6>
+                        </div>
+                      <?php
+                    $pic=unserialize($fet['case_handle']);
+                    foreach($pic as $p){
+                        ?>
+                         <div class="col-sm-9 text-secondary ">
+                        <?php echo  $p . "  ,  "; ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                      </div>
                       <div class="row">
                         <!-- <div class="col-sm-12">
                           <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>

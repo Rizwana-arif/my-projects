@@ -326,6 +326,7 @@ include ('./include/header2.php');
 				p_id:p_id,
 				p_name : p_name,
 				p_price: p_price,
+				total_price: p_price,
 				p_code: p_code,
 				p_pic : p_pic,
 				email: email

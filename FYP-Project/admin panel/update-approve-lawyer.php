@@ -1,5 +1,6 @@
 <?php
 include ('./include/connection.php');
+require_once './phpqrcode/qrlib.php';
 session_start();
 if(empty($_SESSION['email'])){
     header("location:./login.php");
@@ -42,11 +43,17 @@ $mail->Subject = ($subject);
 $mail->Body = $message;
 
 if ($mail->send()) {
-$usql="UPDATE `lawyers-rec` SET `status`='approved' WHERE `lawyerid`='$lid'";
+    $value='./img/';
+    $qrcode=$value.time().".png";
+    $random=rand(99999,999999);
+    $reg_id="LAW-" . $random . "-FIRM"; 
+    QRcode::png($reg_id,$qrcode,'H',4,4);
+
+$usql="UPDATE `lawyers-rec` SET `status`='approved' , `reg_id`='$reg_id' , `qrcode`='$qrcode' WHERE `lawyerid`='$lid'";
 $urun=mysqli_query($conn,$usql);
 if($urun){
     echo "<script>alert('Lawyer status has been changed in approved')</script>";
-        header("Refresh:0, url=./approved-lawyers.php");
+        header("Refresh:0, url=./disapproved-lawyers.php");
 }else {
     echo "<script>alert('Lawyer status has not been changed in approved')</script>";
 

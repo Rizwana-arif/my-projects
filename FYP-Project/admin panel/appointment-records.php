@@ -76,10 +76,14 @@ include ('./include/sidebar.php');
 
            
            <td class="text-right">
+           <?php if($fet['statuss']=="unaccepted" || $fet['statuss']=="reject"){ ?>
            <a class="btn btn-sm btn-success" href="./update-appoin-accept.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-check"></i></a>
-          
-           
+          <?php }
+          if($fet['statuss']=="accept"){ ?>
             <a class="btn btn-sm btn-danger" href="./update-appoin-reject.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-xmark"></i></a>
+        <?php  } ?>
+           
+            
             <a class="btn btn-sm btn-secondary" href="./view-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-eye"></i></a>
             
             <a class="btn btn-sm btn-danger" href="./delete-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-trash"></i></a>

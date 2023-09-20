@@ -7,7 +7,7 @@ if(empty($_SESSION['email'])  && empty($_SESSION['lawyer_email']) ){
 $pro=$_GET['queryid'];
 $sql="SELECT * FROM `query-rec` WHERE `queryid`='$pro'";
 $run=mysqli_query($conn,$sql);
-$fet=mysqli_fetch_assoc($run);
+$qfet=mysqli_fetch_assoc($run);
 include ('./include/header.php');
 include ('./include/sidebar.php');
 
@@ -94,7 +94,7 @@ include ('./include/sidebar.php');
                     <div class="card-body">
                     <h4 align=center>Query Detail</h4>
                     <hr>
-                    <h5 align=center >Status Of Request  : <?php echo $fet['status']; ?></h6> 
+                    <h5 align=center >Status Of Request  : <?php echo $qfet['status']; ?></h6> 
                     <hr>
                         <h5 >Questionarr Detail</h5>
                         <hr>
@@ -103,7 +103,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Full Name</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['name'] ; ?>
+                        <?php echo $qfet['name'] ; ?>
                         </div>
                       </div>
                       <hr>
@@ -112,7 +112,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Email</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['email']; ?>
+                        <?php echo $qfet['email']; ?>
                         </div>
                       </div>
                       <hr>
@@ -121,7 +121,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Mobile No.</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['mobno']; ?>
+                        <?php echo $qfet['mobno']; ?>
                         </div>
                       </div>
                       <hr>
@@ -131,7 +131,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Question / Query</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['query']; ?>
+                        <?php echo $qfet['query']; ?>
                         </div>
                       </div>
                       <hr>
@@ -140,7 +140,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Answer / Reply</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['reply']?>
+                        <?php echo $qfet['reply']?>
                         </div>
                       </div>
                       <hr>
@@ -149,11 +149,11 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Answer_By</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['reply_by']; ?>
+                        <?php echo $qfet['reply_by']; ?>
                         </div>
                       </div>
                       <hr>
-                      <h5 align=center >Date    : <?php echo $fet['date']; ?></h6> 
+                      <h5 align=center >Date    : <?php echo $qfet['date']; ?></h6> 
 
                       <hr>
                      

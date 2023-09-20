@@ -39,8 +39,8 @@ include ('./include/sidebar.php');
             <tr>
                 <th>Image</th>
                 <th>ID</th>
-                <th>First_Name</th>
-                <th>Last_Name</th>
+                <th>Full_Name</th>
+               
                 <th>User Email</th>
                
                 <th>Contact_Number</th>
@@ -64,8 +64,8 @@ include ('./include/sidebar.php');
         <tr>
         <td><img width=50px height=50px src="<?php echo "./data/user-img/" . $fet['image']; ?> "/></td>
             <td><?php echo $fet['userid'] ; ?></td>
-            <td><?php echo $fet['first_name'] ; ?></td>
-            <td><?php echo $fet['last_name'] ; ?></td>
+            <td><?php echo $fet['first_name'] . " " . $fet['last_name']; ?></td>
+           
             <td><?php echo $fet['user_Email'] ; ?></td>
            
             <td><?php echo $fet['contact_number'] ; ?></td>

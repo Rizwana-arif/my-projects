@@ -1,5 +1,6 @@
 <?php 
 include ('./include/connection.php');
+require_once './phpqrcode/qrlib.php';
 session_start();
 if(empty($_SESSION['email']) ){
     header("location:./login.php");
@@ -31,10 +32,15 @@ if(isset($_POST['post'])){
     $a1=strtolower(pathinfo($bar_license,PATHINFO_EXTENSION));
     $arr=array("jpg" , "jpeg" ,"png");
     if(in_array($a,$arr) and in_array($a1,$arr)){
-        $rand=rand(10000,999999);
-        $pic=$profile_image."." .$rand. ".".$a;
-        $idf=$bar_license."." .$rand. ".".$a1;
-        $sql="INSERT INTO `lawyers-rec`(`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
+		$value='./img/';
+		$qrcode=$value.time().".png";
+		$random=rand(99999,999999);
+		$reg_id="LAW-" . $random . "-FIRM"; 
+		QRcode::png($reg_id,$qrcode,'H',4,4);
+        
+        $pic=$profile_image."." .$random. ".".$a;
+        $idf=$bar_license."." .$random. ".".$a1;
+        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
         $run=mysqli_query($conn,$sql);
         if($run){
 

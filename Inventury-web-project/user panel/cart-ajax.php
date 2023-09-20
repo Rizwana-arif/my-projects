@@ -12,6 +12,7 @@ if(@$_POST['p_code']!=""){
         $p_id=mysqli_real_escape_string($conn,$_POST['p_id']);
         $p_name=mysqli_real_escape_string($conn,$_POST['p_name']);
         $p_price=mysqli_real_escape_string($conn,$_POST['p_price']);
+        $total_price=mysqli_real_escape_string($conn,$_POST['total_price']);
          $p_code=mysqli_real_escape_string($conn,$_POST['p_code']);
          $p_pic=mysqli_real_escape_string($conn,$_POST['p_pic']);
          $email=mysqli_real_escape_string($conn,$_POST['email']);
@@ -22,7 +23,7 @@ if(@$_POST['p_code']!=""){
         if(mysqli_num_rows($run)>0){
             echo 2;
         }else{
-            $isql="INSERT INTO `cart-rec` (`p_id`,`p_name`,`p_price`,`p_code`,`p_pic`,`email`,`qty`) VALUES ('$p_id','$p_name','$p_price','$p_code','$p_pic','$email','$qty')";
+            $isql="INSERT INTO `cart-rec` (`p_id`,`p_name`,`p_price`,`total_price`,`p_code`,`p_pic`,`email`,`qty`) VALUES ('$p_id','$p_name','$p_price','$total_price','$p_code','$p_pic','$email','$qty')";
             $irun=mysqli_query($conn,$isql);
             if($irun){
                 echo 3;
@@ -63,5 +64,17 @@ if(isset($_POST['action']) && $_POST['action']=="delete"){
      echo 2;
     }
 }
-
+if(isset($_POST['cart_id'])){
+    $cart_id=mysqli_real_escape_string($conn,$_POST['cart_id']);
+    $p_price=mysqli_real_escape_string($conn,$_POST['p_price']);
+    $qty=mysqli_real_escape_string($conn,$_POST['qty']);
+   $t=$qty*$p_price;
+   $usql="UPDATE `cart-rec` SET `total_price`='$t' , `qty`='$qty' WHERE `email`='$email' AND `cart_id`='$cart_id'";
+   $urun=mysqli_query($conn,$usql);
+   if($urun){
+    echo 1;
+   }else{
+    echo 2;
+   }
+}
 ?>

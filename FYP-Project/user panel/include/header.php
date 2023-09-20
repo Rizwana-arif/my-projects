@@ -75,6 +75,7 @@
                                 <a href="#" class="nav-item nav-link">About</a>
                                 <!-- <a href="service.html" class="nav-item nav-link">Practice</a> -->
                                 <a href="./lawyers.php" class="nav-item nav-link">Lawyers</a>
+                                <a href="./scan-profile.php" class="nav-item nav-link">Scan Profile</a>
                                 <a href="./portfolio.html" class="nav-item nav-link">Case Studies</a>
                                 <a href="./view-FAQ's.php" class="nav-item nav-link">FAQ's</a>
 

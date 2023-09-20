@@ -40,7 +40,7 @@ include ('./include/sidebar.php');
                                         <th >Name</th>
                                         <th >Email</th>
                                         <th >Mobile No</th>
-                                        <th >Query</th>
+                                      
                                         
                                         <th >Status</th>
                                         <th >Date</th>
@@ -60,7 +60,7 @@ include ('./include/sidebar.php');
                          <td><?php echo $fet['name'] ;?></td>
                                         <td><?php echo $fet['email'] ;?></td>
                                         <td><?php echo $fet['mobno'] ;?></td>
-                                        <td><?php echo $fet['query'] ;?></td>
+                                        
                                         <td><?php echo $fet['status'] ;?></td>
                                        <td><?php echo $fet['date'] ;?></td>
 

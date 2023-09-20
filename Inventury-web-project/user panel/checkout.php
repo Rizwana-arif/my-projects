@@ -128,24 +128,27 @@ include ('./include/header2.php');
 <?php 
 $ssql="SELECT * FROM `cart-rec` WHERE `email`='$email'";
 $srun=mysqli_query($conn,$ssql);
+$gtotal=0;
 while($sfet=mysqli_fetch_assoc($srun)){
 ?>
 
 <tr>
 <td ><span><?php echo $sfet['p_name']; ?></span></td>
 <td ><span><?php echo $sfet['qty']; ?></span></td>
-<td ><span><?php echo $sfet['p_price']; ?></span></td>
+<td ><span><?php echo $sfet['total_price']; ?></span></td>
 </tr>
 
-<?php } ?>
+<?php 
+$gtotal=$gtotal+$sfet['total_price'];
+} ?>
 </tbody>
 </table>
 								<h2>CART  TOTALS</h2>
 								<div class="content">
 									<ul>
-										<li>Sub Total<span></span></li>
-										<li>(+) Shipping<span>$10.00</span></li>
-										<li class="last">Total<span>$340.00</span></li>
+										<li>Sub Total<span><?php echo $gtotal . " PKR"; ?></span></li>
+										<li>(+) Shipping<span>0 PKR</span></li>
+										<li class="last">Total<span><?php echo $gtotal . " PKR"; ?></span></li>
 									</ul>
 								</div>
 							</div>

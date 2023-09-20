@@ -48,7 +48,7 @@ include ('./include/sidebar.php');
                            
                         <tbody>
                         <?php 
-                           $sql="SELECT * FROM `lawyers-rec` WHERE `status`='disapproved'";
+                           $sql="SELECT * FROM `lawyers-rec` WHERE `status`='disapproved' ";
                            $run=mysqli_query($conn,$sql);
                            while($fet=mysqli_fetch_assoc($run)){
                            ?>

@@ -42,11 +42,11 @@ $mail->Subject = ($subject);
 $mail->Body = $message;
 
 if ($mail->send()) {
-$usql="UPDATE `lawyers-rec` SET `status`='unapproved' WHERE `lawyerid`='$lid'";
+$usql="UPDATE `lawyers-rec` SET `status`='disapproved' ,`qrcode`=' ' , `reg_id`=' ' WHERE `lawyerid`='$lid'";
 $urun=mysqli_query($conn,$usql);
 if($urun){
     echo "<script>alert('Lawyer status has been changed in disapproved')</script>";
-        header("Refresh:0, url=./approved-lawyers.php");
+        header("Refresh:0, url=./disapproved-lawyers.php");
 }else {
     echo "<script>alert('Lawyer status has not been changed in disapproved')</script>";
 

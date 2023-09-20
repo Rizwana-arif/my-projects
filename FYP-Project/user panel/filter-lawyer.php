@@ -1,6 +1,6 @@
 <?php 
 include ('./include/connection.php');
-$casecategory=$_POST['category'];
+ $casecategory=$_POST['category'];
 if($casecategory=="null"){
    
 							$sql="SELECT * FROM `lawyers-rec` WHERE `status`='approved'";
