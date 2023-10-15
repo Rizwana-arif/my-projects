@@ -16,8 +16,9 @@ if(isset($_POST['sub'])){
    }
     
     $lawyern=$lawyer;
+    $role_date=date("m-d-y");
     $rolearr=serialize($roleacc);
-    $sql="INSERT INTO `role-add-bylawyer` (`role`,`access_user`,`roleacc`,`lawyern`) VALUES ('$role','$access_user','$rolearr','$lawyern')";
+    $sql="INSERT INTO `role-add-bylawyer` (`role`,`access_user`,`roleacc`,`lawyern`,`role_date`) VALUES ('$role','$access_user','$rolearr','$lawyern','$role_date')";
     $run=mysqli_query($conn,$sql);
     if($run){
        
@@ -38,12 +39,18 @@ include ('./include/sidebar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Role</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
+ <style>
+.xyz{
+    width: 40%;
+    margin-top : 5%;
+}
+    </style>
 </head>
 <body>
-<div class="container-fluid pt-4 px-4 ">
-    <div class="bg-light rounded h-100 p-4 w-50">
-        <h4 class="mb-4 d-flex justify-content-center text-success">Add Role</h4>
+   
+<div class="container-fluid pt-4 px-4 xyz">
+    <div class="bg-light rounded h-100 p-4 ">
+        <h4 class="mb-4 d-flex justify-content-center text-dark">Add Role</h4>
         <form  method="post" enctype="multipart/form-data">
             <div class="row g-4 ">
                 <div class="mb-3 col-lg-12 ">
@@ -69,12 +76,13 @@ include ('./include/sidebar.php');
                             <br>
                             <input type="checkbox" value="settings" name="roleacc[]" />Settings
                      </div>
-                <button type="submit" class="btn btn-primary bg-success w-100" name="sub">Add Role </button>
+                <button type="submit" class="btn btn-dark bg-dark w-100" name="sub">Add Role </button>
                 </div>
             </div>
         </form>
     </div>
 </div>
+</center>
 <script>
   function checkrole(){
          var c=document.querySelector("#urole").value;

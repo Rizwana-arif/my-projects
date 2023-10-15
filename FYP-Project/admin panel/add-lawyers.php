@@ -27,6 +27,7 @@ if(isset($_POST['post'])){
     $agree=mysqli_real_escape_string($conn,$_POST['agree']);
     $estatus="lawyer";
     $status="approved";
+	$reg_date=date ("m-d-y");
     $case_handle_arr=serialize($case_handle);
     $a=strtolower(pathinfo($profile_image,PATHINFO_EXTENSION));
     $a1=strtolower(pathinfo($bar_license,PATHINFO_EXTENSION));
@@ -40,7 +41,7 @@ if(isset($_POST['post'])){
         
         $pic=$profile_image."." .$random. ".".$a;
         $idf=$bar_license."." .$random. ".".$a1;
-        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`,`reg_date`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status','$reg_date')";
         $run=mysqli_query($conn,$sql);
         if($run){
 
@@ -74,24 +75,34 @@ include ('./include/sidebar.php');
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 		<link rel="stylesheet" href="css/all.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
-		<link rel="stylesheet" href="css/style2.css">
-		<link rel="stylesheet" href="css/media.css">
+		<link href="css/style.css" rel="stylesheet">
+		
+		
 		<title>Log In here</title>
 <style>
   .has-error .help-block {
   color: red;
 }
-  </style>
+ .registerform {
+	width: 60%; /* Set width to 80% */
+        margin: 0 auto; /* Center content horizontally */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+		margin-top: 25px;
+		margin-bottom: 25px;
+        }
+    </style>
+ 
 	</head>
 	<body>
-		<section class="registerform">
-			<div class="container mt-5 badge-light p-3">
-				<div class="row">
-					<div class="col-md-6">
-						<h1>Hello Lawyer <i class="fas fa-user-tie"></i> !!</h1></br></br>
-						<h2>please register your self here <i class="fas fa-hand-point-right"></i></h2>
-					</div>
-					<div class="col-md-6">
+		<section class="registerform ">
+		<center><h2>Add Lawyers</h2></center>
+			<div class="container mt-5  ">
+				<div class="row justify-content-center">
+					
+					<div class="col-md-12">
 						<form   method="post" enctype="multipart/form-data"  id="validateForm">
 							<div class="form-row">
 								<div class="form-group col-md-6">

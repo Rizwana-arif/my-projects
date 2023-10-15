@@ -121,7 +121,7 @@ include ('./include/sidebar.php');
                 <h3>Record of Act</h3>
                 </div>
                 <div class="col-6">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
                 class="fa fa-user-plus"></i>
                 Add Act
                 </button>
@@ -152,8 +152,8 @@ while($fet=mysqli_fetch_assoc($run)){
    <td><?php echo $fet['actid'] ; ?></td>
    <td><?php echo $fet['act'] ; ?></td>
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-act.php?actid=<?php echo $fet['actid']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

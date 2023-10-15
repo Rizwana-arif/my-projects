@@ -55,7 +55,7 @@ margin-top : 10%;
                     <div class="card-header justify-content-center" >
                       <h4>Payment
                       <!-- <a href="./viewcategory.php"></a> -->
-                      <button class="btn btn-primary" style="margin-left:240px;font-size: 18px;" onclick="location.href='./view-payments.php'">View Payment</button></h4>
+                      <button class="btn btn-dark" style="margin-left:240px;font-size: 18px;" onclick="location.href='./view-payments.php'">View Payment</button></h4>
 
                     </div>
                     <div class="card-body">
@@ -90,7 +90,7 @@ margin-top : 10%;
                       </div>
                     </div>
                     <div class="card-footer text-right ">
-                      <button class="btn btn-primary justify-content-right" name="sub"  value="Register">Submit</button>
+                      <button class="btn btn-dark w-100" name="sub"  value="Register">Submit</button>
                     </div>
                   </form>
                 </div>

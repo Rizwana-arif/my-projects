@@ -62,14 +62,14 @@ include ('./include/sidebar.php');
                                         <td><?php echo $fet['mobno'] ;?></td>
                                         
                                         <td><?php echo $fet['status'] ;?></td>
-                                       <td><?php echo $fet['date'] ;?></td>
+                                       <td><?php echo $fet['query_date'] ;?></td>
 
            
                         <td class="text-right">
 
-                         <a class="btn btn-sm btn-success" href="./query-reply-form.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-reply"></i></a>
-                         <a class="btn btn-sm btn-secondary" href="./view-query.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-eye"></i></a>
-                         <a class="btn btn-sm btn-danger" href="./delete-query.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-trash"></i></a>
+                         <a class="btn btn-sm btn-success" title="Reply" href="./query-reply-form.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-reply"></i></a>
+                         <a class="btn btn-sm btn-secondary" title="View" href="./view-query.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-eye"></i></a>
+                         <a class="btn btn-sm btn-danger" title="Delete" href="./delete-query.php?queryid=<?php echo $fet['queryid']; ?>"><i class="fa-solid fa-trash"></i></a>
                          </td>
                         </tr>
       

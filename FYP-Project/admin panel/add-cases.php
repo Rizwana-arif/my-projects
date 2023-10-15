@@ -123,7 +123,7 @@ include ('./include/sidebar.php');
                         <h3>Record of Cases</h3>
                         </div>
                         <div class="col-6">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                        <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
                         class="fa fa-user-plus"></i>
                         Add Cases Type
                         </button>
@@ -154,8 +154,8 @@ include ('./include/sidebar.php');
            <td><?php echo $fet['caseid'] ; ?></td>
            <td><?php echo $fet['casetype'] ; ?></td>
            <td class="text-right">
-           <a class="btn btn-sm btn-success" href="./update-case.php?caseid=<?php echo $fet['caseid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-             <a class="btn btn-sm btn-danger" href="./delete-case.php?caseid=<?php echo $fet['caseid']; ?>"><i class="fa-solid fa-trash"></i></a>
+           <a class="btn btn-sm btn-success" title="Update" href="./update-case.php?caseid=<?php echo $fet['caseid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+             <a class="btn btn-sm btn-danger" title="Delete" href="./delete-case.php?caseid=<?php echo $fet['caseid']; ?>"><i class="fa-solid fa-trash"></i></a>
            </td>
           </tr>
       

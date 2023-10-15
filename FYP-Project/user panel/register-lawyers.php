@@ -28,6 +28,7 @@ if(isset($_POST['post'])){
     $agree=mysqli_real_escape_string($conn,$_POST['agree']);
     $estatus="lawyer";
     $status="disapproved";
+	$reg_date=date ("m-d-y");
     $case_handle_arr=serialize($case_handle);
     $a=strtolower(pathinfo($profile_image,PATHINFO_EXTENSION));
     $a1=strtolower(pathinfo($bar_license,PATHINFO_EXTENSION));
@@ -41,7 +42,7 @@ if(isset($_POST['post'])){
       
         $pic=$profile_image."." .$random. ".".$a;
         $idf=$bar_license."." .$random. ".".$a1;
-        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status')";
+        $sql="INSERT INTO `lawyers-rec`(`qrcode`,`reg_id`,`first_Name`,`last_Name`,`contact_number`, `cnic`,`lawyer_email`,`password`,`profile_image`,`bar_license`,`university_college`,`degree`,`passing_year`,`full_address`,`city`,`zip_code`,`practice_Length`,`case_handle`,`speciality`,`about`,`agree`,`estatus`,`status`,`reg_date`) VALUES ('$qrcode','$reg_id','$first_Name','$last_Name','$contact_number','$cnic','$lawyer_email','$password','$pic','$idf','$university_college','$degree','$passing_year','$full_address','$city','$zip_code','$practice_Length','$case_handle_arr','$speciality','$about','$agree','$estatus','$status','$reg_date')";
         $run=mysqli_query($conn,$sql);
         if($run){
 

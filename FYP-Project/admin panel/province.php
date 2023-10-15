@@ -133,8 +133,8 @@ while($cfet=mysqli_fetch_assoc($run)){
    <td><?php echo $cfet['pid'] ; ?></td>
    <td><?php echo $cfet['province'] ; ?></td>
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-province.php?pid=<?php echo $cfet['pid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-province.php?pid=<?php echo $cfet['pid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-province.php?pid=<?php echo $cfet['pid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-province.php?pid=<?php echo $cfet['pid']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

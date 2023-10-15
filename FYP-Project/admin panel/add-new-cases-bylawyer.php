@@ -7,7 +7,7 @@ if( empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
  $mylawyer=$_SESSION['lawyerid'];
 if(isset($_POST['sub'])){
     $l_name=$_SESSION['lawyerid'];
-    $case_condition=mysqli_real_escape_string($conn,$_POST['case_condition']);
+    $case_condition="Processing";
     $client_name=mysqli_real_escape_string($conn,$_POST['client_name']);
     $client_email=mysqli_real_escape_string($conn,$_POST['client_email']);
     $mob_no=mysqli_real_escape_string($conn,$_POST['mob_no']);
@@ -37,7 +37,8 @@ if(isset($_POST['sub'])){
     $ldate=mysqli_real_escape_string($conn,$_POST['ldate']);
     $ndate=mysqli_real_escape_string($conn,$_POST['ndate']);
     $ph=mysqli_real_escape_string($conn,$_POST['ph']);
-    $sql="INSERT INTO `add-case-bylawyers` (`l_name`,`case_condition`,`client_name` , `client_email` , `mob_no` , `petitioner_name` ,`adv_name` , `respondent_name`,`respondent_adv`,`pro`,`dis`,`teh`,`court`,`jname`,`caset`,`ccat`,`csub`,`cno`,`cdate`,`refno`,`rdate`,`pstation`,`fno`,`fdate`,`fnum`,`fidate`,`atype`,`us`,`ldate`,`ndate`,`ph`) VALUES ('$l_name','$case_condition','$client_name','$client_email','$mob_no','$petitioner_name','$adv_name','$respondent_name','$respondent_adv','$pro','$dis','$teh','$court','$jname','$caset','$ccat','$csub','$cno','$cdate','$refno','$rdate','$pstation','$fno','$fdate','$fnum','$fidate','$atype','$us','$ldate','$ndate','$ph')";
+    $case_date=date("m-d-y");
+    $sql="INSERT INTO `add-case-bylawyers` (`l_name`,`case_condition`,`client_name` , `client_email` , `mob_no` , `petitioner_name` ,`adv_name` , `respondent_name`,`respondent_adv`,`pro`,`dis`,`teh`,`court`,`jname`,`caset`,`ccat`,`csub`,`cno`,`cdate`,`refno`,`rdate`,`pstation`,`fno`,`fdate`,`fnum`,`fidate`,`atype`,`us`,`ldate`,`ndate`,`ph`,`case_date`) VALUES ('$l_name','$case_condition','$client_name','$client_email','$mob_no','$petitioner_name','$adv_name','$respondent_name','$respondent_adv','$pro','$dis','$teh','$court','$jname','$caset','$ccat','$csub','$cno','$cdate','$refno','$rdate','$pstation','$fno','$fdate','$fnum','$fidate','$atype','$us','$ldate','$ndate','$ph','$case_date')";
     $run=mysqli_query($conn,$sql);
     if($run){
          echo "<script> alert ('Successfully ! Case has been added....') </script>";
@@ -58,22 +59,12 @@ include ('./include/sidebar.php');
           <div class="row justify-content-center">
                 <div class="bg-light rounded h-100 p-4 w-75">
                     <h4 class="mb-4 d-flex justify-content-center text-dark">Add New Cases
-                    <a class="btn btn-sm " href="./view-cases-addbylawyer.php" style="margin-left: 62%;        background-color: #000;color: #ddd;"><i
+                    <a class="btn btn-sm " href="./view-cases-addbylawyer.php" style="margin-left: 50%;        background-color: #000;color: #ddd;"><i
                         class="fa-solid fa-eye"></i>View Cases</a>
                     </h4>
                     <form  method="post">
             <div class="row g-4 ">
-            <div class="mb-3 col-lg-6 ">
-                      
-                      <label  class="form-label">Case Condition</label>
-                      <select class="form-select mb-3 form-control" aria-label="Default select example" name="case_condition">
-                          
-                          <option selected>Processing</option>
-                          <option >Wining</option>
-                          <option >Losing</option>
-                      </select>
-                     
-                  </div>
+          
                
                   <h5 align="center">Client Information</h5>
                     <div class="mb-3 col-lg-4">

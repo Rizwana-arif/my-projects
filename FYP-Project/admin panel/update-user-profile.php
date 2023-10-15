@@ -88,12 +88,9 @@ section{
 		
 		<section class="registerform">
 			<div class="container bg-light">
-				<div class="row">
-					<div class="col-md-6 mt-5">
-						<h1>Hello !!! <i class="fas fa-hand-paper"></i></h1></br></br></br>
-						<h3>Register here to find suitable lawyers <i class="fas fa-hand-point-right"></i></h3>
-					</div>
-					<div class="col-md-6 mt-5">
+			<center><h2>Update Your Profile </h2></center>
+				<div class="row justify-content-center">
+					<div class="col-md-8 mt-5">
 						<form  method="POST" enctype="multipart/form-data" id="validateForm">
 							
 							<div class="form-row">
@@ -165,7 +162,7 @@ section{
 									<input id="accept" name="agree" type="checkbox" value="y" <?php echo $m; ?> /><strong>I Agree with terms & conditions </strong>
 								</div>
 							</div>
-							<input name="sub" type="submit" class="btn btn-block btn-dark"  value="Register" />
+							<input name="sub" type="submit" class="btn btn-block btn-dark mb-5"  value="Update" />
 							<!--after signup redirect user dashboard page-->
 						</form>
 					</div>

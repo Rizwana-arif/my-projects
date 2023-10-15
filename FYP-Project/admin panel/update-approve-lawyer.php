@@ -31,7 +31,7 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "rizwanaarif448@gmail.com"; //enter you email address
-$mail->Password ='kdrhsicexdwjqljq'; //enter you email password
+$mail->Password ='wyyf zzit mydr dbrn'; //enter you email password
 $mail->Port = 465;
 $mail->SMTPSecure = "ssl";
 
@@ -41,7 +41,7 @@ $mail->setFrom($email, $name);
 $mail->addAddress($email); //enter you email address
 $mail->Subject = ($subject);
 $mail->Body = $message;
-
+$mail->SMTPDebug = 2;
 if ($mail->send()) {
     $value='./img/';
     $qrcode=$value.time().".png";

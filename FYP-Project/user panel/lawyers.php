@@ -87,7 +87,8 @@ include ('./include/header.php');
                     <div class="row align-items-center">
                         <div class="col-lg-5 col-md-6">
                             <div class="about-img">
-                                <img src="img/about.jpg" alt="Image">
+                            <img src="./img/team.jpg" alt="Image" style="height:450px;">
+
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">
@@ -95,13 +96,13 @@ include ('./include/header.php');
                                 <h2>About Attorneys</h2>
                             </div>
                             <div class="about-text">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem.
+                            <p>
+                                Instant Legal Consultant is a “Next Gen” Online Legal Solution platform managed by a leading  Law firm with experienced team of lawyers & legal consultants in the Faisalabad, the law firm has been known for its legal innovation and outstanding service to clients. Our team consists of highly qualified lawyers from multinational backgrounds and experience in many jurisdictions. 
                                 </p>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulputate. Aliquam metus tortor, auctor id gravida condimentum, viverra quis sem. Curabitur non nisl nec nisi scelerisque maximus. Aenean consectetur convallis porttitor. Aliquam interdum at lacus non blandit.
+                                We are proud to present this site to our clients as this is the first online legal service website in FSD to provide legal services online which are in most efficient way, hassle free, quick and at a lower cost. You are no longer required to visit law offices and carry documents as we provide our legal services online. All you need to do is fill the information required and our qualified lawyers will work on your query and get back to you shortly.
                                 </p>
-                                <a class="btn" href="">Learn More</a>
+                                
                             </div>
                         </div>
                     </div>

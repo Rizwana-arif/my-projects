@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="../admin panel/index.php">
                                     <h1>Kanun</h1>
                                     <!-- <img src="img/logo.jpg" alt="Logo"> -->
                                 </a>
@@ -80,9 +80,8 @@
                                 <a href="./view-FAQ's.php" class="nav-item nav-link">FAQ's</a>
 
                                 <?php
-                                if(@$_SESSION['estatus']=="user"){
+                                if(@$_SESSION['estatus']=="user" or @$_SESSION['estatus']=="admin"){
                                 ?>
-                                <a href="../admin panel/users-profile.php" class="nav-item nav-link">MyProfile</a>
                                 <a href="../admin panel/logout.php" class="nav-item nav-link">Logout</a>
                                 <?php } ?>
                                 <?php
@@ -100,6 +99,7 @@
                                     </div>
                                 </div> -->
                                 <a href="#" class="nav-item nav-link">Contact</a>
+                                <?php if(empty($_SESSION['estatus'])){ ?>
                                 <div class="nav-item dropdown">
                                     <a href="#" class=" nav-link dropdown-toggle" data-toggle="dropdown">Register</a>
                                     <div class="dropdown-menu">
@@ -107,11 +107,13 @@
                                         <a href="./register-users.php" class="dropdown-item">As User</a>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                             <div class="nav-item dropdown">
                                     <!-- <a href="../admin panel/login.php" class="btn nav-link dropdown-toggle" data-toggle="dropdown">Login</a> -->
-                                <a class="btn" href="../admin panel/login.php">Login</a>
-
+                                    <?php if(empty($_SESSION['estatus'])){ ?>
+                                    <a class="btn" href="../admin panel/login.php">Login</a>
+<?php } ?>
                                     <!-- <div class="dropdown-menu">
                                          <a href="../admin panel/login.php" class="dropdown-item">As Admin</a>
                                         <a href="../admin panel/login.php" class="dropdown-item">As Lawyer</a>
@@ -119,9 +121,11 @@
                                         <a href="../admin panel/login.php" class="dropdown-item">As Team</a>
                                     </div> -->
                                 </div>
+                                <?php if(empty($_SESSION['estatus']) or $_SESSION['estatus']=="user"){ ?>
                             <div class="ml-auto">
                                 <a class="btn" href="./appointment.php">Get Appointment</a>
                             </div>
+                            <?php } ?>
                             
                         </div>
                     </nav>

@@ -37,6 +37,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    
     <script>
         $(document).ready(function () {
             var table = $('#example2').DataTable({

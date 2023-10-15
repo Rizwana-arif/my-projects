@@ -1,11 +1,11 @@
 <?php 
 include ("./include/connection.php");
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email'])){
     header("location:./login.php");
 }
 $uroleid=$_GET['uroleid'];
-$lawyer=$_SESSION['email'];
+$lawyer=$_SESSION['lawyer_email'];
 $sql="SELECT * FROM `user-role-rec` ur INNER JOIN `role-add-bylawyer` ra ON ur.urole=ra.lroleid  WHERE `uroleid`='$uroleid'";
 $run=mysqli_query($conn,$sql);
 $fet=mysqli_fetch_assoc($run);

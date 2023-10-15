@@ -17,12 +17,13 @@ if(isset($_POST['sub'])){
     $agree=mysqli_real_escape_string($conn,$_POST['agree']);   
 	$estatus="user";
 	$assign_lawyer="";
+	$user_date=date("m-d-y");
     $a=strtolower(pathinfo($image,PATHINFO_EXTENSION));
     $arr=array("jpg" , "jpeg" ,"png");
     if(in_array($a,$arr)){
         $rand=rand(10000,999999);
         $pic=$image."." .$rand. ".".$a;
-        $sql="INSERT INTO `users-rec` (`first_name`,`last_name`,`user_Email`,`password`,`contact_number`,`image`,`full_address`,`city`,`zip_code`,`agree`,`estatus`,`assign_lawyer`) VALUES ('$first_name','$last_name','$user_Email','$password','$contact_number','$pic','$full_address','$city','$zip_code','$agree','$estatus','$assign_lawyer')";
+        $sql="INSERT INTO `users-rec` (`first_name`,`last_name`,`user_Email`,`password`,`contact_number`,`image`,`full_address`,`city`,`zip_code`,`agree`,`estatus`,`assign_lawyer`,`user_date`) VALUES ('$first_name','$last_name','$user_Email','$password','$contact_number','$pic','$full_address','$city','$zip_code','$agree','$estatus','$assign_lawyer','$user_date')";
         $run=mysqli_query($conn,$sql);
         if($run){
             move_uploaded_file($_FILES['image']['tmp_name'],"../admin panel/data/user-img/".$pic);

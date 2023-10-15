@@ -7,33 +7,26 @@
  <!-- Sidebar Start -->
  <div class="sidebar pe-0 pb-0">
             <nav class="navbar bg-light navbar-light">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>LEGAL</h3>
+                <a href="./index.php" class="navbar-brand mx-4 mb-3">
+                    <!-- <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>LEGAL</h3> -->
+                    <img class="rounded-circle" src="./img/logoof.jpeg" alt="" style="width: 100px; height: 100px;">
                 </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
-                    </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
-                        <span>Admin</span>
-                    </div>
-                </div>
                 <div class="navbar-nav w-100">
                     <?php
                     if($_SESSION['estatus']=="admin"){
                     ?>
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Admin</a>
+                    <a href="./index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Admin</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Lawyers</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="./approved-lawyers.php" class="dropdown-item">Approved Lawyers</a>
                             <a href="./disapproved-lawyers.php" class="dropdown-item">Disapproved Lawyers</a>
+                            <a href="./history-oflawyers.php" class="dropdown-item">Lawyers History</a>
                         </div>
                     </div>
                     <a href="./users-rec-view.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Users</a>
-                    <a href="./view-payment-admin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Payments</a>
+                    <a href="./admin-cases-history.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Cases History</a>
+                    
 
                     <!-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Lawyers</a>
@@ -52,7 +45,7 @@
                             <a href="./rejected-appointments.php" class="dropdown-item">Rejected Appointment</a>
                         </div>
                     </div>
-
+                    <a href="./view-payment-admin.php" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Payments</a>
                     <!-- <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Feedback</a> -->
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Queries</a>
@@ -76,7 +69,7 @@
                     <?php 
 if($_SESSION['estatus']=="lawyer"){
                     ?>
-                    <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Lawyer</a>
+                    <a href="./index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Lawyer</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Cases</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -84,16 +77,15 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./view-cases-addbylawyer.php" class="dropdown-item">View Cases</a>
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
+                    <!-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Team Members</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="./add-role.php" class="dropdown-item">Role</a>
                             <a href="./add-members.php" class="dropdown-item">Members</a>
                         </div>
-                    </div>
-                    <a href="./appointment-records.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointments</a>
+                    </div> -->
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>User</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Team Members</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="./add-role-bylawyer.php" class="dropdown-item">Add Role</a>
                             <a href="./view-role-bylawyer.php" class="dropdown-item">View Role</a>
@@ -101,6 +93,7 @@ if($_SESSION['estatus']=="lawyer"){
                             <a href="./view-user-role.php" class="dropdown-item">View User Role</a>
                         </div>
                     </div>
+                    <a href="./appointment-records.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Appointments</a>
                     <a href="./view-payment-lawyer.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Payments</a>
                     <a href="./visiting-lawyer-card.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>My Visiting Card</a>
                     <div class="nav-item dropdown">
@@ -144,7 +137,7 @@ if($_SESSION['estatus']=="lawyer"){
                         
                        
                     ?>
-                   <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Team</a>
+                   <a href="./index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Team</a>
                    <?php  if(in_array("cases",$arr)){ ?>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Cases</a>
@@ -203,7 +196,7 @@ if($_SESSION['estatus']=="lawyer"){
                     <?php } 
                      if($_SESSION['estatus']=="user"){
                     ?>
-                      <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>User</a>
+                      <a href="./index.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>User</a>
                     <a href="./lawyers-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Lawyers History</a>
                     <a href="./cases-history.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Case History</a>
                     <a href="./rating-lawyer.php" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Rating</a>

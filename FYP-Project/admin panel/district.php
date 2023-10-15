@@ -124,7 +124,7 @@ include ('./include/sidebar.php');
                 <h3>Record of District</h3>
                 </div>
                 <div class="col-6">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
                 class="fa fa-user-plus"></i>
                 Add district
                 </button>
@@ -157,8 +157,8 @@ while($cfet=mysqli_fetch_assoc($run)){
    <td><?php echo $cfet['district'] ; ?></td>
 
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-district.php?did=<?php echo $cfet['did']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-district.php?did=<?php echo $cfet['did']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-district.php?did=<?php echo $cfet['did']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-district.php?did=<?php echo $cfet['did']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

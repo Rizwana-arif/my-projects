@@ -153,7 +153,7 @@ include ('./include/sidebar.php');
                         </div>
                       </div>
                       <hr>
-                      <h5 align=center >Date    : <?php echo $qfet['date']; ?></h6> 
+                      <h5 align=center >Date    : <?php echo $qfet['query_date']; ?></h6> 
 
                       <hr>
                      

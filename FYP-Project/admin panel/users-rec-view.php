@@ -27,7 +27,7 @@ include ('./include/sidebar.php');
                         <h3>List of Users</h3>
                         </div>
                         <div class="col-6">
-                        <a class="btn btn-sm " href="../user panel/register-users.php" style="margin-left: 62%;        background-color: #000;color: #ddd;"><i
+                        <a class="btn btn-sm " href="./add-users.php" style="margin-left: 62%;        background-color: #000;color: #ddd;"><i
                         class="fa fa-user-plus"></i>Add New</a>
                         </div>
                   
@@ -73,8 +73,8 @@ include ('./include/sidebar.php');
             <td><?php echo $fet['city'] ; ?></td>
            
             <td><?php echo $fet['first_Name'] ; ?></td>
-            <td><a class="btn btn-sm btn-secondary" href="./view-users.php?userid=<?php echo $fet['userid']; ?>"><i class="fa-solid fa-eye"></i></a>
-            <a class="btn btn-sm btn-danger" href="./delete-users.php?userid=<?php echo $fet['userid']; ?>"><i class="fa-solid fa-trash"></i></a>
+            <td><a class="btn btn-sm btn-secondary" title="View" href="./view-users.php?userid=<?php echo $fet['userid']; ?>"><i class="fa-solid fa-eye"></i></a>
+            <a class="btn btn-sm btn-danger" title="Delete" href="./delete-users.php?userid=<?php echo $fet['userid']; ?>"><i class="fa-solid fa-trash"></i></a>
         </td>
     </tr>
        

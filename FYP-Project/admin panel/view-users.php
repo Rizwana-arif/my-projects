@@ -69,6 +69,9 @@ include ('./include/sidebar.php');
 .shadow-none {
     box-shadow: 2px!important;
 }
+.car{
+  background-color: #aa9166;
+}
     </style>
 </head>
 <body>
@@ -89,6 +92,13 @@ include ('./include/sidebar.php');
         
               <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
+                <div class="card">
+                    
+                      <div class=" car">
+                      <h4 style="height:89px;display: flex; justify-content: center; align-items: center;"><?php echo strtoupper($fet['first_name']) ?></h4>
+                      </div>
+                    
+                  </div>
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">

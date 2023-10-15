@@ -184,8 +184,8 @@ while($cfet=mysqli_fetch_assoc($run)){
    <td><?php echo $cfet['casectg'] ; ?></td>
    <td><?php echo $cfet['csubctg'] ; ?></td>
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-case-subcategory.php?csubid=<?php echo $cfet['csubid']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

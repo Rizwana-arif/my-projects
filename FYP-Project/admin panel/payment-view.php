@@ -150,7 +150,7 @@ include ('./include/sidebar.php');
                           <h6 class="mb-0">Date</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                        <?php echo $fet['date']; ?>
+                        <?php echo $fet['pay_date']; ?>
                         </div>
                       </div>
                       <hr>

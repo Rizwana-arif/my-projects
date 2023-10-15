@@ -1,7 +1,7 @@
 <?php
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['uemail'])  && empty($_SESSION['lawyer_email']) ){
+if(empty($_SESSION['email']) && empty($_SESSION['lawyer_email']) ){
   header("location:./login.php");
 }
 $pro=$_GET['case_id'];

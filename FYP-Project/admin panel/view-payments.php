@@ -8,6 +8,12 @@ echo $myid=$_SESSION['user_Email'];
 include ('./include/header.php');
 include ('./include/sidebar.php');
 ?>
+<style>
+img{
+    border-radius: 50%;
+    border : 1px solid black;
+}
+    </style>
 <body>
     <!--wrapper-->
     <div class="wrapper">
@@ -40,11 +46,12 @@ include ('./include/sidebar.php');
                                 while($fet=mysqli_fetch_assoc($run)){
                                 ?>
                                 <tr>
-                                    <td><?php echo $fet['first_Name']; ?></td>
+                                    <td> <a href="<?php echo "./data/lawyer-image/" . $fet['profile_image']; ?>"><img width=50px height=50px src="<?php echo "./data/lawyer-image/" . $fet['profile_image']; ?> " /></a>
+                                        <?php echo " ".$fet['first_Name']; ?></td>
                                     <td><?php echo $fet['payment']; ?></td>
                                     <td><img width=50px height=50px src="<?php echo "./data/receipt/" . $fet['receipt']; ?> "/></td>
-                                    <td><?php echo $fet['date']; ?></td>
-                                   <td><a class="btn btn-sm btn-secondary" href="./payment-view.php?pay_id=<?php echo $fet['pay_id']; ?>"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td><?php echo $fet['pay_date']; ?></td>
+                                   <td><a class="btn btn-sm btn-secondary" title="View" href="./payment-view.php?pay_id=<?php echo $fet['pay_id']; ?>"><i class="fa-solid fa-eye"></i></a></td>
                                 </tr>
                                
                                 <?php } ?>

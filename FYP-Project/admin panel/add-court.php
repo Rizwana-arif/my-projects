@@ -207,8 +207,8 @@ while($cfet=mysqli_fetch_assoc($run)){
    <td><?php echo $cfet['tehsil'] ; ?></td>
    <td><?php echo $cfet['court'] ; ?></td>
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-court.php?courtid=<?php echo $cfet['courtid']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

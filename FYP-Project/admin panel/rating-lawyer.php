@@ -11,11 +11,11 @@ if(empty($_SESSION['user_Email'])){
   $lawyer_id = mysqli_real_escape_string($conn, $_POST['lawyer_id']);
   $stars = mysqli_real_escape_string($conn, $_POST['stars']);
   $comment = mysqli_real_escape_string($conn, $_POST['comment']);
- 
+ $rate_date=date("m-d-y");
  
 
  
-  $Sql = "INSERT INTO `rating-lawyer` (`email`, `lawyer_id`, `stars`,`comment`)VALUES ('$email','$lawyer_id','$stars','$comment')";
+  $Sql = "INSERT INTO `rating-lawyer` (`email`, `lawyer_id`, `stars`,`comment`,`rate_date`)VALUES ('$email','$lawyer_id','$stars','$comment','$role_date')";
 $run= mysqli_query($conn,$Sql);
 if($run){
   echo"<script>
@@ -49,7 +49,7 @@ margin-top : 10%;
                     <div class="card-header justify-content-center" >
                       <h4>Rating
                       <!-- <a href="./viewcategory.php"></a> -->
-                      <button class="btn btn-primary" style="margin-left:240px;font-size: 18px;" onclick="location.href='./view-rating.php'">View Rating</button></h4>
+                      <button class="btn btn-dark" style="margin-left:240px;font-size: 18px;" onclick="location.href='./view-rating.php'">View Rating</button></h4>
 
                     </div>
                     <div class="card-body">
@@ -90,7 +90,7 @@ margin-top : 10%;
                       </div>
                     </div>
                     <div class="card-footer text-right ">
-                      <button class="btn btn-primary justify-content-right" name="sub"  value="Register">Submit</button>
+                      <button class="btn btn-dark w-100" name="sub"  value="Register">Submit</button>
                     </div>
                   </form>
                 </div>

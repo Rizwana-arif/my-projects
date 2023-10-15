@@ -79,7 +79,7 @@ include ('./include/sidebar.php');
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2><?php echo $fet['first_Name']; ?></h2>
+                            <h2 style="background-color: #aa9166; display: flex; justify-content: center; align-items: center; height: 100px;"><?php echo strtoupper($fet['first_Name']); ?></h2>
                         </div>
                     </div>
                 </div>

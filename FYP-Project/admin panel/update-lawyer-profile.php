@@ -5,12 +5,11 @@
     header("location:./login.php");
   }
   $pro=$_GET['lawyerid'];
-       $sql="SELECT * FROM `lawyers-rec` WHERE `lawyerid`='$pro'";
+       $sql="SELECT * FROM `lawyers-rec` l INNER JOIN `case-type` c ON l.speciality=c.caseid WHERE `lawyerid`='$pro'";
        $run=mysqli_query($conn,$sql);
-       $fet=mysqli_fetch_assoc($run);
+       $result=mysqli_fetch_assoc($run);
   if(isset($_POST['update'])){
-       $random=rand(99999,999999);
-       $reg_id="LAW-" . $random . "-FIRM"; 
+       
       $first_Name=mysqli_real_escape_string($conn,$_POST['first_Name']);
       $last_Name=mysqli_real_escape_string($conn,$_POST['last_Name']);
       $contact_number=mysqli_real_escape_string($conn,$_POST['contact_number']);
@@ -37,11 +36,11 @@
           $arr=array("png","jpg","jpeg");
           if(in_array($a,$arr) && in_array($a1,$arr)){
 
-			if(file_exists("./data/lawyer-image/".$fet['profile_image'])){
-				unlink("./data/lawyer-image/".$fet['profile_image']);
+			if(file_exists("./data/lawyer-image/".$result['profile_image'])){
+				unlink("./data/lawyer-image/".$result['profile_image']);
 			}
-			if(file_exists("./data/bar-license/".$fet['bar_license'])){
-				unlink("./data/bar-license/".$fet['bar_license']);
+			if(file_exists("./data/bar-license/".$result['bar_license'])){
+				unlink("./data/bar-license/".$result['bar_license']);
 			}
              
              
@@ -49,7 +48,7 @@
               $pi=rand(10000,90000).".".$a;
               $pf=rand(10000,90000).".".$a1;
 
-			  $sql=" UPDATE `lawyers-rec` SET `reg_id`='$reg_id',`first_Name`='$first_Name',`last_Name`='$last_Name',`contact_number`='$contact_number',`cnic`='$cnic',`lawyer_email`='$lawyer_email',`password`='$password',`profile_image`='$pi',`bar_license`='$pf',`university_college`='$university_college',`degree`='$degree',`passing_year`='$passing_year',`full_address`='$full_address',`city`='$city',`zip_code`='$zip_code',`practice_Length`='$practice_Length',`case_handle`='$case_handle_arr',`speciality`='$speciality',`about`='$about' WHERE `lawyerid`='$pro'";
+			  $sql=" UPDATE `lawyers-rec` SET `reg_id`='$reg_id',`first_Name`='$first_Name',`last_Name`='$last_Name',`contact_number`='$contact_number',`cnic`='$cnic',`lawyer_email`='$lawyer_email',`password`='$password',`profile_image`='$pi',`bar_license`='$pf',`university_college`='$university_college',`degree`='$degree',`passing_year`='$passing_year',`full_address`='$full_address',`city`='$city',`zip_code`='$zip_code',`practice_Length`='$practice_Length',`case_handle`='$case_handle_arr',`speciality`='$speciality',`about`='$about'  WHERE `lawyerid`='$pro'";
               $run=mysqli_query($conn,$sql);
               if($run){
                   move_uploaded_file($_FILES['profile_image']['tmp_name'],"./data/lawyer-profile/".$pi);
@@ -64,8 +63,8 @@
 			echo "<script>alert('Image is invalid')</script>";
              }
        }else{
-          $pi=$fet['profile_image'];
-          $pf=$fet['bar_license'];
+          $pi=$result['profile_image'];
+          $pf=$result['bar_license'];
 		 $sql=" UPDATE `lawyers-rec` SET `reg_id`='$reg_id',`first_Name`='$first_Name',`last_Name`='$last_Name',`contact_number`='$contact_number',`cnic`='$cnic',`lawyer_email`='$lawyer_email',`password`='$password',`profile_image`='$pi',`bar_license`='$pf',`university_college`='$university_college',`degree`='$degree',`passing_year`='$passing_year',`full_address`='$full_address',`city`='$city',`zip_code`='$zip_code',`practice_Length`='$practice_Length',`case_handle`='$case_handle_arr',`speciality`='$speciality',`about`='$about' WHERE `lawyerid`='$pro'";
           $run=mysqli_query($conn,$sql);
           if($run){
@@ -114,31 +113,31 @@ section{
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="fname">First Name</label>
-									<input type="text" class="form-control" id="first_Name" name="first_Name" placeholder="first name" value="<?php echo $fet['first_Name']; ?>">
+									<input type="text" class="form-control" id="first_Name" name="first_Name" placeholder="first name" value="<?php echo $result['first_Name']; ?>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="lname">Last Name</label>
-									<input type="text" class="form-control" id="lname" name="last_Name" placeholder="last name" value="<?php echo $fet['last_Name']; ?>">
+									<input type="text" class="form-control" id="lname" name="last_Name" placeholder="last name" value="<?php echo $result['last_Name']; ?>">
 								</div>
 							</div>
                             <div class="form-row">
 								<div class="form-group col-md-6">
                                     <label for="num">Contact Number</label>
-								    <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="contact number" value="<?php echo $fet['contact_number']; ?>">
+								    <input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="contact number" value="<?php echo $result['contact_number']; ?>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="lname">CNIC</label>
-									<input type="text" class="form-control" id="cnic" name="cnic" placeholder="CNIC" value="<?php echo $fet['cnic']; ?>">
+									<input type="text" class="form-control" id="cnic" name="cnic" placeholder="CNIC" value="<?php echo $result['cnic']; ?>">
 								</div>
 							</div>
                             <div class="form-row">
 								<div class="form-group col-md-6">
                                     <label for="email">Email</label>
-								    <input type="email" class="form-control" id="lawyer_email" name="lawyer_email" placeholder="email address" value="<?php echo $fet['lawyer_email']; ?>">
+								    <input type="email" class="form-control" id="lawyer_email" name="lawyer_email" placeholder="email address" value="<?php echo $result['lawyer_email']; ?>">
 								</div>
 								<div class="form-group col-md-6">
 									<label for="lname">Password</label>
-									<input type="text" class="form-control" id="lname" name="password" placeholder="Generate Password" value="<?php echo $fet['password']; ?>">
+									<input type="text" class="form-control" id="lname" name="password" placeholder="Generate Password" value="<?php echo $result['password']; ?>">
 								</div>
 							</div>
 							<div class="form-group">
@@ -159,12 +158,12 @@ section{
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="institute">University / College Name</label>
-									<input type="text" class="form-control" id="institute" name="university_college" placeholder="Institute name" value="<?php echo $fet['university_college']; ?>">
+									<input type="text" class="form-control" id="institute" name="university_college" placeholder="Institute name" value="<?php echo $result['university_college']; ?>">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="degree">Degree</label>
 									<select id="degree" name="degree" class="form-control">
-										<option selected><?php echo $fet['degree']; ?></option>
+										<option selected><?php echo $result['degree']; ?></option>
 										<option value="LLB">LLB</option>
 										<option value="LLM">LLM</option>
 									</select>
@@ -172,7 +171,7 @@ section{
 								<div class="form-group col-md-3">
 									<label for="pyear">Passing Year</label>
 									<select id="passing_year" name="passing_year" class="form-control">
-										<option selected><?php echo $fet['passing_year']; ?></option>
+										<option selected><?php echo $result['passing_year']; ?></option>
 										<option >2000</option>
 										<option >2001</option>
 										<option >2002</option>
@@ -204,12 +203,12 @@ section{
 							<div class="form-row">
 								<div class="form-group col-md-6">
 									<label for="address">Full Address</label>
-									<input type="text" class="form-control" id="address" name="full_address" placeholder="full address" value="<?php echo $fet['full_address']; ?>">
+									<input type="text" class="form-control" id="address" name="full_address" placeholder="full address" value="<?php echo $result['full_address']; ?>">
 								</div>
 								<div class="form-group col-md-3">
 									<label for="city">City</label>
 									<select id="city" name="city" class="form-control">
-										<option selected><?php echo $fet['city']; ?></option>
+										<option selected><?php echo $result['city']; ?></option>
 										<option >Faisalabad</option>
 										<option >Lahore</option>
 										<option >Peshawar</option>
@@ -222,13 +221,13 @@ section{
 								</div>
 								<div class="form-group col-md-3">
 									<label for="zip">Zip code</label>
-									<input type="text" class="form-control" id="zip" name="zip_code" placeholder="zip code" value="<?php echo $fet['zip_code']; ?>">
+									<input type="text" class="form-control" id="zip" name="zip_code" placeholder="zip code" value="<?php echo $result['zip_code']; ?>">
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="practise">Length of practice</label>
 								<select id="practise" name="practice_Length" class="form-control">
-									<option selected><?php echo $fet['practice_Length']; ?></option>
+									<option selected><?php echo $result['practice_Length']; ?></option>
 									<option >1-5 years</option>
 									<option >6-10 years</option>
 									<option >11-15 years</option>
@@ -237,7 +236,7 @@ section{
 								</select>
 							</div>
               <?php
- $darr=unserialize($fet['case_handle']);
+ $darr=unserialize($result['case_handle']);
                     
  if(in_array("Criminal matter",$darr) ){
    $c="checked";
@@ -382,7 +381,7 @@ if(in_array("Family Law",$darr)){
               <div class="form-group">
 								<label for="practise">My Speciality</label>
 								<select id="practise" name="speciality" class="form-control">
-									<option value=" " selected></option>
+									<option value="<?php echo $result['caseid']; ?>" selected><?php echo $result['casetype']; ?></option>
 									<?php 
 									$csql="SELECT * FROM `case-type`";
 									$crun=mysqli_query($conn,$csql);
@@ -394,12 +393,12 @@ if(in_array("Family Law",$darr)){
 							</div>
               <div class="form-group ">
                                 <label class="form-label">Introduce Yourself</label>
-                            <textarea class="form-control"  name="about"  > <?php echo $fet['about'];  ?> </textarea>
+                            <textarea class="form-control"  name="about"  > <?php echo $result['about'];  ?> </textarea>
 								</div>
 							<div class="form-group">
 								<div class="form-check">
 								<?php 
-       if($fet['agree']=="y"){
+       if($result['agree']=="y"){
          $m="checked";
        }else{
         $m="unchecked";

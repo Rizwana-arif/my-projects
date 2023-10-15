@@ -130,7 +130,7 @@ include ('./include/sidebar.php');
                 <h3>Record of Court</h3>
                 </div>
                 <div class="col-6">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="margin-left: 30%;background-color: #000;color: #ddd;"><i
                 class="fa fa-user-plus"></i>
                 Add court
                 </button>
@@ -163,8 +163,8 @@ while($cfet=mysqli_fetch_assoc($run)){
    <td><?php echo $cfet['court_name'] ; ?></td>
 
    <td class="text-right">
-   <a class="btn btn-sm btn-success" href="./update-court-name.php?cname_id=<?php echo $cfet['cname_id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-     <a class="btn btn-sm btn-danger" href="./delete-court-name.php?cname_id=<?php echo $cfet['cname_id']; ?>"><i class="fa-solid fa-trash"></i></a>
+   <a class="btn btn-sm btn-success" title="Update" href="./update-court-name.php?cname_id=<?php echo $cfet['cname_id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+     <a class="btn btn-sm btn-danger" title="Delete" href="./delete-court-name.php?cname_id=<?php echo $cfet['cname_id']; ?>"><i class="fa-solid fa-trash"></i></a>
    </td>
   </tr>
 

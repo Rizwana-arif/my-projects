@@ -48,7 +48,7 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
 					  $_SESSION['first_name']=$u_name;
 					  $_SESSION['image']=$image;
                       $_SESSION['estatus']="user";
-                      header("location:../user panel/index.php");
+                      header("location:./index.php");
                     }else{
                       $usql="SELECT * FROM `user-role-rec` WHERE `uemail`='$email' AND `password`='$password'";
                       $urun=mysqli_query($conn,$usql);
@@ -99,7 +99,17 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
   .has-error .help-block {
   color: red;
 }
-  </style>
+.registerform {
+        width: 80%; /* Set width to 80% */
+        margin: 0 auto; /* Center content horizontally */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+		margin-top: 25px;
+    }
+    </style>
+ 
 
 	</head>
 	<body>
@@ -111,7 +121,7 @@ if(mysqli_num_rows($run)==1 && $fet['estatus']=="admin"){
 				<div class="row">
 					<div class="col-md-6">
 						
-            <img src="../user panel/img/faqs.jpg" width="500px" height="500px" alt="Image">
+            <img src="./img/login-image.webp" width="500px" height="500px" alt="Image">
 					</div>
 					<div class="col-md-6">
 						<form  method="POST"  id="validateForm">

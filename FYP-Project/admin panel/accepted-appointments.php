@@ -78,9 +78,9 @@ include ('./include/sidebar.php');
            
            <td class="text-right">
 
-                         <a class="btn btn-sm btn-success" href="./update-appoin-unaccept.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-pause"></i></a>
-                         <a class="btn btn-sm btn-secondary" href="./view-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-eye"></i></a>
-                         <a class="btn btn-sm btn-danger" href="./delete-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-trash"></i></a>
+                         <a class="btn btn-sm btn-success" title="Pending" href="./update-appoin-unaccept.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-hourglass-half"></i></a>
+                         <a class="btn btn-sm btn-secondary" title="View" href="./view-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-eye"></i></a>
+                         <a class="btn btn-sm btn-danger" title="Delete" href="./delete-appointment.php?appoinid=<?php echo $fet['appoinid']; ?>"><i class="fa-solid fa-trash"></i></a>
            </td>
           </tr>
       

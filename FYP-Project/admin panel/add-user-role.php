@@ -4,7 +4,7 @@ session_start();
 if(empty($_SESSION['lawyer_email']) && empty($_SESSION['uemail'])){
     header("location:./login.php");
 }
-$lawyer=$_SESSION['email'];
+$lawyer=$_SESSION['lawyer_email'];
 if(isset($_POST['sub'])){
     $uname=mysqli_real_escape_string($conn,$_POST['uname']);
     $uemail=mysqli_real_escape_string($conn,$_POST['uemail']);
@@ -13,8 +13,9 @@ if(isset($_POST['sub'])){
     $urole=mysqli_real_escape_string($conn,$_POST['urole']);
     $lawyeremail=$lawyer;
     $estatus="team";
+    $urole_date=date("m-d-y");
     if($password==$cpass){
-      $sql="INSERT INTO `user-role-rec` (`uname`,`uemail`,`password`,`cpass`,`urole`,`lawyeremail`,`estatus`) VALUES ('$uname','$uemail','$password','$cpass','$urole','$lawyeremail','$estatus')";
+      $sql="INSERT INTO `user-role-rec` (`uname`,`uemail`,`password`,`cpass`,`urole`,`lawyeremail`,`estatus`,`urole_date`) VALUES ('$uname','$uemail','$password','$cpass','$urole','$lawyeremail','$estatus','$urole_date')";
       $run=mysqli_query($conn,$sql);
       if($run){
           header ("location:./view-user-role.php");
@@ -42,24 +43,28 @@ include ('./include/sidebar.php');
  <style>
        #togglePassword  {
   position: absolute;
-  top: 49%;
-  right: 550px; /* Adjust the distance from the right as needed */
+  top: 75%;
+  right: 10%; /* Adjust the distance from the right as needed */
   transform: translateY(-50%);
   cursor: pointer;
 }
 #togglePassword2  {
   position: absolute;
-  top: 61.5%;
-  right: 550px; /* Adjust the distance from the right as needed */
+  top: 75%;
+  right: 10%; /* Adjust the distance from the right as needed */
   transform: translateY(-50%);
   cursor: pointer;
+}
+.car{
+  width: 60%;
+  margin-top: 3%;
 }
  </style>
 </head>
 <body>
-<div class="container-fluid pt-4 px-4 ">
-    <div class="bg-light rounded h-100 p-4 w-50 ml-30">
-        <h4 class="mb-4 d-flex justify-content-center text-success">Add Role</h4>
+<div class="container-fluid car pt-4 px-4 ">
+    <div class="bg-light rounded h-100 p-4">
+        <h4 class="mb-4 d-flex justify-content-center text-dark">Add Role</h4>
         <form  method="post" enctype="multipart/form-data">
             <div class="row g-4 ">
                 <div class="mb-3 col-lg-12 ">
@@ -97,7 +102,7 @@ include ('./include/sidebar.php');
                         <?php } ?>
                       </select>
                      </div>
-                <button type="submit" class="btn btn-primary bg-success" name="sub">Add User Role</button>
+                <button type="submit" class="btn btn-dark bg-dark" name="sub">Add User Role</button>
             </div>
         </form>
     </div>

@@ -8,7 +8,9 @@ include ('./include/header.php');
 include ('./include/sidebar.php');
 
 ?>
+<style>
 
+    </style>
 <body>
     <!--wrapper-->
     <div class="wrapper">
@@ -64,9 +66,9 @@ include ('./include/sidebar.php');
                               <td><?php echo $fet['status'] ; ?></td>
                               <td class="text-right">
 
-<a class="btn btn-sm btn-danger" href="./update-disapprove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-xmark"></i></a>
-<a class="btn btn-sm btn-secondary" href="./view-lawyers.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-eye"></i></a>
-<a class="btn btn-sm btn-danger" href="./delete-lawyers.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-trash"></i></a>
+<a class="btn btn-sm btn-danger" title="Disapprove" href="./update-disapprove-lawyer.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-xmark"></i></a>
+<a class="btn btn-sm btn-secondary" title="View" href="./view-lawyers.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-eye"></i></a>
+<a class="btn btn-sm btn-danger" title="Delete" href="./delete-lawyers.php?lawyerid=<?php echo $fet['lawyerid']; ?>"><i class="fa-solid fa-trash"></i></a>
 </td>
                         </tr>
                         <?php } ?>

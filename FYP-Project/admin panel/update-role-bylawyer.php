@@ -2,10 +2,10 @@
 include ('./include/connection.php');
 include ('./include/connection.php');
 session_start();
-if(empty($_SESSION['email'])){
+if(empty($_SESSION['lawyer_email'])){
     header("location:./login.php");
 }
-$lawyer=$_SESSION['email'];
+$lawyer=$_SESSION['lawyer_email'];
  $lroleid=$_GET['lroleid'];
 $usql="SELECT * FROM `role-add-bylawyer` WHERE `lroleid`='$lroleid'";
 $urun=mysqli_query($conn,$usql);
@@ -49,12 +49,17 @@ include ('./include/sidebar.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Role</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
- 
+ <style>
+.car{
+  width: 40%;
+  margin-top: 5%;
+}
+  </style>
 </head>
 <body>
-<div class="container-fluid pt-4 px-4 ">
-    <div class="bg-light rounded h-100 p-4 w-50">
-        <h4 class="mb-4 d-flex justify-content-center text-success">Update Role</h4>
+<div class="container-fluid car pt-4 px-4 ">
+    <div class="bg-light rounded h-100 p-4 ">
+        <h4 class="mb-4 d-flex justify-content-center text-dark">Update Role</h4>
         <form  method="post" enctype="multipart/form-data">
             <div class="row g-4 ">
                 <div class="mb-3 col-lg-12 ">
@@ -111,7 +116,7 @@ include ('./include/sidebar.php');
                             <br>
                             <input type="checkbox" value="settings" <?php echo @$se; ?> name="roleacc[]" />Settings
                      </div>
-                <button type="submit" class="btn btn-primary bg-success w-100" name="update">Update Role </button>
+                <button type="submit" class="btn btn-primary bg-dark w-100" name="update">Update Role </button>
                 </div>
             </div>
         </form>
